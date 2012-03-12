@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Facelet Title</title>
         <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-responsive.css"/>
@@ -13,21 +15,18 @@
     <h:body>
             <div class="container">
                 <div class="span12">
-                    <h1>#{questionBean.out}</h1>
+                    <h1>KONY 2012</h1>
                     
                 </div>
                 <div class="span1">
                     jammen i drammen
                 </div>
                 <div class="span4">
-                <blockquote>
-                    <h2>
-                        There's a smaller chance to get no if you dont ask!
-                        Why question rape!?
-                        - Abraham Lincoln
-                    </h2>
-                </blockquote>
-            </div>
+                    <h:inputText id="name" value="#{questionBean.question}"></h:inputText>
+                    <h:commandButton value="Add">
+                        <f:ajax execute="name" render=""
+                    </h:commandButton>
+                </div>
             </div>
     </h:body>
 </html>
