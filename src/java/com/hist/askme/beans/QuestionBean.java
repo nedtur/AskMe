@@ -17,11 +17,14 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean
 @SessionScoped
+
 public class QuestionBean {
     String [] svar = {"Ja","Nei"};
     ArrayList<Question> questions = new ArrayList<Question>();
     Question question = new Question("Funker dette?", 2, svar);
     String out = question.getQuestion();
+    String name;
+    String password = "ina";
     
     public Question getQuestion() {
         return question;
@@ -29,5 +32,21 @@ public class QuestionBean {
     
     public String getOut() {
         return out;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setName(String newName) {
+        this.name = newName;
+    }
+    
+    public void setPassword(String newPassword) {
+        this.password = newPassword;
     }
 }
