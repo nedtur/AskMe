@@ -9,25 +9,31 @@ import java.util.ArrayList;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
-
-
 /**
  *
  * @author Håvard
  */
+
 @ManagedBean
 @SessionScoped
 public class QuestionBean {
-    String [] svar = {"Ja","Nei"};
     ArrayList<Question> questions = new ArrayList<Question>();
-    Question question = new Question("Funker dette?", 2, svar);
-    String out = question.getQuestion();
+    String question;
+    int amountofanswers;
+    String[] answers = {"yes","no"};
     
-    public Question getQuestion() {
+    public String getQuestion() {
         return question;
     }
-    
-    public String getOut() {
-        return out;
+    public void setQuestion(String q) {
+        question = q;
+    }
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
+    public void addQuestion() {
+        amountofanswers = 2;
+        Question q = new Question(question, amountofanswers, answers);
+        questions.add(q);
     }
 }
