@@ -9,5 +9,5 @@ package com.hist.askme.models;
  * @author Ina
  */
 public class heyYA {
-    
+    String hei = "hei sveis";
 }
