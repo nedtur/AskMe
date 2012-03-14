@@ -6,6 +6,7 @@ package com.hist.askme.beans;
 
 import com.hist.askme.models.Question;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -28,6 +29,25 @@ public class QuestionBean {
     String name;
     String password = "ina";
     private Set<String> types = new TreeSet<String>();
+    
+    public String testSTRING = "spørsmålsTEST";
+    int testINT = 6;
+    
+    public String getTestString(){
+        return testSTRING;
+    }
+    
+    public int getTestInt(){
+        return testINT;
+    }
+    
+    public void setTestInt(int ny){
+        testINT = ny;
+    }
+    
+     public void setTestString(String ny){
+            testSTRING = ny;
+    }
 
     public Question getQuestion() {
         return question;
@@ -57,9 +77,41 @@ public class QuestionBean {
         return types;
     }
 
-    
     public void setTypes(Set<String> newValue) {
         types = newValue;
     }
     
+       public String submit() {
+        return "questionnaire";
+    }
+ 
+    final static String[] stringArray = {"tester her", "test", "hei"};
+    
+    public static final ArrayList<Question> questionlist =
+            new ArrayList<Question>(Arrays.asList(
+            new Question("Spørsmål her", 3, stringArray)));
+    
+    public String addAction() {
+ 
+		Question questionme = new Question(this.testSTRING, this.testINT, 
+			this.svar);
+ 
+		questionlist.add(questionme);
+		return null;
+	}
+    
+    public String deleteAction(Question question) {
+ 
+		questionlist.remove(question);
+		return null;
+	}
+    
+    public ArrayList<Question> getQuestionlist() {
+ 
+		return questionlist;
+ 
+	}
+    
+    
 }
+ 

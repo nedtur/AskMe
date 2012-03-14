@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>AskMe</title>
         <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-responsive.css"/>
@@ -21,9 +22,21 @@
                 Spørsmål:
             </div>
 
+            <ui:include src="ask.xhtml"/>
             <h:form>
                 <h:inputText id="name" value="#{questionBean.name}"></h:inputText>
-                <h:selectOneRadio id="myRadio" value="#{questionBean.questionType}">
+                <h:commandButton value="OK" action="#{questionBean.submit}">
+                    <f:ajax render="foo" />
+                </h:commandButton>
+                <h:panelGroup id="foo" layout="block">
+                    <ui:include src="questionnaire.xhtml" />
+                </h:panelGroup>
+            </h:form>
+            <!--
+
+            <h:form>
+                <h:inputText id="name" value="#{questionBean.name}"></h:inputText>
+                <h:selectOneRadio id="myRadio" value="#{questionBean.name}">
                     <f:selectItem itemValue="Flervalg" itemLabel="Flervalg"/>   
                     <f:selectItem itemValue="Ja/Nei" itemLabel="Ja/Nei"/>   
                     <f:selectItem itemValue="Tekst" itemLabel="Tekst"/>   
@@ -33,8 +46,91 @@
                 </h:commandButton>
                 <h2><h:outputText id="output" value="#{questionBean.name}" /></h2>	
             </h:form>
+            -->
 
-        </div>
+
+
+
+
+            <!--
+            <h:form>
+                <div id="search" class="search">
+                    <ui:insert name="search" >
+                        <ui:include src="tester.xhtml" />
+                    </ui:insert>
+                </div>
+
+                <h:panelGroup id="ajaxResult" layout="block"> 
+                    <ui:insert name="searchResults" >
+                        <ui:include src="questionnaire.xhtml" />
+                    </ui:insert>
+                </h:panelGroup>
+            </h:form>
+           frem til hit-->
+
+            <h:form>
+                <h:dataTable value="#{questionBean.questionlist}" var="q"
+                             styleClass="order-table"
+                             headerClass="order-table-header"
+                             rowClasses="order-table-odd-row,order-table-even-row"
+                             >
+
+                    <h:column>
+
+                        <f:facet name="header">Spørsmål</f:facet>
+                        #{q.question}
+
+                    </h:column>
+
+                    <h:column>
+
+                        <f:facet name="header">Antall</f:facet>
+                        #{q.amountOfAnswers}
+
+                    </h:column>
+
+                    <h:column>
+
+                        <f:facet name="header">pfft</f:facet>
+
+                    </h:column>
+
+
+                    <h:column>
+
+                        <f:facet name="header">Action</f:facet>
+
+                        <h:commandLink value="Delete" 
+                                       action="#{questionBean.deleteAction(q)}" />
+
+                    </h:column>
+
+                </h:dataTable>
+
+
+
+        
+        
+        <h3>Enter Order</h3>
+    		<table>
+    		<tr>
+    			<td>Spørsmål</td>
+    			<td><h:inputText size="10" value="#{questionBean.testString}" /></td>
+    		</tr>
+    		<tr>
+    			<td>Antall</td>
+    			<td><h:inputText size="20" value="#{questionBean.testInt}" /></td>
+    		</tr>
+    		<tr>
+    			<td>hei :</td>
+    			<td><h:inputText size="5" value="halla" /></td>
+    		</tr>
+    		</table>
+ 
+    		<h:commandButton value="Add" action="#{questionBean.addAction}" />
+ 
+    	</h:form>
+            </div>
 
     </h:body>
 </html>
