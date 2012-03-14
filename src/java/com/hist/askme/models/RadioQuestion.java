@@ -4,12 +4,14 @@
  */
 package com.hist.askme.models;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Håvard
  */
 public class RadioQuestion extends Question{
-    public RadioQuestion(String question, int amountOfAnswers, String[] answers) {
+    public RadioQuestion(String question, int amountOfAnswers, ArrayList<String> answers) {
         super(question, amountOfAnswers, answers);
     }
 }

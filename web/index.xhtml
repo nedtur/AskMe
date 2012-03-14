@@ -14,21 +14,42 @@
     <h:body>
         <div class="container">
             <div class="span12">
-                <!--<h1>#{questionBean.out}</h1>-->
+
 
             </div>
             <div class="span1">
                 Legg til spørsmål
+                
+                <h:form> 
+                    <h:inputTextarea id="que" value="#{questionBean.que}"/>
+                    <h:dataTable value="#{questionBean.answers}" var="ans" id="answers">
+                        <h:column>    
+                            <h:outputText value="#{ans}"/>
+                            <h:commandLink value="-" action="#{questionBean.deleteAnswer(ans)}">
+                                <f:ajax render="answers"/>
+                            </h:commandLink>
+                        </h:column>
+                    </h:dataTable>
+                    <h:inputText id="ans" value="#{questionBean.ans}"/>
+                    <h:commandButton value="Add" action="#{questionBean.addAnswer()}">
+                        <f:ajax execute="ans" render="answers"/>
+                    </h:commandButton>
+                    
+                    <h:commandButton value="Publish" action="#{questionBean.addQuestion()}">
+                        <f:ajax execute="que" render="questions"/>
+                    </h:commandButton>
+
+                    
+                    <h:dataTable value="#{questionBean.questions}" var="ques" id="questions">
+                        <h:column>
+                            <h:outputText value="#{ques.question}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{ques.amountOfAnswers}"/>
+                        </h:column>
+                    </h:dataTable> 
+                </h:form>
             </div>
-
-            <h:form>
-                <h:inputText id="name" value="#{questionBean.name}"></h:inputText>
-                <h:commandButton value="OK">
-                    <f:ajax execute="name" render="output" />
-                </h:commandButton>
-                <h2><h:outputText id="output" value="#{questionBean.name}" /></h2>	
-            </h:form>
-
         </div>
 
     </h:body>

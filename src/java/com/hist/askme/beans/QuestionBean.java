@@ -19,41 +19,40 @@ import javax.faces.bean.ManagedBean;
 
 public class QuestionBean {
     ArrayList<Question> questions = new ArrayList<Question>();
-    String question;
-    int amountofanswers;
-    String[] answers = {"yes","no"};
-    String name;
-    String password = "ina";
-
+    String que;
+    String ans;
+    int amountofanswers = 2;
+    ArrayList<String> answers = new ArrayList<String>();
     
-    public String getQuestion() {
-        return question;
+    public QuestionBean() {
+        answers.add("yes");
+        answers.add("no");
+        questions.add(new Question("hei", 2, answers));
+        questions.add(new Question("grei", 2, answers));
+        questions.add(new Question("nei", 2, answers));
     }
-    public void setQuestion(String q) {
-        question = q;
-    }
+    
     public ArrayList<Question> getQuestions() {
         return questions;
     }
     public void addQuestion() {
-        amountofanswers = 2;
-        Question q = new Question(question, amountofanswers, answers);
-        questions.add(q);
+        questions.add(new Question(que, amountofanswers, answers));
     }
     
-    public String getName() {
-        return name;
-    }
-    
-    public String getPassword() {
-        return password;
-    }
-    
-    public void setName(String newName) {
-        this.name = newName;
-    }
-    
-    public void setPassword(String newPassword) {
-        this.password = newPassword;
+    public String getQue() { return que;}
+    public void setQue(String newQue) { que = newQue;}
+    public String getAns() { return ans;}
+    public void setAns(String a) { ans=a; }
+    public int getAmount() { return amountofanswers;}
+    public void setAmount(int newAmount){ amountofanswers = newAmount;}
+    public ArrayList<String> getAnswers() { return answers;}
+    public void addAnswer(){ answers.add(ans); amountofanswers++;}
+    public void deleteAnswer(String delAns) {
+        for(String a : answers) {
+            if(a.equalsIgnoreCase(delAns)) {
+                answers.remove(a);
+                amountofanswers--;
+            }
+        }
     }
 }

@@ -3,6 +3,9 @@
  * and open the template in the editor.
  */
 package com.hist.askme.models;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author Håvard
@@ -10,9 +13,10 @@ package com.hist.askme.models;
 
 public class YesNoQuestion extends Question {
  
-    public YesNoQuestion(String question, int amountOfAnswers, String[] answers) {
+    public YesNoQuestion(String question, int amountOfAnswers, ArrayList<String> answers) {
         super(question, amountOfAnswers, answers);
         amountOfAnswers = 2;
-        answers = new String[]{"yes", "no"};
+        answers.add("Yes");
+        answers.add("No");
     }
 }
