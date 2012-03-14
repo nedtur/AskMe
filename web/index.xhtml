@@ -29,46 +29,15 @@
                     <tr>
                         <td><h:inputText size="10" value="#{questionBean.testString}" />
                         <h:commandButton value="OK" action="#{questionBean.addAction}"/></td>
+                        <td>
+                        <h:selectOneRadio id="myRadio" value="#{questionBean.selected}">
+                         
+                        <f:selectItems value="#{questionBean.responseTypes}"/> 
+                    </h:selectOneRadio>
+                            </td>
                     </tr>
                 </table>
 
-
-
-                <!--
-    
-                <h:form>
-                    <h:inputText id="name" value="#{questionBean.name}"></h:inputText>
-                    <h:selectOneRadio id="myRadio" value="#{questionBean.name}">
-                        <f:selectItem itemValue="Flervalg" itemLabel="Flervalg"/>   
-                        <f:selectItem itemValue="Ja/Nei" itemLabel="Ja/Nei"/>   
-                        <f:selectItem itemValue="Tekst" itemLabel="Tekst"/>   
-                    </h:selectOneRadio>
-                    <h:commandButton value="OK">
-                        <f:ajax execute="name" render="output" />
-                    </h:commandButton>
-                    <h2><h:outputText id="output" value="#{questionBean.name}" /></h2>	
-                </h:form>
-                -->
-
-
-
-
-
-                <!--
-                <h:form>
-                    <div id="search" class="search">
-                        <ui:insert name="search" >
-                            <ui:include src="tester.xhtml" />
-                        </ui:insert>
-                    </div>
-    
-                    <h:panelGroup id="ajaxResult" layout="block"> 
-                        <ui:insert name="searchResults" >
-                            <ui:include src="questionnaire.xhtml" />
-                        </ui:insert>
-                    </h:panelGroup>
-                </h:form>
-               frem til hit-->
                 <h:dataTable value="#{questionBean.questionlist}" var="q"
                              styleClass="order-table"
                              headerClass="order-table-header"

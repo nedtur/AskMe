@@ -7,8 +7,6 @@ package com.hist.askme.beans;
 import com.hist.askme.models.Question;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.enterprise.context.SessionScoped;
@@ -28,25 +26,47 @@ public class QuestionBean {
     String out = question.getQuestion();
     String name;
     String password = "ina";
+    String selected = "Hei";
     private Set<String> types = new TreeSet<String>();
+    public static final ArrayList<String> responseTypes = new ArrayList<String>();
+
+    public QuestionBean() {
+
+        responseTypes.add("Ja/Nei");
+        responseTypes.add("Flervalg");
+        responseTypes.add("Tekst");
+
+    }
+    
+    public ArrayList getResponseTypes(){
+        return responseTypes;
+    }
     
     public String testSTRING = "spørsmålsTEST";
     int testINT = 6;
-    
-    public String getTestString(){
+
+    public String getTestString() {
         return testSTRING;
     }
     
-    public int getTestInt(){
+    public String getSelected(){
+        return selected;
+    }
+
+     public void setSelected(String ny){
+        selected = ny;
+    }
+    
+    public int getTestInt() {
         return testINT;
     }
-    
-    public void setTestInt(int ny){
+
+    public void setTestInt(int ny) {
         testINT = ny;
     }
-    
-     public void setTestString(String ny){
-            testSTRING = ny;
+
+    public void setTestString(String ny) {
+        testSTRING = ny;
     }
 
     public Question getQuestion() {
@@ -80,38 +100,33 @@ public class QuestionBean {
     public void setTypes(Set<String> newValue) {
         types = newValue;
     }
-    
-       public String submit() {
+
+    public String submit() {
         return "questionnaire";
     }
- 
     final static String[] stringArray = {"tester her", "test", "hei"};
-    
     public static final ArrayList<Question> questionlist =
             new ArrayList<Question>(Arrays.asList(
             new Question("Spørsmål her", 3, stringArray)));
-    
+
     public String addAction() {
- 
-		Question questionme = new Question(this.testSTRING, this.testINT, 
-			this.svar);
- 
-		questionlist.add(questionme);
-		return null;
-	}
-    
+
+        Question questionme = new Question(this.testSTRING, this.testINT,
+                this.svar);
+
+        questionlist.add(questionme);
+        return null;
+    }
+
     public String deleteAction(Question question) {
- 
-		questionlist.remove(question);
-		return null;
-	}
-    
+
+        questionlist.remove(question);
+        return null;
+    }
+
     public ArrayList<Question> getQuestionlist() {
- 
-		return questionlist;
- 
-	}
-    
-    
+
+        return questionlist;
+
+    }
 }
- 
