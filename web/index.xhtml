@@ -12,128 +12,86 @@
         <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-responsive.min.css"/>
         <link rel="stylesheet" type="text/css" href="resources/css/boostrap.css"/>
     </h:head>
-    <h:body>
-        <div class="container">
-            <div class="span12">
-
-
-            </div>
-            <div class="span1">
-                Spørsmål:
-            </div>
-
-            <ui:include src="ask.xhtml"/>
-            <h:form>
-                <h:inputText id="name" value="#{questionBean.name}"></h:inputText>
-                <h:commandButton value="OK" action="#{questionBean.submit}">
-                    <f:ajax render="foo" />
-                </h:commandButton>
-                <h:panelGroup id="foo" layout="block">
-                    <ui:include src="questionnaire.xhtml" />
-                </h:panelGroup>
-            </h:form>
-            <!--
-
-            <h:form>
-                <h:inputText id="name" value="#{questionBean.name}"></h:inputText>
-                <h:selectOneRadio id="myRadio" value="#{questionBean.name}">
-                    <f:selectItem itemValue="Flervalg" itemLabel="Flervalg"/>   
-                    <f:selectItem itemValue="Ja/Nei" itemLabel="Ja/Nei"/>   
-                    <f:selectItem itemValue="Tekst" itemLabel="Tekst"/>   
-                </h:selectOneRadio>
-                <h:commandButton value="OK">
-                    <f:ajax execute="name" render="output" />
-                </h:commandButton>
-                <h2><h:outputText id="output" value="#{questionBean.name}" /></h2>	
-            </h:form>
-            -->
-
-
-
-
-
-            <!--
-            <h:form>
-                <div id="search" class="search">
-                    <ui:insert name="search" >
-                        <ui:include src="tester.xhtml" />
-                    </ui:insert>
+    <body data-spy="scroll" data-target=".subnav" data-offset="50" style="background-color: hotpink">
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <li>
+                            <h3 style="color: hotpink">AskMe</h3>
+                        </li>
+                        <li>
+                            <a class="active">Stille</a>
+                        </li>
+                        <li>
+                            <a href="ask.xhtml">Svare</a>
+                        </li>
+                        <li>
+                            <a>Resultat</a>
+                        </li>
+                    </ul>
                 </div>
-
-                <h:panelGroup id="ajaxResult" layout="block"> 
-                    <ui:insert name="searchResults" >
-                        <ui:include src="questionnaire.xhtml" />
-                    </ui:insert>
-                </h:panelGroup>
-            </h:form>
-           frem til hit-->
-
-            <h:form>
-                <h:dataTable value="#{questionBean.questionlist}" var="q"
-                             styleClass="order-table"
-                             headerClass="order-table-header"
-                             rowClasses="order-table-odd-row,order-table-even-row"
-                             >
-
-                    <h:column>
-
-                        <f:facet name="header">Spørsmål</f:facet>
-                        #{q.question}
-
-                    </h:column>
-
-                    <h:column>
-
-                        <f:facet name="header">Antall</f:facet>
-                        #{q.amountOfAnswers}
-
-                    </h:column>
-
-                    <h:column>
-
-                        <f:facet name="header">pfft</f:facet>
-
-                    </h:column>
-
-
-                    <h:column>
-
-                        <f:facet name="header">Action</f:facet>
-
-                        <h:commandLink value="Delete" 
-                                       action="#{questionBean.deleteAction(q)}" />
-
-                    </h:column>
-
-                </h:dataTable>
-
-
-
-        
-        
-        <h3>Enter Order</h3>
-    		<table>
-    		<tr>
-    			<td>Spørsmål</td>
-    			<td><h:inputText size="10" value="#{questionBean.testString}" /></td>
-    		</tr>
-    		<tr>
-    			<td>Antall</td>
-    			<td><h:inputText size="20" value="#{questionBean.testInt}" /></td>
-    		</tr>
-    		<tr>
-    			<td>hei :</td>
-    			<td><h:inputText size="5" value="halla" /></td>
-    		</tr>
-    		</table>
- 
-    		<h:commandButton value="Add" action="#{questionBean.addAction}" />
- 
-    	</h:form>
             </div>
+        </div>
 
-    </h:body>
+        <div  class="container" style="margin-top: 100px">
+            <h:form>
+                <table>
+                    <tr>
+                        <td><h:inputText value="#{questionBean.question}"/></td>
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+                        <h:dataTable value="#{questionBean.answers}" var="a"
+                                     styleClass="order-table"
+                                     headerClass="order-table-header"
+                                     rowClasses="order-table-odd-row,order-table-even-row">
+                            <h:column>
+                                <h:commandLink value="-" action="#{questionBean.deleteAnswer(a)}" />
+                            </h:column>
+                            <h:column>
+                                #{a}
+                            </h:column>
+                            
+                        </h:dataTable>
+                    </tr>
+                    <tr>
+                        <td><h:inputText size="10" value="#{questionBean.ans}"/></td>
+                    </tr>
+                </table>
+                <h:commandLink value="+" action="#{questionBean.addAnswer}"/>
+                <br/>
+                <h:commandButton value="Add" action="#{questionBean.addQuestion}" />
+                <table>
+                    <h:dataTable value="#{questionBean.questions}" var="q"
+                                 styleClass="order-table"
+                                 headerClass="order-table-header"
+                                 rowClasses="order-table-odd-row,order-table-even-row">
+                        <h:column>
+                            <f:facet name="header">Spørsmål</f:facet>
+                            #{q.question}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Svar</f:facet>
+                            <h:dataTable value="#{q.answers}" var="an"
+                                         styleClass="order-table"
+                                         headerClass="order-table-header"
+                                         rowClasses="order-table-odd-row,order-table-even-row">
+                                <h:column>
+                                    #{an}
+                                </h:column>
+                            </h:dataTable>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"></f:facet>
+                            <h:commandLink value="Delete" action="#{questionBean.deleteQuestion(q)}" />
+                        </h:column>
+                    </h:dataTable>
+                </table>
+                
+            </h:form>
+        </div>
+    </body>
 </html>
-
-
-
