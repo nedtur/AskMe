@@ -28,15 +28,22 @@
                 <table>
                     <tr>
                         <td><h:inputText size="10" value="#{questionBean.testString}" />
-                        <h:commandButton value="OK" action="#{questionBean.addAction}"/></td>
-                        <td>
-                        <h:selectOneRadio id="myRadio" value="#{questionBean.selected}">
+                               <h:selectOneRadio id="myRadio" value="#{questionBean.selected}">
+                            <f:selectItem itemValue="1" itemLabel="Ja/Nei"/>
+                            <f:selectItem itemValue="2" itemLabel="Flervalg"/>
+                            <f:selectItem itemValue="3" itemLabel="Tekst"/>
                          
-                        <f:selectItems value="#{questionBean.responseTypes}"/> 
+                       <!-- <f:selectItems value="#{questionBean.responseTypes}"/> -->
                     </h:selectOneRadio>
-                            </td>
+                        <h:commandButton value="OK" action="#{questionBean.addAction}"/></td>
                     </tr>
                 </table>
+            </h:form>
+            <h:form>
+                   
+                </h:form>
+            <h:form>
+                
 
                 <h:dataTable value="#{questionBean.questionlist}" var="q"
                              styleClass="order-table"

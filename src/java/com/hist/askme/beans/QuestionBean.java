@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.*;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -27,36 +28,41 @@ public class QuestionBean {
     String name;
     String password = "ina";
     String selected = "Hei";
+    public String testSTRING = "spørsmålsTEST";
+    int testINT = 6;
     private Set<String> types = new TreeSet<String>();
+   
     public static final ArrayList<String> responseTypes = new ArrayList<String>();
+    public static final ArrayList<Question> questionlist = new ArrayList<Question>();
 
     public QuestionBean() {
 
+        responseTypes.add("test");
+        System.out.println("testing");
+    }
+
+    public ArrayList getResponseTypes() {
+        
         responseTypes.add("Ja/Nei");
         responseTypes.add("Flervalg");
         responseTypes.add("Tekst");
-
-    }
-    
-    public ArrayList getResponseTypes(){
+        System.out.println("test get");
+        
         return responseTypes;
     }
-    
-    public String testSTRING = "spørsmålsTEST";
-    int testINT = 6;
 
     public String getTestString() {
         return testSTRING;
     }
-    
-    public String getSelected(){
+
+    public String getSelected() {
         return selected;
     }
 
-     public void setSelected(String ny){
+    public void setSelected(String ny) {
         selected = ny;
     }
-    
+
     public int getTestInt() {
         return testINT;
     }
@@ -101,20 +107,14 @@ public class QuestionBean {
         types = newValue;
     }
 
-    public String submit() {
-        return "questionnaire";
-    }
-    final static String[] stringArray = {"tester her", "test", "hei"};
-    public static final ArrayList<Question> questionlist =
-            new ArrayList<Question>(Arrays.asList(
-            new Question("Spørsmål her", 3, stringArray)));
-
     public String addAction() {
 
         Question questionme = new Question(this.testSTRING, this.testINT,
                 this.svar);
 
         questionlist.add(questionme);
+        System.out.println("test");
+        
         return null;
     }
 
