@@ -23,6 +23,8 @@ public class QuestionBean {
     int amount = 0;
     static final ArrayList<String> answers = new ArrayList<String>();
     String ans = "Svar...";
+    String selected = "0";
+    String yesOrNo = "whoknows";
     
     public String getQuestion() { return question; }
     public void setQuestion(String newQ) { question = newQ; }
@@ -59,5 +61,39 @@ public class QuestionBean {
         return questions;
 
     }
+    
+    public String getSelected(){
+        return selected;
+    }
+
+    
+    public void setSelected(String newSelected){
+        selected = newSelected;
+    }
+    
+    public boolean getYesNoAnswer(){
+        if (selected.equals("1")){
+            return true;
+        } else {
+        return false;
+        }
+    }
+    
+    public boolean getTextAnswer(){
+        if (selected.equals("2")){
+            return true;
+        } else {
+        return false;
+        }
+    }
+    
+    public boolean getMultipleAnswer(){
+        if (selected.equals("3")){
+            return true;
+        } else {
+        return false;
+        }
+    }
+    
 
 }
