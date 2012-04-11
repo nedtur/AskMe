@@ -22,8 +22,11 @@ public class Question {
         this.question = question;
         this.amountOfAnswers = amountOfAnswers;
         this.answers = answers;
+        
+        ID = UUID.randomUUID();
     }
     
+    public UUID getID() {return ID;}
     public String getQuestion() { return question; }
     public int getAmountOfAnswers() { return amountOfAnswers; }
     public List<String> getAnswers() { return answers; }

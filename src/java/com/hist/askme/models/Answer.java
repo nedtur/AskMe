@@ -4,10 +4,18 @@
  */
 package com.hist.askme.models;
 
+import java.util.UUID;
+
 /**
  *
- * @author Håvard
+ * @author Ina
  */
 public class Answer {
-    String answer;
+    
+    UUID questionID;
+    
+    public Answer(UUID questionID){
+        this.questionID = questionID;
+    }
+    
 }
