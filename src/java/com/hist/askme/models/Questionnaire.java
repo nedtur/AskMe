@@ -11,11 +11,11 @@ import java.util.List;
  * @author Håvard
  */
 
-public class Questionnair {
+public class Questionnaire {
     private static final ArrayList<Question> questions = new ArrayList<Question>();
     private boolean published;
     
-    public Questionnair() {
+    public Questionnaire() {
         published = false;
     }
     

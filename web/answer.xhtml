@@ -13,14 +13,28 @@
         <link rel="stylesheet" type="text/css" href="resources/css/boostrap.css"/>
     </h:head>
     <body>
-        <div class="container" style="background-color: hotpink">
-            <div class="span2" style="background-color: blue">
-                <h:dataTable value="#{questionBean.questions}" var="q">
-                    <h:outputText value="#{q.question}"/><br/>
-                    <h:dataTable value="#{q.answers}" var="a">
-                        <h:selectOneRadio value="#{a}"/>
+        <div class="container">
+            <div class="span2">
+                <table>
+                    <h:dataTable value="#{questionBean.questions}" var="q"
+                                 styleClass="order-table"
+                                 headerClass="order-table-header"
+                                 rowClasses="order-table-odd-row,order-table-even-row">
+                        <h:column>
+                            <h2>#{q.question}</h2>
+                        </h:column>
+                        <h:column>
+                            <h:dataTable value="#{q.answers}" var="an"
+                                         styleClass="order-table"
+                                         headerClass="order-table-header"
+                                         rowClasses="order-table-odd-row,order-table-even-row">
+                                <h:column>
+                                    <h:selectOneRadio value="#{an}">#{an}}</h:selectOneRadio>
+                                </h:column>
+                            </h:dataTable>
+                        </h:column>
                     </h:dataTable>
-                </h:dataTable>
+                </table>
             </div>
         </div>
     </body>
