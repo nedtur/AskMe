@@ -5,8 +5,10 @@
 package com.hist.askme.beans;
 
 import com.hist.askme.models.Question;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -14,15 +16,17 @@ import javax.faces.bean.ManagedBean;
  *
  * @author Håvard
  */
-@ManagedBean
-@SessionScoped
-public class QuestionBean {
 
-    static final ArrayList<Question> questions = new ArrayList<Question>();
+@ManagedBean(name="questionBean")
+@SessionScoped
+public class QuestionBean implements Serializable {
+
+    static ArrayList<Question> questions = new ArrayList<Question>();
     String question = "Spørsmål...";
     int amount = 0;
-    static final ArrayList<String> answers = new ArrayList<String>();
+    static List<String> answers = new CopyOnWriteArrayList<String>();
     String ans = "Svar...";
+    Question q = new Question(this.question, this.amount, answers);
     
     public String getQuestion() { return question; }
     public void setQuestion(String newQ) { question = newQ; }
@@ -30,24 +34,25 @@ public class QuestionBean {
     public void setAmount(int newA) { amount = newA; }
     public String getAns() { return ans; }
     public void setAns(String newA) { ans = newA; }
-    public ArrayList<String> getAnswers() { return answers; }
+   
+    public List<String> getAnswers() {
+        answers = q.getAnswers();
+        return answers;
+    }
     
     public String addAnswer() {
-        answers.add(ans);
-        amount++;
+        q.addAnswer(ans);
         return null;
     }
     
     public String deleteAnswer(String answer) {
-        answers.remove(answer);
-        amount--;
+        q.deleteAnswer(answer);
         return null;
     }
     
     public String addQuestion() {
-        Question q = new Question(this.question, this.amount, answers);
         questions.add(q);
-        return null;
+        return "/answer.xhtml";
     }
 
     public String deleteQuestion(Question question) {
