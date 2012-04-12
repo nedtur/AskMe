@@ -5,6 +5,7 @@
 package com.hist.askme.beans;
 
 import com.hist.askme.models.Question;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.enterprise.context.SessionScoped;
@@ -16,7 +17,7 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean
 @SessionScoped
-public class QuestionBean {
+public class QuestionBean implements Serializable {
 
     static final ArrayList<Question> questions = new ArrayList<Question>();
     String question = "Spørsmål...";

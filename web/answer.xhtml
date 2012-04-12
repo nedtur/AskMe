@@ -24,16 +24,12 @@
                             <h2>#{q.question}</h2>
                         </h:column>
                         <h:column>
-                            <h:dataTable value="#{q.answers}" var="an"
-                                         styleClass="order-table"
-                                         headerClass="order-table-header"
-                                         rowClasses="order-table-odd-row,order-table-even-row">
-                                <h:column>
-                                    <h:selectOneRadio value="#{an}">#{an}}</h:selectOneRadio>
-                                </h:column>
-                            </h:dataTable>
+                            <h:selectOneRadio value="#{q.answers}">
+                                <f:selectItems value="#{q.answers}"/>
+                            </h:selectOneRadio>
                         </h:column>
                     </h:dataTable>
+                    <h:commandButton value="Send svar" action="result.xhtml"/>
                 </table>
             </div>
         </div>

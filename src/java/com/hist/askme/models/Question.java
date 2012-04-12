@@ -7,6 +7,7 @@ package com.hist.askme.models;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -17,6 +18,7 @@ public class Question {
     private String question; 
     private int amountOfAnswers;
     private List<String> answers = new CopyOnWriteArrayList<String>();
+    UUID ID;
     
     public Question(String question, int amountOfAnswers, List<String> answers) {
         this.question = question;
