@@ -23,6 +23,10 @@ public class Questionnaire {
         published = true;
     }
     
+    public boolean getPublished() {
+        return published;
+    }
+    
     public ArrayList<Question> getQuestions() {
         return questions;
     }
@@ -46,10 +50,10 @@ public class Questionnaire {
     public void addAnswer(Question q, String answer) {
         q.addAnswer(answer);
     }
-    public void deleteAnswer(Question q, String answer) {
+    public void deleteAnswer(Question q, Answer answer) {
         q.deleteAnswer(answer);
     }
-    public List<String> getAnswers(Question q) {
+    public List<Answer> getAnswers(Question q) {
         return q.getAnswers();
     }
 }

@@ -16,7 +16,7 @@
         <div class="container">
             <div class="span2">
                 <table>
-                    <h:dataTable value="#{questionBean.questions}" var="q"
+                    <h:dataTable value="#{questionnaireBean.questions}" var="q"
                                  styleClass="order-table"
                                  headerClass="order-table-header"
                                  rowClasses="order-table-odd-row,order-table-even-row">
@@ -24,8 +24,8 @@
                             <h2>#{q.question}</h2>
                         </h:column>
                         <h:column>
-                            <h:selectOneRadio value="#{q.answers}">
-                                <f:selectItems value="#{q.answers}"/>
+                            <h:selectOneRadio value="#{q.answerString}">
+                                <f:selectItems value="#{q.answerString}"/>
                             </h:selectOneRadio>
                         </h:column>
                     </h:dataTable>
