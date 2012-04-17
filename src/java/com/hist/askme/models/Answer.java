@@ -13,6 +13,19 @@ import java.util.UUID;
 public class Answer {
     
     UUID questionID;
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+    
+    public Answer(String text) {
+        this.text = text;
+    }
     
     public Answer(UUID questionID){
         this.questionID = questionID;

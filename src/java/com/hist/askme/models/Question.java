@@ -16,34 +16,36 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class Question {
     private String question; 
-    private int amountOfAnswers;
-    private List<String> answers = new CopyOnWriteArrayList<String>();
+    private List<Answer> answers = new CopyOnWriteArrayList<Answer>();
+    private List<String> answerString = new CopyOnWriteArrayList<String>();
     UUID ID;
     
-    public Question(String question, int amountOfAnswers, List<String> answers) {
+    public Question() {}
+    public Question(String question, List<Answer> answers) {
         this.question = question;
-        this.amountOfAnswers = amountOfAnswers;
         this.answers = answers;
+        for(Answer a : answers) {
+            answerString.add(a.getText());
+        }
         
         ID = UUID.randomUUID();
     }
     
     public UUID getID() {return ID;}
     public String getQuestion() { return question; }
-    public int getAmountOfAnswers() { return amountOfAnswers; }
-    public List<String> getAnswers() { return answers; }
+    public List<Answer> getAnswers() { return answers; }
+    public List<String> getAnswerString() { return answerString; }
     
     public void setQuestion(String newQ) { question=newQ; }
-    public void setAmountOfAnswers(int newAm) { amountOfAnswers=newAm; }
-    public void setAnswers(ArrayList<String> newAns) { answers=newAns; }
+    public void setAnswers(ArrayList<Answer> newAns) { answers=newAns; }
     
     public void addAnswer(String answer) {
-        answers.add(answer);
+        answers.add(new Answer(answer));
     }
     
-    public void deleteAnswer(String answer) {
-        for(Iterator<String> iter = answers.iterator(); iter.hasNext();) {
-            String ans = iter.next();
+    public void deleteAnswer(Answer answer) {
+        for(Iterator<Answer> iter = answers.iterator(); iter.hasNext();) {
+            Answer ans = iter.next();
             if(answer.equals(ans)) {
                 answers.remove(ans);
             }
