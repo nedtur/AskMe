@@ -12,6 +12,9 @@
         <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-responsive.min.css"/>
         <link rel="stylesheet" type="text/css" href="resources/css/boostrap.css"/>
         <link rel="stylesheet" type ="text/css" href="resources/css/mycss.css"/>
+        <link rel="stylesheet" type ="text/css" href="resources/css/toggle-radio-buttons.css"/>
+        <script src="resources/boostrap/js/bootstrap.min.js"></script>
+        <script>$('.btn-group').button()</script>
     </h:head>
     <body data-spy="scroll" data-target=".subnav" data-offset="50" style="background-color: #ACDED6">
         <h:outputStylesheet library="css" name="mycss.css"  />
@@ -49,42 +52,46 @@
                         </tr>
                     </table>
 
-                    
+
                     <!--Radioknapper for å velge type svar-->
-                    <h:selectOneRadio value="#{questionBean.selected}" layout="lineDirection">
-                        <f:selectItem itemValue="1" itemLabel="Ja/Nei"/>
+
+                    <h:selectOneRadio value="#{questionBean.selected}" layout="lineDirection" styleClass="toggle-radio-buttons">
+                        <f:selectItem itemValue="1" itemLabel="Ja/Nei" />
                         <f:selectItem itemValue="2" itemLabel="Tekst" />
                         <f:selectItem itemValue="3" itemLabel="Flervalg" />
                         <!--<f:ajax event="change" render="qtype"/>-->
                     </h:selectOneRadio>
-                    
-                        <!--Vises når tekstsvar er valgt-->
-                        <h:inputTextarea readonly="true" value ="Her vil brukeren kunne svare" rendered="#{questionBean.textAnswer}"/>
 
-                        <!--Vises når ja/nei-svar er valgt-->
-                        <h:selectOneRadio readonly="true" rendered="#{questionBean.yesNoAnswer}">
-                            <f:selectItem itemValue="yes" itemLabel="Ja" />
-                            <f:selectItem itemValue="no" itemLabel="Nei" />
+            
+
+
+                    <!--Vises når tekstsvar er valgt-->
+                    <h:inputTextarea readonly="true" value ="Her vil brukeren kunne svare" rendered="#{questionBean.textAnswer}"/>
+
+                    <!--Vises når ja/nei-svar er valgt-->
+                    <h:selectOneRadio readonly="true" rendered="#{questionBean.yesNoAnswer}">
+                        <f:selectItem itemValue="yes" itemLabel="Ja" />
+                        <f:selectItem itemValue="no" itemLabel="Nei" />
+                    </h:selectOneRadio>
+
+                    <!--Vises når flersvar er valgt-->
+                    <h:panelGroup rendered="#{questionBean.multipleAnswer}">
+                        <h:selectOneRadio value ="Tekst" styleClass="toggle-radio-buttons">
+                            <f:selectItem itemValue="checkbox" itemLabel="Avkrysningsenheter" />
+                            <f:selectItem itemValue="radio" itemLabel="Radioknapper" />
                         </h:selectOneRadio>
+                        <h:dataTable value="#{questionBean.answers}" var="a">
+                            <h:column>
+                                #{a}
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="-" action="#{questionBean.deleteAnswer(a)}"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:inputText size="10" value="#{questionBean.ans}"/>
+                        <h:commandLink value="+" action="#{questionBean.addAnswer}"/>
+                    </h:panelGroup>
 
-                        <!--Vises når flersvar er valgt-->
-                        <h:panelGroup rendered="#{questionBean.multipleAnswer}">
-                            <h:selectOneRadio value ="Tekst">
-                                <f:selectItem itemValue="checkbox" itemLabel="Avkrysningsenheter" />
-                                <f:selectItem itemValue="radio" itemLabel="Radioknapper" />
-                            </h:selectOneRadio>
-                            <h:dataTable value="#{questionBean.answers}" var="a">
-                                <h:column>
-                                    #{a}
-                                </h:column>
-                                <h:column>
-                                    <h:commandLink value="-" action="#{questionBean.deleteAnswer(a)}"/>
-                                </h:column>
-                            </h:dataTable>
-                            <h:inputText size="10" value="#{questionBean.ans}"/>
-                            <h:commandLink value="+" action="#{questionBean.addAnswer}"/>
-                        </h:panelGroup>
-                    
 
 <!--<h:dataTable rendered ="#{questionBean.multipleAnswer}" value="#{questionBean.answers}" var="a"
        styleClass="order-table"
@@ -96,7 +103,7 @@
 <h:column>
                     #{a}
                 </h:column>-->
-                        <h:commandLink value="rawr" action="index.xhtml"/>
+                    <h:commandLink value="rawr" action="index.xhtml"/>
                     <br/>
                     <h:commandButton value="Add" action="#{questionBean.addQuestion}" />
                     <table>
