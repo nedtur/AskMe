@@ -15,7 +15,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class GenerateComponents {
 
-    public formTitle  = "";
+    public String formTitle  = "";
 
     public GenerateComponents() {
     }
