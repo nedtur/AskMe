@@ -5,6 +5,7 @@
 package com.hist.askme.models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 /**
  *
@@ -13,13 +14,22 @@ import java.util.List;
 
 public class Questionnaire {
     private static final ArrayList<Question> questions = new ArrayList<Question>();
+    private String name;
     private boolean published;
+    private Calendar start;
+    private int pubTime;
+    private Calendar end;
     
-    public Questionnaire() {
+    public Questionnaire(String name, int pubTime) {
+        this.name = name;
+        start = Calendar.getInstance();
+        this.pubTime = pubTime;
+        end = null;
         published = false;
     }
     
     public void publish() {
+        end.setTimeInMillis(start.getTimeInMillis()+(long) pubTime);
         published = true;
     }
     

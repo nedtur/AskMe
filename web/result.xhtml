@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -17,19 +17,23 @@
             <div class="span2">
                 <table>
                     <h:dataTable value="#{questionnaireBean.questions}" var="q"
-                                 styleClass="order-table"
-                                 headerClass="order-table-header"
-                                 rowClasses="order-table-odd-row,order-table-even-row">
+                                styleClass="order-table"
+                                headerClass="order-table-header"
+                                rowClasses="order-table-odd-row,order-table-even-row">
                         <h:column>
                             <h2>#{q.question}</h2>
                         </h:column>
                         <h:column>
-                            <h:selectOneRadio value="#{questionBean.selectedAnswer}">
-                                <f:selectItems value="#{q.answerString}"/>
-                            </h:selectOneRadio>
+                            <h:dataTable value="#{q.answers}" var="a"
+                                styleClass="order-table"
+                                headerClass="order-table-header"
+                                rowClasses="order-table-odd-row,order-table-even-row">
+                                <h:column>
+                                    #{a.text} : #{a.result}
+                                </h:column>
+                            </h:dataTable>
                         </h:column>
                     </h:dataTable>
-                    <h:commandButton value="Send svar" action="result.xhtml"/>
                 </table>
             </div>
         </div>

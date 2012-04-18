@@ -26,6 +26,7 @@ public class QuestionBean implements Serializable {
     List<com.hist.askme.models.Answer> answers = new ArrayList<com.hist.askme.models.Answer>();
     String selected = "0";
     String yesOrNo = "whoknows";
+    com.hist.askme.models.Answer selectedAnswer;
     
     public Question getQuestion() { return question; }
     public void setQuestion(Question newQ) { question = newQ; }
@@ -50,6 +51,7 @@ public class QuestionBean implements Serializable {
         answers.remove(answer);
         return null;
     }
+    
     public String getSelected(){
         return selected;
     }
@@ -77,4 +79,9 @@ public class QuestionBean implements Serializable {
         return false;
         }
     }
+    
+    public com.hist.askme.models.Answer getSelectedAnswer() { return selectedAnswer;}
+    public void setSelectedAnswer(com.hist.askme.models.Answer ans) { selectedAnswer = ans; }
+    
+    
 }

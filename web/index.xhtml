@@ -40,7 +40,7 @@
                             <a href="answer.xhtml">Svare</a>
                         </li>
                         <li>
-                            <a>Resultat</a>
+                            <a href="result.xhtml">Resultat</a>
                         </li>
 
                     </ul>
@@ -72,7 +72,7 @@
                             <button class="btn">Tekst</button>
                             <button class="btn">Flervalg</button>
                         </div>-->
-
+                        
                         <h:panelGroup id="qtype">
                             <!--Vises når tekstsvar er valgt-->
                             <h:inputTextarea readonly="true" value ="Her vil brukeren kunne svare" style="resize: none;" rendered="#{questionBean.textAnswer}"/>
@@ -151,7 +151,7 @@
             </div>
             <div class="span5 pull-right">
                 <div class="hero-unit">
-                    
+                    <h:commandLink value="Publish" action="#{questionnaireBean.publishQuestionnaire}"/>
                 </div>
             </div>
         </div>

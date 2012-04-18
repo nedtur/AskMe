@@ -51,4 +51,8 @@ public class Question {
             }
         }
     }
+    
+    public void answerAns(Answer answer) {
+        answer.setResult();
+    }
 }
