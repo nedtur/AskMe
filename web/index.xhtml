@@ -5,6 +5,12 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    
+    <f:metadata>
+        <f:viewParam name="question" value="#{text}"/>
+    </f:metadata>
+    
     <h:head>
         <title>AskMe</title>
         <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-responsive.css"/>
@@ -56,6 +62,7 @@
                             <tr>
                                 <!--tekstfelt for å skrive inn spørsmål-->
                                 <td><h:inputText value="#{questionBean.questiontext}"/></td> 
+                                #{text}
                             </tr>
                         </table>
 

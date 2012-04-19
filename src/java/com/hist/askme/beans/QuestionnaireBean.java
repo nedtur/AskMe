@@ -4,10 +4,13 @@
  */
 package com.hist.askme.beans;
 
+import com.hist.askme.models.Answer;
 import com.hist.askme.models.Question;
 import com.hist.askme.models.Questionnaire;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -19,6 +22,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class QuestionnaireBean implements Serializable {
     
+    private Map<Question, Answer> selected = new HashMap<Question, Answer>();
     String name = "";
     int pubTime = 0;
     Questionnaire questionnaire = new Questionnaire(name, pubTime);
@@ -38,6 +42,7 @@ public class QuestionnaireBean implements Serializable {
     public void addQuestion(Question q) {
         questionnaire.addQuestion(q);
     }
+    public Map<Question, Answer> getSelected() { return selected; }
 
     public void deleteQuestion(Question q) {
         questionnaire.deleteQuestion(q);
@@ -62,9 +67,15 @@ public class QuestionnaireBean implements Serializable {
     
     public String answerQuestionnaire() {
         for(Question q : questions) {
-            q.answerAns(null);
+            for(Answer a : q.getAnswers()) {
+                if(selected.get(q).equals(a)) {
+                    a.setResult();
+                }
+            }
+            
         }
-        return "result.xhtml";
+        return "result";
     }
+    public String nav() { return "result.xhtml"; }
     
 }
