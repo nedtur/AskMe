@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+    </head>
+    <f:view>  
+        <body class="body">  
+        <h:form id="newQuestionnaire">  
+            <h:outputLabel>  
+                <h:outputText  
+                    value="Enter fields to generate your desired form based on" />  
+            </h:outputLabel>   
+            <h:panelGrid columns="3" >  
+                <h:outputLabel value="Form Title" for="formTitle" />  
+                <h:inputText id="formTitle"  
+                             value="#{InputFieldGeneration.formTitle}" required="true" />  
+                <h:message for="formTitle" />  
+            </h:panelGrid>  
+
+            <h:panelGrid cellpadding="0" cellspacing="5" width="700" border="0"  
+                         binding="#{InputFieldGeneration.gridElems}">  
+            </h:panelGrid>  
+            <h:commandButton id="addInputField"  
+                             action="#{InputFieldGeneration.checkFormGeneration}" value="Add New Field"></h:commandButton>  
+        </h:form>  
+    </body>  
+</f:view>  
+</html>
