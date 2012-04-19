@@ -4,6 +4,7 @@
  */
 package com.hist.askme.beans;
 
+import com.hist.askme.models.Answer;
 import com.hist.askme.models.Question;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,9 +24,10 @@ public class QuestionBean implements Serializable {
     Question question = new Question();
     String questiontext = "Spørsmål...";
     String ans = "Svar...";
-    List<com.hist.askme.models.Answer> answers = new ArrayList<com.hist.askme.models.Answer>();
+    List<Answer> answers = new ArrayList<Answer>();
     String selected = "0";
     String yesOrNo = "whoknows";
+    Answer selectedItem = question.getItem();
     
     public Question getQuestion() { return question; }
     public void setQuestion(Question newQ) { question = newQ; }
@@ -33,23 +35,26 @@ public class QuestionBean implements Serializable {
     public void setQuestiontext(String newQ) { questiontext = newQ; }
     public String getAns() { return ans; }
     public void setAns(String newA) { ans = newA; }
-    public List<com.hist.askme.models.Answer> getAnswers() { return answers; }
+    public List<Answer> getAnswers() { return answers; }
+    public Answer getSelectedItem() { return selectedItem; }
+    public void setSelectedItem(Answer i) { question.setItem(i); }
     
     public Question newQuestion() {
         question = new Question(questiontext, answers);
-        answers = new ArrayList<com.hist.askme.models.Answer>();
+        answers = new ArrayList<Answer>();
         return question;
     }
     
     public String addAnswer() {
-        com.hist.askme.models.Answer a = new com.hist.askme.models.Answer(ans);
+        Answer a = new Answer(ans);
         answers.add(a);
         return null;
     }
-    public String deleteAnswer(com.hist.askme.models.Answer answer) {
+    public String deleteAnswer(Answer answer) {
         answers.remove(answer);
         return null;
     }
+    
     public String getSelected(){
         return selected;
     }
@@ -76,5 +81,8 @@ public class QuestionBean implements Serializable {
         } else {
         return false;
         }
+    }
+    public void ans() {
+        
     }
 }

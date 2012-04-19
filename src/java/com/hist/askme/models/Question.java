@@ -18,6 +18,7 @@ public class Question {
     private String question; 
     private List<Answer> answers = new CopyOnWriteArrayList<Answer>();
     private List<String> answerString = new CopyOnWriteArrayList<String>();
+    private Answer item = new Answer("");
     UUID ID;
     
     public Question() {}
@@ -51,4 +52,7 @@ public class Question {
             }
         }
     }
+    
+    public Answer getItem() { return item; }
+    public void setItem(Answer i) { item = i; }
 }

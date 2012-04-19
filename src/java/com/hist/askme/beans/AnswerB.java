@@ -16,13 +16,13 @@ import javax.faces.component.html.HtmlForm;
  */
 @ManagedBean
 @SessionScoped
-public class Answer implements Serializable {
+public class AnswerB implements Serializable {
 
     private HtmlForm textForm;
     private HtmlForm radioForm;
     private HtmlForm checkForm;
 
-    public Answer() {
+    public AnswerB() {
         textForm = new HtmlForm();
         radioForm = new HtmlForm();
         checkForm = new HtmlForm();
