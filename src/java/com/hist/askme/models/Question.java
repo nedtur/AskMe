@@ -15,6 +15,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Håvard
  */
 public class Question {
+    public final static int CHECKBOX_QUESTION = 0;
+    public final static int RADIO_QUESTION = 1;
+    public final static int BOOLEAN_QUESTION = 2;
+    public final static int TEXT_QUESTION = 3;
+    
     private String question; 
     private List<Answer> answers = new CopyOnWriteArrayList<Answer>();
     private List<String> answerString = new CopyOnWriteArrayList<String>();

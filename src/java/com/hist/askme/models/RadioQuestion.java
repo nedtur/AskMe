@@ -4,19 +4,19 @@
  */
 package com.hist.askme.models;
 
-import java.util.UUID;
+import java.util.List;
 
 /**
  *
  * @author Ina
  */
-public class RadioMultipleAnswer extends MultipleAnswer {
+public class RadioQuestion extends MultipleChoiceQuestion {
     Answer answer;
-    
-    public RadioMultipleAnswer(UUID questionID){
-        super(questionID);
-    }
 
+    public RadioQuestion(String questiontext, List<Answer> answers) {
+        super(questiontext, answers);
+    }
+    
     public Answer getAnswer() {
         return answer;
     }

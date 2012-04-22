@@ -5,14 +5,19 @@
 package com.hist.askme.models;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
  *
  * @author Ina
  */
-public class CheckboxMultipleAnswer extends MultipleAnswer {
+public class CheckboxQuestion extends MultipleChoiceQuestion {
     private ArrayList<Answer> answers = new ArrayList<Answer>();
+
+    public CheckboxQuestion(String questiontext, List<Answer> answers) {
+        super(questiontext, answers);
+    }
     
     public void addAnswer(Answer answer) {
         this.answers.add(answer);
@@ -24,10 +29,6 @@ public class CheckboxMultipleAnswer extends MultipleAnswer {
     
     public void setAnswers(ArrayList<Answer> answers) {
         this.answers = answers;
-    }
-
-    public CheckboxMultipleAnswer(UUID questionID) {
-        super(questionID);
     }
 
     public ArrayList<Answer> getAnswers() {

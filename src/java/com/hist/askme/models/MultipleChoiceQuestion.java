@@ -5,19 +5,19 @@
 package com.hist.askme.models;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
  *
  * @author Håvard
  */
-public class MultipleAnswer extends Answer {
+public class MultipleChoiceQuestion extends Question {
 
     private ArrayList<Answer> theOptions = new ArrayList<Answer>();
-    
 
-    public MultipleAnswer(UUID questionID) {
-        super(questionID);
+    public MultipleChoiceQuestion(String question, List<Answer> answers) {
+        super(question, answers);
     }
 
     public void addOption(Answer newAnswer) {

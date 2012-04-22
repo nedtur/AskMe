@@ -25,9 +25,10 @@
                                 </table>
                                 <!--Radioknapper for å velge type svar-->
                                 <h:selectOneRadio value="#{questionBean.selected}" layout="lineDirection" styleClass="toggle-radio-buttons">
-                                    <f:selectItem itemValue="1" itemLabel="Ja/Nei"/>
-                                    <f:selectItem itemValue="2" itemLabel="Tekst" />
-                                    <f:selectItem itemValue="3" itemLabel="Flervalg" />
+                                    <f:selectItem itemValue="0" itemLabel="Flervalg"/>
+                                    <f:selectItem itemValue="1" itemLabel="Fleralternativ" />
+                                    <f:selectItem itemValue="2" itemLabel="Ja/Nei" />
+                                    <f:selectItem itemValue="3" itemLabel="Tekst" />
                                     <f:ajax event="change" render="qtype"/>
                                 </h:selectOneRadio>
                                 <h:panelGroup id="qtype">
@@ -41,11 +42,7 @@
                                     </h:selectOneRadio>
 
                                     <!--Vises når flersvar er valgt-->
-                                    <h:panelGroup rendered="#{questionBean.multipleAnswer}">
-                                        <h:selectOneRadio value ="Tekst" styleClass="toggle-radio-buttons">
-                                            <f:selectItem itemValue="checkbox" itemLabel="Avkrysningsenheter" />
-                                            <f:selectItem itemValue="radio" itemLabel="Radioknapper" />
-                                        </h:selectOneRadio>
+                                    <h:panelGroup rendered="#{questionBean.checkboxAnswer}">
                                         <h:dataTable value="#{questionBean.answers}" var="a" id="ans" >
                                             <h:column>
                                                 #{a.text}
@@ -99,7 +96,6 @@
                                         </h:column>
                                     </h:dataTable>
                                 </table>
-
                             </div>
                         </div>
                     </h:form>
