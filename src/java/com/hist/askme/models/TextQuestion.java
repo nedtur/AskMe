@@ -24,4 +24,8 @@ public class TextQuestion extends Question {
         return liste;
     }
     
+    @Override
+    public int getQuestionInt(){
+        return Question.TEXT_QUESTION;
+    }
 }

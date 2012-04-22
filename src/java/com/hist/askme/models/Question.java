@@ -5,7 +5,6 @@
 package com.hist.askme.models;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,11 +17,10 @@ public class Question {
     public final static int RADIO_QUESTION = 1;
     public final static int BOOLEAN_QUESTION = 2;
     public final static int TEXT_QUESTION = 3;
-    
     private String questionText;
     private List<Answer> options = new ArrayList<Answer>();
     private Answer answer;
-    
+
     public Question() {
     }
 
@@ -65,5 +63,8 @@ public class Question {
 
     public String getQuestionType() {
         return "Type:" + this.getClass();
+    }
+    public int getQuestionInt() {
+        return 4;
     }
 }

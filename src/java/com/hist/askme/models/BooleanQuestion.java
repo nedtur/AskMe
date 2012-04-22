@@ -19,5 +19,7 @@ public class BooleanQuestion extends Question {
         yesno.add(new Answer("Nei"));        
         super.setOptions(yesno);
     }
-    
+ 
+    @Override
+    public int getQuestionInt() {return Question.BOOLEAN_QUESTION;}
 }

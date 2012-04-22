@@ -39,5 +39,6 @@ public class CheckboxQuestion extends Question {
     public void setAnswer(Answer answer){
         throw new UnsupportedOperationException();
     }
-    
+    @Override
+    public int getQuestionInt() {return Question.CHECKBOX_QUESTION;}
 }
