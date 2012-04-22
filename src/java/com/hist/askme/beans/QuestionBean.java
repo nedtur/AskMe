@@ -4,10 +4,7 @@
  */
 package com.hist.askme.beans;
 
-import com.hist.askme.models.Answer;
-import com.hist.askme.models.CheckboxQuestion;
-import com.hist.askme.models.Question;
-import com.hist.askme.models.RadioQuestion;
+import com.hist.askme.models.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +57,7 @@ public class QuestionBean implements Serializable {
     public Question newQuestion() {
         switch (Integer.parseInt(selected))  {
             case Question.BOOLEAN_QUESTION:
-                question = new Question(questiontext, answers);
+                question = new BooleanQuestion(questiontext);
                 break;
             case Question.CHECKBOX_QUESTION:
                 question = new CheckboxQuestion(questiontext, answers);
@@ -69,22 +66,20 @@ public class QuestionBean implements Serializable {
                 question = new RadioQuestion(questiontext, answers);
                 break;
             case Question.TEXT_QUESTION:
-                question = new Question(questiontext, answers);
+                question = new TextQuestion(questiontext);
                 break;
         }
         answers = new ArrayList<Answer>();
         return question;
     }
 
-    public String addAnswer() {
+    public void addAnswer() {
         Answer a = new Answer(ans);
         answers.add(a);
-        return null;
     }
 
-    public String deleteAnswer(Answer answer) {
+    public void deleteAnswer(Answer answer) {
         answers.remove(answer);
-        return null;
     }
 
     public String getSelected() {
@@ -96,35 +91,15 @@ public class QuestionBean implements Serializable {
     }
 
     public boolean getYesNoAnswer() {
-        if (selected.equals("2")) {
-            return true;
-        } else {
-            return false;
-        }
+        return (selected.equals("2"));
     }
 
     public boolean getTextAnswer() {
-        if (selected.equals("3")) {
-            return true;
-        } else {
-            return false;
-        }
+        return (selected.equals("3"));
     }
 
-    public boolean getCheckboxAnswer() {
-        if (selected.equals("0")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean getRadioAnswer() {
-        if (selected.equals("1")) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean getMultipleChoiceQuestion() {
+        return (selected.equals("1")||selected.equals("0"));
     }
 
     public void ans() {

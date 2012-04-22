@@ -35,14 +35,8 @@
                                     <!--Vises når tekstsvar er valgt-->
                                     <h:inputTextarea readonly="true" value ="Her vil brukeren kunne svare" style="resize: none;" rendered="#{questionBean.textAnswer}"/>
 
-                                    <!--Vises når ja/nei-svar er valgt-->
-                                    <h:selectOneRadio readonly="true" rendered="#{questionBean.yesNoAnswer}" styleClass="toggle-radio-buttons">
-                                        <f:selectItem itemValue="yes" itemLabel="Ja" />
-                                        <f:selectItem itemValue="no" itemLabel="Nei" />
-                                    </h:selectOneRadio>
-
                                     <!--Vises når flersvar er valgt-->
-                                    <h:panelGroup rendered="#{questionBean.checkboxAnswer}">
+                                    <h:panelGroup rendered="#{questionBean.multipleChoiceQuestion}">
                                         <h:dataTable value="#{questionBean.answers}" var="a" id="ans" >
                                             <h:column>
                                                 #{a.text}
@@ -70,12 +64,12 @@
                                                  rowClasses="order-table-odd-row,order-table-even-row">
                                         <h:column>
                                             <f:facet name="header">Spørsmål</f:facet>
-                                            #{q.question}
+                                            #{q.questionText}
                                         </h:column>
 
                                         <h:column>
                                             <f:facet name="header">Svar</f:facet>
-                                            <h:dataTable value="#{q.answers}" var="an"
+                                            <h:dataTable value="#{q.options}" var="an"
                                                          styleClass="order-table"
                                                          headerClass="order-table-header"
                                                          rowClasses="order-table-odd-row,order-table-even-row">

@@ -21,10 +21,10 @@
                                 headerClass="order-table-header"
                                 rowClasses="order-table-odd-row,order-table-even-row">
                         <h:column>
-                            <h2>#{q.question}</h2>
+                            <h2>#{q.questionText}</h2>
                         </h:column>
                         <h:column>
-                            <h:dataTable value="#{q.answers}" var="a"
+                            <h:dataTable value="#{q.options}" var="a"
                                 styleClass="order-table"
                                 headerClass="order-table-header"
                                 rowClasses="order-table-odd-row,order-table-even-row">

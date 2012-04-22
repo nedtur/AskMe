@@ -6,13 +6,12 @@ package com.hist.askme.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
  * @author Ina
  */
-public class CheckboxQuestion extends MultipleChoiceQuestion {
+public class CheckboxQuestion extends Question {
     private ArrayList<Answer> answers = new ArrayList<Answer>();
 
     public CheckboxQuestion(String questiontext, List<Answer> answers) {
@@ -27,11 +26,18 @@ public class CheckboxQuestion extends MultipleChoiceQuestion {
         this.answers.remove(answer);
     }
     
-    public void setAnswers(ArrayList<Answer> answers) {
-        this.answers = answers;
-    }
-
     public ArrayList<Answer> getAnswers() {
         return answers;
     }
+    
+    @Override
+    public Answer getAnswer(){
+        throw new UnsupportedOperationException();
+    }
+    
+    @Override
+    public void setAnswer(Answer answer){
+        throw new UnsupportedOperationException();
+    }
+    
 }

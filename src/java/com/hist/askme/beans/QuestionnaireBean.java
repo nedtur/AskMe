@@ -67,7 +67,7 @@ public class QuestionnaireBean implements Serializable {
     
     public String answerQuestionnaire() {
         for(Question q : questions) {
-            for(Answer a : q.getAnswers()) {
+            for(Answer a : q.getOptions()) {
                 if(selected.get(q).equals(a)) {
                     a.setResult();
                 }
