@@ -13,22 +13,22 @@ import java.util.UUID;
  */
 public class MultipleAnswer extends Answer {
 
-    private ArrayList<String> theAnswers = new ArrayList<String>();
+    private ArrayList<Answer> theOptions = new ArrayList<Answer>();
     
 
     public MultipleAnswer(UUID questionID) {
         super(questionID);
     }
 
-    public void addAnswer(String newAnswer) {
-        theAnswers.add(newAnswer);
+    public void addOption(Answer newAnswer) {
+        theOptions.add(newAnswer);
     }
 
-    public int getNumberOfAnswers() {
-        return theAnswers.size();
+    public int getNumberOfOptions() {
+        return theOptions.size();
     }
 
-    public ArrayList<String> getAnswers() {
-        return theAnswers;
+    public ArrayList<Answer> getOptions() {
+        return theOptions;
     }
 }

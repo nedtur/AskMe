@@ -11,7 +11,18 @@ import java.util.UUID;
  * @author Ina
  */
 public class RadioMultipleAnswer extends MultipleAnswer {
+    Answer answer;
+    
     public RadioMultipleAnswer(UUID questionID){
         super(questionID);
     }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
+    }
+    
 }

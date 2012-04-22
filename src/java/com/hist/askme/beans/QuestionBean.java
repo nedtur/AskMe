@@ -27,7 +27,6 @@ public class QuestionBean implements Serializable {
     List<Answer> answers = new ArrayList<Answer>();
     String selected = "0";
     String yesOrNo = "whoknows";
-    Answer selectedItem = question.getItem();
     
     public Question getQuestion() { return question; }
     public void setQuestion(Question newQ) { question = newQ; }
@@ -36,8 +35,6 @@ public class QuestionBean implements Serializable {
     public String getAns() { return ans; }
     public void setAns(String newA) { ans = newA; }
     public List<Answer> getAnswers() { return answers; }
-    public Answer getSelectedItem() { return selectedItem; }
-    public void setSelectedItem(Answer i) { question.setItem(i); }
     
     public Question newQuestion() {
         question = new Question(questiontext, answers);
