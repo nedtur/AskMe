@@ -69,8 +69,10 @@ public class QuestionnaireBean implements Serializable {
     public String answerQuestionnaire() {
         
         for(Question q : questions) {
-            if(selected.containsKey(q)) {
-                q.getAnswerFromString(selected.get(q).getText());
+            for(Answer a : q.getOptions()) {
+                if(selected.get(q).equals(a)) {
+                    a.setResult();
+                }
             }
             
             

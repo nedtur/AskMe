@@ -5,62 +5,66 @@
 package com.hist.askme.models;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
  * @author Håvard
  */
 public class Question {
-    private String question; 
-    private List<Answer> answers = new CopyOnWriteArrayList<Answer>();
-    private List<String> answerString = new CopyOnWriteArrayList<String>();
-    private Answer item = new Answer("");
-    UUID ID;
-    
-    public Question() {}
-    public Question(String question, List<Answer> answers) {
-        this.question = question;
-        this.answers = answers;
-        for(Answer a : answers) {
-            answerString.add(a.getText());
-        }
-        
-        ID = UUID.randomUUID();
+
+    public final static int CHECKBOX_QUESTION = 0;
+    public final static int RADIO_QUESTION = 1;
+    public final static int BOOLEAN_QUESTION = 2;
+    public final static int TEXT_QUESTION = 3;
+    private String questionText;
+    private List<Answer> options = new ArrayList<Answer>();
+    private Answer answer;
+
+    public Question() {
     }
-    
-    public UUID getID() {return ID;}
-    public String getQuestion() { return question; }
-    public List<Answer> getAnswers() { return answers; }
-    public List<String> getAnswerString() { return answerString; }
-    
-    public void setQuestion(String newQ) { question=newQ; }
-    public void setAnswers(ArrayList<Answer> newAns) { answers=newAns; }
-    
-    public void addAnswer(String answer) {
-        answers.add(new Answer(answer));
+
+    public Question(String question, List<Answer> options) {
+        this.questionText = question;
+        this.options = options;
     }
-    
-    public void deleteAnswer(Answer answer) {
-        for(Iterator<Answer> iter = answers.iterator(); iter.hasNext();) {
-            Answer ans = iter.next();
-            if(answer.equals(ans)) {
-                answers.remove(ans);
-            }
-        }
+
+    public String getQuestionText() {
+        return questionText;
     }
-    public Answer getAnswerFromString(String ans) {
-        for(Answer a : answers) {
-            if(a.getText().compareTo(ans) == 0) {
-                return a;
-            }
-        }
-        return null;
+
+    public List<Answer> getOptions() {
+        return options;
     }
-    
-    public Answer getItem() { return item; }
-    public void setItem(Answer i) { item = i; }
+
+    public void setQuestionText(String newQ) {
+        questionText = newQ;
+    }
+
+    public void setOptions(ArrayList<Answer> newAns) {
+        options = newAns;
+    }
+
+    public void addOption(String answer) {
+        options.add(new Answer(answer));
+    }
+
+    public void deleteOption(Answer answer) {
+        options.remove(answer);
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
+    }
+
+    public String getQuestionType() {
+        return "Type:" + this.getClass();
+    }
+    public int getQuestionInt() {
+        return 4;
+    }
 }

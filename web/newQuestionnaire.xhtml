@@ -18,15 +18,15 @@ and open the template in the editor.
             <h:panelGrid columns="3" >  
                 <h:outputLabel value="Form Title" for="formTitle" />  
                 <h:inputText id="formTitle"  
-                             value="#{InputFieldGeneration.formTitle}" required="true" />  
+                             value="#{generateComponents.formTitle}" required="true" />  
                 <h:message for="formTitle" />  
             </h:panelGrid>  
 
             <h:panelGrid cellpadding="0" cellspacing="5" width="700" border="0"  
-                         binding="#{InputFieldGeneration.gridElems}">  
+                         binding="#{generateComponents.gridElems}">  
             </h:panelGrid>  
             <h:commandButton id="addInputField"  
-                             action="#{InputFieldGeneration.checkFormGeneration}" value="Add New Field"></h:commandButton>  
+                             action="#{generateComponents.checkFormGeneration}" value="Add New Field"></h:commandButton>  
         </h:form>  
     </body>  
 </f:view>  

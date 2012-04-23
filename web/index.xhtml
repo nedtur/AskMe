@@ -5,8 +5,6 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
-    
     <h:head>
         <title>IGNORED</title>
     </h:head>
@@ -17,7 +15,7 @@
                 <div style="margin-top: 100px; margin-left: 50px">
                     <h:form>
                         <div class="span5">
-                            <div class="hero-unit" style="height: 500px">
+                            <div class="hero-unit" style="height: 5 00px">
 
                                 <table>
                                     <tr>
@@ -27,27 +25,18 @@
                                 </table>
                                 <!--Radioknapper for å velge type svar-->
                                 <h:selectOneRadio value="#{questionBean.selected}" layout="lineDirection" styleClass="toggle-radio-buttons">
-                                    <f:selectItem itemValue="1" itemLabel="Ja/Nei"/>
-                                    <f:selectItem itemValue="2" itemLabel="Tekst" />
-                                    <f:selectItem itemValue="3" itemLabel="Flervalg" />
+                                    <f:selectItem itemValue="0" itemLabel="Flervalg"/>
+                                    <f:selectItem itemValue="1" itemLabel="Fleralternativ" />
+                                    <f:selectItem itemValue="2" itemLabel="Ja/Nei" />
+                                    <f:selectItem itemValue="3" itemLabel="Tekst" />
                                     <f:ajax event="change" render="qtype"/>
                                 </h:selectOneRadio>
                                 <h:panelGroup id="qtype">
                                     <!--Vises når tekstsvar er valgt-->
                                     <h:inputTextarea readonly="true" value ="Her vil brukeren kunne svare" style="resize: none;" rendered="#{questionBean.textAnswer}"/>
 
-                                    <!--Vises når ja/nei-svar er valgt-->
-                                    <h:selectOneRadio readonly="true" rendered="#{questionBean.yesNoAnswer}" styleClass="toggle-radio-buttons">
-                                        <f:selectItem itemValue="yes" itemLabel="Ja" />
-                                        <f:selectItem itemValue="no" itemLabel="Nei" />
-                                    </h:selectOneRadio>
-
                                     <!--Vises når flersvar er valgt-->
-                                    <h:panelGroup rendered="#{questionBean.multipleAnswer}">
-                                        <h:selectOneRadio value ="Tekst" styleClass="toggle-radio-buttons">
-                                            <f:selectItem itemValue="checkbox" itemLabel="Avkrysningsenheter" />
-                                            <f:selectItem itemValue="radio" itemLabel="Radioknapper" />
-                                        </h:selectOneRadio>
+                                    <h:panelGroup rendered="#{questionBean.multipleChoiceQuestion}">
                                         <h:dataTable value="#{questionBean.answers}" var="a" id="ans" >
                                             <h:column>
                                                 #{a.text}
@@ -75,12 +64,12 @@
                                                  rowClasses="order-table-odd-row,order-table-even-row">
                                         <h:column>
                                             <f:facet name="header">Spørsmål</f:facet>
-                                            #{q.question}
+                                            #{q.questionText}
                                         </h:column>
 
                                         <h:column>
                                             <f:facet name="header">Svar</f:facet>
-                                            <h:dataTable value="#{q.answers}" var="an"
+                                            <h:dataTable value="#{q.options}" var="an"
                                                          styleClass="order-table"
                                                          headerClass="order-table-header"
                                                          rowClasses="order-table-odd-row,order-table-even-row">
@@ -90,12 +79,17 @@
                                             </h:dataTable>
                                         </h:column>
                                         <h:column>
+                                            <f:facet name="header">Spørsmåltype</f:facet>
+                                            <h:column>
+                                                #{q.questionType}
+                                            </h:column>
+                                        </h:column>
+                                        <h:column>
                                             <f:facet name="header"></f:facet>
                                             <h:commandLink value="Delete" action="#{questionnaireBean.deleteQuestion(q)}" />
                                         </h:column>
                                     </h:dataTable>
                                 </table>
-
                             </div>
                         </div>
                     </h:form>

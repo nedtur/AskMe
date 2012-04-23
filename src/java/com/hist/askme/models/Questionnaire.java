@@ -42,7 +42,7 @@ public class Questionnaire {
     }
     public Question getQuestionByString(String question) {
         for(Question q : questions) {
-            if(q.getQuestion().equalsIgnoreCase(question)) {
+            if(q.getQuestionText().equalsIgnoreCase(question)) {
                 return q;
             }
         }
@@ -58,12 +58,12 @@ public class Questionnaire {
         questions.remove(question);
     }
     public void addAnswer(Question q, String answer) {
-        q.addAnswer(answer);
+        q.addOption(answer);
     }
     public void deleteAnswer(Question q, Answer answer) {
-        q.deleteAnswer(answer);
+        q.deleteOption(answer);
     }
     public List<Answer> getAnswers(Question q) {
-        return q.getAnswers();
+        return q.getOptions();
     }
 }
