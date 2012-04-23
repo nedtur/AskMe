@@ -13,6 +13,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/boostrap.css"/>
     </h:head>
     <body>
+        
         <h:form>
             <div class="container">
                 <div class="span2">
@@ -33,7 +34,8 @@
                                 </h:selectOneRadio>
                             </h:column>
                         </h:dataTable>
-                        <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
+                        #{questionnaireBean.name}
+                        <h:commandButton value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
                     </table>
                 </div>
             </div>

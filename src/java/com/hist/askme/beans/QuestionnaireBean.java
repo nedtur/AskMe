@@ -23,7 +23,7 @@ import javax.faces.bean.SessionScoped;
 public class QuestionnaireBean implements Serializable {
     
     private Map<Question, Answer> selected = new HashMap<Question, Answer>();
-    String name = "";
+    String name = "";   
     int pubTime = 0;
     Questionnaire questionnaire = new Questionnaire(name, pubTime);
     ArrayList<Question> questions = questionnaire.getQuestions();
@@ -43,6 +43,7 @@ public class QuestionnaireBean implements Serializable {
         questionnaire.addQuestion(q);
     }
     public Map<Question, Answer> getSelected() { return selected; }
+    public void setSelected(Map<Question, Answer> newS) { selected=newS; }
 
     public void deleteQuestion(Question q) {
         questionnaire.deleteQuestion(q);
@@ -66,16 +67,23 @@ public class QuestionnaireBean implements Serializable {
     }
     
     public String answerQuestionnaire() {
+        
         for(Question q : questions) {
-            for(Answer a : q.getAnswers()) {
-                if(selected.get(q).equals(a)) {
-                    a.setResult();
-                }
+            if(selected.containsKey(q)) {
+                q.getAnswerFromString(selected.get(q).getText());
             }
             
+            
+            /*
+            for(Answer a : q.getAnswers()) {
+                if(a.equals(selected.get(q))) {
+                    a.setResult();
+                } else {
+                    return "index";
+                    
+                }
+            }*/
         }
         return "result";
     }
-    public String nav() { return "result.xhtml"; }
-    
 }

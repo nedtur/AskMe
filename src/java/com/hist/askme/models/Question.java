@@ -52,6 +52,14 @@ public class Question {
             }
         }
     }
+    public Answer getAnswerFromString(String ans) {
+        for(Answer a : answers) {
+            if(a.getText().compareTo(ans) == 0) {
+                return a;
+            }
+        }
+        return null;
+    }
     
     public Answer getItem() { return item; }
     public void setItem(Answer i) { item = i; }

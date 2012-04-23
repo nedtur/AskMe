@@ -34,7 +34,8 @@ public class QuestionBean implements Serializable {
     public String getQuestiontext() { return questiontext; }
     public void setQuestiontext(String newQ) { questiontext = newQ; }
     public String getAns() { return ans; }
-    public void setAns(String newA) { ans = newA; }
+    public void setAns
+            (String newA) { ans = newA; }
     public List<Answer> getAnswers() { return answers; }
     public Answer getSelectedItem() { return selectedItem; }
     public void setSelectedItem(Answer i) { question.setItem(i); }
