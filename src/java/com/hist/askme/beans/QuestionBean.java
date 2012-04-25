@@ -104,4 +104,11 @@ public class QuestionBean implements Serializable {
 
     public void ans() {
     }
+    
+    
+    //tester databasen.. 
+    public String getDatabase(){
+        
+        return"";
+    }
 }
