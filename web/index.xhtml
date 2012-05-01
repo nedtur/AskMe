@@ -11,11 +11,11 @@
     <body data-spy="scroll" data-target=".subnav" data-offset="50" style="background-color: #ACDED6">
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
-                
+
                 <div style="margin-top: 100px; margin-left: 50px">
                     <h:form>
                         <div class="span5">
-                            <div class="hero-unit" style="height: 5 00px">
+                            <div class="hero-unit" style="height: 500px">
 
                                 <table>
                                     <tr>
@@ -89,12 +89,24 @@
                                             <h:commandLink value="Delete" action="#{questionnaireBean.deleteQuestion(q)}" />
                                         </h:column>
                                     </h:dataTable>
+                                    <h:commandLink value="Publiser" action="#{questionnaireBean.addQuestionnaire}"/>
+                                    
+                                    <h:dataTable value="#{questionnaireBean.questionnaires}" var="mm">
+                                        <h:column>
+                                            #{mm.name}
+                                        </h:column>
+                                        <h:column>
+                                            <h:link value="#{mm.name}" outcome="answer">
+                                                <f:param name="name" value="#{mm.name}" />
+                                            </h:link>
+                                        </h:column>
+                                    </h:dataTable>
                                 </table>
                             </div>
                         </div>
                     </h:form>
                 </div>
-                    
+
             </ui:define>
         </ui:composition>
     </body>

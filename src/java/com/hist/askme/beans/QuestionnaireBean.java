@@ -4,15 +4,15 @@
  */
 package com.hist.askme.beans;
 
-import com.hist.askme.models.Answer;
 import com.hist.askme.models.Question;
 import com.hist.askme.models.Questionnaire;
+import com.hist.askme.models.QuestionnaireService;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -22,19 +22,41 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class QuestionnaireBean implements Serializable {
     
-    private Map<Question, Answer> selected = new HashMap<Question, Answer>();
-    String name = "";   
+    String name = "a";  
     int pubTime = 0;
-    Questionnaire questionnaire = new Questionnaire(name, pubTime);
+    Questionnaire questionnaire = new Questionnaire();
     ArrayList<Question> questions = questionnaire.getQuestions();
-    ArrayList<Questionnaire> questionnaires = new ArrayList <Questionnaire>();
-    ArrayList<Questionnaire> questionnairesActive = new ArrayList <Questionnaire>();
-    ArrayList<QuestionBean> qs = new ArrayList<QuestionBean>();
+    
+    QuestionnaireService questionnaireService = new QuestionnaireService();
+    ArrayList<Questionnaire> questionnaires = questionnaireService.getQuestionnaires();
+    
+    public QuestionnaireService getQuestionnaireService() {
+        return questionnaireService;
+    }
+    public void setQuestionnaireService(QuestionnaireService qs) {
+        questionnaireService = qs;
+    }
+    public ArrayList<Questionnaire> getQuestionnaires() {
+        return questionnaires;
+    }
+    
+    public void addQuestionnaire() {
+        questionnaireService.addQuestionnaire(new Questionnaire(name, questions, pubTime));
+    }
+    
+    public void deleteQuestionnaire(Questionnaire q) {
+        questionnaireService.deleteQuestionnaire(q);
+    }
+    
     
     public String getName() { return name; }
     public void setName(String newName) { name = newName; }
     public int getPubTime() { return pubTime; }
     public void setPubTime(int newTime) {  pubTime = newTime; }
+    
+    public Questionnaire getQuestionnaire() {
+        return questionnaire;
+    }
     
     public ArrayList<Question> getQuestions() {
         return questions;
@@ -42,23 +64,9 @@ public class QuestionnaireBean implements Serializable {
     public void addQuestion(Question q) {
         questionnaire.addQuestion(q);
     }
-    public Map<Question, Answer> getSelected() { return selected; }
-    public void setSelected(Map<Question, Answer> newS) { selected=newS; }
 
     public void deleteQuestion(Question q) {
         questionnaire.deleteQuestion(q);
-    }
-    
-    public ArrayList<Questionnaire> getQuestionnaires() {
-        return questionnaires;
-    }
-    public ArrayList<Questionnaire> getQuestionnairesActive() {
-        for (Questionnaire q : getQuestionnaires()) {
-            if(q.getPublished()) {
-                questionnairesActive.add(q);
-            }
-        }
-        return questionnairesActive;
     }
     
     public boolean publishQuestionnaire() {
@@ -67,25 +75,27 @@ public class QuestionnaireBean implements Serializable {
     }
     
     public String answerQuestionnaire() {
-        
         for(Question q : questions) {
-            for(Answer a : q.getOptions()) {
-                if(selected.get(q).equals(a)) {
-                    a.setResult();
-                }
-            }
-            
-            
-            /*
-            for(Answer a : q.getAnswers()) {
-                if(a.equals(selected.get(q))) {
-                    a.setResult();
-                } else {
-                    return "index";
-                    
-                }
-            }*/
+            q.getOptionByString(q.getAnswer()).setResult();
         }
         return "result";
+    }
+    
+    //-----------------------------------------------------------------------------
+    public void init() {
+        if (name.trim() == null) {
+            String message = "Bad request. Please use a link from within the system.";
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+            return;
+        }
+        questionnaire = questionnaireService.find(name);
+        
+        if(questionnaire == null) {
+            String message = "Bad request. Unknown questionnaire.";
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+            return;
+        }
     }
 }

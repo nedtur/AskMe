@@ -5,8 +5,8 @@
 package com.hist.askme.beans;
 
 import com.hist.askme.models.*;
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -100,8 +100,5 @@ public class QuestionBean implements Serializable {
 
     public boolean getMultipleChoiceQuestion() {
         return (selected.equals("1")||selected.equals("0"));
-    }
-
-    public void ans() {
     }
 }

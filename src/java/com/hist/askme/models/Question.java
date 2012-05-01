@@ -17,16 +17,25 @@ public class Question {
     public final static int RADIO_QUESTION = 1;
     public final static int BOOLEAN_QUESTION = 2;
     public final static int TEXT_QUESTION = 3;
+        
     private String questionText;
     private List<Answer> options = new ArrayList<Answer>();
-    private Answer answer;
+    private String answer;
 
     public Question() {
     }
-
     public Question(String question, List<Answer> options) {
         this.questionText = question;
         this.options = options;
+    }
+    
+    public Answer getOptionByString(String ans) {
+        for(Answer a : options){
+            if(a.getText().compareTo(ans) == 0) {
+                return a;
+            }
+        }
+        return null;
     }
 
     public String getQuestionText() {
@@ -53,11 +62,11 @@ public class Question {
         options.remove(answer);
     }
 
-    public Answer getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Answer answer) {
+    public void setAnswer(String answer){
         this.answer = answer;
     }
 
