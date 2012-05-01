@@ -6,6 +6,10 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       >
+    <f:metadata>
+        <f:viewParam name="name" value="#{questionnaireBean.name}"/>
+        <f:event type="preRenderView" listener="#{questionnaireBean.init}"/>
+    </f:metadata>
     <h:head>
         <title>IGNORED</title>
     </h:head>
@@ -15,6 +19,7 @@
                 <div class="span12" style="margin-top: 100px; margin-left: 50px">
                     <div class="hero-unit">
                         <h:form>
+                            <h1>#{questionnaireBean.name}</h1>
                             <div class="container">
                                 <div class="span2">
                                     <table>
@@ -36,10 +41,10 @@
                                             <h:column>
 
 
-                                                <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==1}">
+                                                <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
                                                     <f:selectItems value="#{q.options}"
                                                                    var="a"
-                                                                   itemValue="#{a}"
+                                                                   itemValue="#{a.text}"
                                                                    itemLabel="#{a.text}"/>
                                                 </h:selectOneRadio>
 
@@ -62,7 +67,6 @@
                                                 <h:inputTextarea value="#{q.answer.text}" rendered="#{q.questionInt==3}"/>
 
                                             </h:column>
-
                                         </h:dataTable>
                                         <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
                                     </table>

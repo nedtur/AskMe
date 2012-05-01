@@ -24,6 +24,9 @@
                             <h2>#{q.questionText}</h2>
                         </h:column>
                         <h:column>
+                            #{q.answer}
+                        </h:column>
+                        <h:column>
                             <h:dataTable value="#{q.options}" var="a"
                                 styleClass="order-table"
                                 headerClass="order-table-header"

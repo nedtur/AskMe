@@ -12,7 +12,7 @@ public class Answer {
 
     private String text;
     private int result = 0;
-
+    
     public String getText() {
         return text;
     }
