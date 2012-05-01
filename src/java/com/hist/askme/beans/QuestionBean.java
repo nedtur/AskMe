@@ -101,4 +101,11 @@ public class QuestionBean implements Serializable {
     public boolean getMultipleChoiceQuestion() {
         return (selected.equals("1")||selected.equals("0"));
     }
+    
+    
+    //tester databasen.. 
+    public String getDatabase(){
+        
+        return"";
+    }
 }
