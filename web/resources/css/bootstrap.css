@@ -818,8 +818,8 @@ textarea[readonly] {
 }
 .control-group.success .input-prepend .add-on, .control-group.success .input-append .add-on {
   color: #468847;
-  background-color: #dff0d8;
-  border-color: #468847;
+  background-color: #000000;
+  border-color: #000000;
 }
 input:focus:required:invalid, textarea:focus:required:invalid, select:focus:required:invalid {
   color: #b94a48;
@@ -2141,8 +2141,8 @@ button.btn.small, input[type="submit"].btn.small {
   line-height: 18px;
 }
 .alert-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
+  background-color: #000000;
+  border-color: #000000;
 }
 .alert-success, .alert-success .alert-heading {
   color: #468847;
