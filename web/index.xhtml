@@ -8,26 +8,21 @@
     <h:head>
         <title>IGNORED</title>
     </h:head>
-    <body data-spy="scroll" data-target=".subnav" data-offset="50" style="background-color: #DCDDDF">
+    <body data-spy="scroll" data-target=".subnav" data-offset="50">
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
 
-                
+
                 <div style="margin-top: 100px; margin-left: 50px">
-
                     <h:form>
-                        <div class="span12">
-                            <div class="hero-unit" style="background-color: #FFFFFF">
-                                <h:inputText value="#{questionnaireBean.name}"/>
-                            </div>
-                        </div>
                         <div class="span5">
-                            <div class="hero-unit" style="height: 500px; background-color: #FFFFFF">
-
+                            <div class="hero-unit" style="height: 500px; background-color: #DCDDDF">
                                 <table>
                                     <tr>
                                         <!-- tekstfelt for å skrive inn spørsmål-->
-                                        <td><h:inputTextarea value="#{questionBean.questiontext}" style="max-width: 300px; max-height: 300px"/></td> 
+                                        <td><h:inputTextarea id="questionBox" value="#{questionBean.questiontext}" style="width: 260px; max-height: 300px" required="true" requiredMessage="Du må skrive inn et spørsmål"/></td> 
+
+
                                     </tr>
                                 </table>
                                 <!--Radioknapper for å velge type svar-->
@@ -42,81 +37,107 @@
 
                                     <!--Vises når flersvar er valgt-->
                                     <h:panelGroup rendered="#{questionBean.multipleChoiceQuestion}">
+                                        <div style="margin-top: 10px; margin-bottom: 10px ; width: 260px">
+                                            <h:inputText size="10" value="#{questionBean.ans}" required="true" requiredMessage="Du må skrive inn et svaralternativ"/>
+                                            <h:commandButton value="+" action="#{questionBean.addAnswer()}"/>
+                                        </div>
                                         <h:dataTable value="#{questionBean.answers}" var="a" id="ans" >
                                             <h:column>
                                                 #{a.text}
                                             </h:column>
                                             <h:column>
-                                                <h:commandLink value="-" action="#{questionBean.deleteAnswer(a)}"/>
+                                                <h:commandButton value="fjern" action="#{questionBean.deleteAnswer(a)}" style="width: 30px; margin-left: 10px" immediate="true"/>
                                             </h:column>
                                         </h:dataTable>
-                                        <h:inputText size="10" value="#{questionBean.ans}"/>
-                                        <h:commandLink value="+" action="#{questionBean.addAnswer()}"/>
+                                        
+                                        
+                                        
                                     </h:panelGroup>
                                 </h:panelGroup>
                                 <br/>
                                 <h:commandButton value="Legg til spørsmål" action="#{questionnaireBean.addQuestion(questionBean.newQuestion())}" />
                             </div>
                         </div>
-                        <div class ="span7">
-                            <table>
-                                <h:dataTable value="#{questionnaireBean.questions}" var="q" styleClass="order-table"
-                                             headerClass="order-table-header"
-                                             rowClasses="order-table-odd-row,order-table-even-row">
-                                    <h:column>
-                                        <!--ja/nei-->
-                                        <h:panelGroup rendered="#{q.questionInt==2}">
-                                            <div class="alert alert-success span7">
-                                                <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
-                                                <b>#{q.questionText}</b>
-                                                <h:selectOneRadio value="#{q.answer}" disabled="true">
-                                                    <f:selectItems value="#{q.options}"
-                                                                   var="a"
-                                                                   itemValue="#{a}"
-                                                                   itemLabel="#{a.text}"/>
-                                                </h:selectOneRadio></div>
-                                        </h:panelGroup>
-                                        <!--radioknapper-->
-                                        <h:panelGroup rendered="#{q.questionInt==1}">
-                                            <div class="alert alert-success span7"> 
-                                                <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
-                                                <b>#{q.questionText}</b>
-                                                <h:selectOneRadio value="#{q.answer}" disabled="true">
-                                                    <f:selectItems value="#{q.options}"
-                                                                   var="a"
-                                                                   itemValue="#{a}"
-                                                                   itemLabel="#{a.text}"/>
-                                                </h:selectOneRadio></div>
-                                        </h:panelGroup>
-                                        <!--tekst-->
-                                        <h:panelGroup rendered="#{q.questionInt==3}">
-                                            <div class="alert alert-success span7">
-                                                <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
-                                                <b>#{q.questionText}</b>
-                                                <h:inputTextarea value="Her vil brukeren kunne svare" readonly="true"/></div>
 
-                                        </h:panelGroup>
-                                        <!--checkbox-->
-                                        <h:panelGroup rendered="#{q.questionInt==0}">
-                                            <div class="alert alert-success span7">
-                                                <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
-                                                <b>#{q.questionText}</b>
-                                                <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true">
-                                                    <f:selectItems value="#{q.options}"
-                                                                   var="a"
-                                                                   itemValue="#{a}"
-                                                                   itemLabel="#{a.text}"/>
-                                                </h:selectManyCheckbox>
-                                            </div>
-                                        </h:panelGroup>
-                                    </h:column>
-                                    <h:commandButton value="Publiser"/>
-                                </h:dataTable>
-                            </table>
-                            <div class="alert alert-success">
-                                <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}"/>
-                            </div>                            
-                        </div>
+
+
+
+                        <div class="hero-unit span7" style="background-color: #DCDDDF">
+                        <table>
+                            
+                            <tr>
+                                <td>
+                                    <h2>Tittel/id:</h2><h:inputText style="width: 350px; height: 40px"/><br/>
+                                    <h:dataTable value="#{questionnaireBean.questions}" var="q" styleClass="order-table"
+                                                 headerClass="order-table-header"
+                                                 rowClasses="order-table-odd-row,order-table-even-row">
+                                        <h:column>
+                                            <!--ja/nei-->
+                                            <h:panelGroup rendered="#{q.questionInt==2}">
+                                                <div class="alert alert-success span8">
+                                                    <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
+                                                    <b>#{q.questionText}</b>
+                                                    <h:selectOneRadio value="#{q.answer}" disabled="true">
+                                                        <f:selectItems value="#{q.options}"
+                                                                       var="a"
+                                                                       itemValue="#{a}"
+                                                                       itemLabel="#{a.text}"/>
+                                                    </h:selectOneRadio></div>
+                                            </h:panelGroup>
+                                            <!--radioknapper-->
+                                            <h:panelGroup rendered="#{q.questionInt==1}">
+                                                <div class="alert alert-success span8"> 
+                                                    <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
+                                                    <b>#{q.questionText}</b>
+                                                    <h:selectOneRadio value="#{q.answer}" disabled="true">
+                                                        <f:selectItems value="#{q.options}"
+                                                                       var="a"
+                                                                       itemValue="#{a}"
+                                                                       itemLabel="#{a.text}"/>
+                                                    </h:selectOneRadio></div>
+                                            </h:panelGroup>
+                                            <!--tekst-->
+                                            <h:panelGroup rendered="#{q.questionInt==3}">
+                                                <div class="alert alert-success span8">
+                                                    <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
+                                                    <b>#{q.questionText}</b>
+                                                    <h:inputTextarea value="Her vil brukeren kunne svare" readonly="true"/></div>
+
+                                            </h:panelGroup>
+                                            <!--checkbox-->
+                                            <h:panelGroup rendered="#{q.questionInt==0}">
+                                                <div class="alert alert-success span8">
+                                                    <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
+                                                    <b>#{q.questionText}</b>
+                                                    <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true">
+                                                        <f:selectItems value="#{q.options}"
+                                                                       var="a"
+                                                                       itemValue="#{a}"
+                                                                       itemLabel="#{a.text}"/>
+                                                    </h:selectManyCheckbox>
+                                                </div>
+                                            </h:panelGroup>
+                                        </h:column>
+
+                                    </h:dataTable>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> <div class="alert alert-success span8" style="border: #000000; border-style: solid">  
+                                         Varighet
+                                <h:selectOneMenu/><br/>
+                                        <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire}"/>
+                                        <br/>
+                               
+                                    </div>
+                               
+                                </td>
+                            </tr>
+                                
+                        </table>
+                            </div>
+
                     </h:form>
                 </div>
             </ui:define>

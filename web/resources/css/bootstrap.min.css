@@ -411,7 +411,7 @@ button.btn.small,input[type="submit"].btn.small{*padding-top:3px;*padding-bottom
 .alert,.alert-heading{color:#c09853;}
 .alert .close{position:relative;top:-2px;right:-21px;line-height:18px;}
 .alert-success{background-color:#FFFFFF;border-color:#FFFFFF;}
-.alert-success,.alert-success .alert-heading{color:#468847;}
+.alert-success,.alert-success .alert-heading{color:#000000;}
 .alert-danger,.alert-error{background-color:#f2dede;border-color:#eed3d7;}
 .alert-danger,.alert-error,.alert-danger .alert-heading,.alert-error .alert-heading{color:#b94a48;}
 .alert-info{background-color:#d9edf7;border-color:#bce8f1;}
