@@ -19,12 +19,26 @@
           <view-id value="/faces/index.xhtml" />
       </url-mapping>
       
-   <!--   
-      <url-mapping id="store"> 
-          <pattern value="/store/" /> 
-          <view-id value="/faces/shop/store.jsf" />
-      </url-mapping> 
+      <url-mapping id="index"> 
+          <pattern value="/h" /> 
+          <view-id value="/faces/index.xhtml" />
+      </url-mapping>
       
+      <url-mapping id="result"> 
+          <pattern value="/-r" /> 
+          <view-id value="/faces/result.xhtml" />
+      </url-mapping>
+      
+      <url-mapping id="results"> 
+          <pattern value="/#{questionnaireBean.name}-r" />
+          <view-id value="/faces/results.xhtml" />
+      </url-mapping>
+      
+      <url-mapping id="questionnaire"> 
+          <pattern value="/#{questionnaireBean.name}" /> 
+          <view-id value="/faces/answer.xhtml" />
+      </url-mapping>
+      <!--
       <url-mapping id="viewCategory">
           <pattern value="/store/#{ cat : bean.category }/" />
           <view-id value="/faces/shop/store.jsf" />

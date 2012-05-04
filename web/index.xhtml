@@ -12,19 +12,22 @@
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
 
-
+                
                 <div style="margin-top: 100px; margin-left: 50px">
 
                     <h:form>
+                        <div class="span12">
+                            <div class="hero-unit" style="background-color: #FFFFFF">
+                                <h:inputText value="#{questionnaireBean.name}"/>
+                            </div>
+                        </div>
                         <div class="span5">
-                            <div class="hero-unit" style="height: 5 00px; background-color: #FFFFFF">
+                            <div class="hero-unit" style="height: 500px; background-color: #FFFFFF">
 
                                 <table>
                                     <tr>
                                         <!-- tekstfelt for å skrive inn spørsmål-->
                                         <td><h:inputTextarea value="#{questionBean.questiontext}" style="max-width: 300px; max-height: 300px"/></td> 
-                                        #{databaseBean.string}
-
                                     </tr>
                                 </table>
                                 <!--Radioknapper for å velge type svar-->
@@ -110,10 +113,12 @@
                                     <h:commandButton value="Publiser"/>
                                 </h:dataTable>
                             </table>
+                            <div class="alert alert-success">
+                                <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}"/>
+                            </div>                            
                         </div>
                     </h:form>
                 </div>
-
             </ui:define>
         </ui:composition>
     </body>
