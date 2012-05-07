@@ -22,11 +22,10 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class QuestionnaireBean implements Serializable {
     
-    String name = "a";  
+    String name = "";  
     int pubTime = 0;
     Questionnaire questionnaire = new Questionnaire();
-    ArrayList<Question> questions = questionnaire.getQuestions();
-    
+    ArrayList<Question> questions = new ArrayList<Question>();
     QuestionnaireService questionnaireService = new QuestionnaireService();
     ArrayList<Questionnaire> questionnaires = questionnaireService.getQuestionnaires();
     
@@ -40,12 +39,18 @@ public class QuestionnaireBean implements Serializable {
         return questionnaires;
     }
     
-    public void addQuestionnaire() {
-        questionnaireService.addQuestionnaire(new Questionnaire(name, questions, pubTime));
+    public void addQuestionnaire(Questionnaire q) {
+        questionnaireService.addQuestionnaire(q);
     }
     
     public void deleteQuestionnaire(Questionnaire q) {
         questionnaireService.deleteQuestionnaire(q);
+    }
+    
+    public Questionnaire newQuestionnaire() {
+        questionnaire = new Questionnaire(name, questions, pubTime);
+        questions = new ArrayList<Question>();
+        return questionnaire;
     }
     
     
@@ -62,11 +67,11 @@ public class QuestionnaireBean implements Serializable {
         return questions;
     }
     public void addQuestion(Question q) {
-        questionnaire.addQuestion(q);
+        questions.add(q);
     }
 
     public void deleteQuestion(Question q) {
-        questionnaire.deleteQuestion(q);
+        questions.remove(q);
     }
     
     public boolean publishQuestionnaire() {
@@ -75,10 +80,10 @@ public class QuestionnaireBean implements Serializable {
     }
     
     public String answerQuestionnaire() {
-        for(Question q : questions) {
+        for(Question q : questionnaire.getQuestions()) {
             q.getOptionByString(q.getAnswer()).setResult();
         }
-        return "result";
+        return "pretty:result";
     }
     
     //-----------------------------------------------------------------------------

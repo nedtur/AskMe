@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:metadata>
+        <f:viewParam name="name" value="#{questionnaireBean.questionnaire.name}"/>
+        <f:event type="preRenderView" listener="#{questionnaireBean.init}"/>
+    </f:metadata>
+    <h:head>
+        <title>IGNORED</title>
+    </h:head>
+    <body>
+        <ui:composition template="/Templates/mainTemplate.xhtml">
+            <ui:define name="content">
+                <div class="span12" style="margin-top: 100px; margin-left: 50px">
+                    <div class="hero-unit">
+                        <table>
+                            <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
+                                         styleClass="order-table"
+                                         headerClass="order-table-header"
+                                         rowClasses="order-table-odd-row,order-table-even-row">
+                                <h:column>
+                                    <h2>#{q.questionText}</h2>
+                                </h:column>
+                                <h:column>
+                                    <h:dataTable value="#{q.options}" var="a"
+                                                 styleClass="order-table"
+                                                 headerClass="order-table-header"
+                                                 rowClasses="order-table-odd-row,order-table-even-row">
+                                        <h:column>
+                                            #{a.text} : #{a.result}
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:column>
+                            </h:dataTable>
+                        </table>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

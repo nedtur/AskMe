@@ -6,39 +6,27 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>AskMe</title>
-        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-responsive.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-responsive.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/boostrap.css"/>
+        <title>IGNORED</title>
     </h:head>
     <body>
-        <div class="container">
-            <div class="span2">
-                <table>
-                    <h:dataTable value="#{questionnaireBean.questions}" var="q"
-                                styleClass="order-table"
-                                headerClass="order-table-header"
-                                rowClasses="order-table-odd-row,order-table-even-row">
-                        <h:column>
-                            <h2>#{q.questionText}</h2>
-                        </h:column>
-                        <h:column>
-                            #{q.answer}
-                        </h:column>
-                        <h:column>
-                            <h:dataTable value="#{q.options}" var="a"
-                                styleClass="order-table"
-                                headerClass="order-table-header"
-                                rowClasses="order-table-odd-row,order-table-even-row">
-                                <h:column>
-                                    #{a.text} : #{a.result}
-                                </h:column>
-                            </h:dataTable>
-                        </h:column>
-                    </h:dataTable>
-                </table>
-            </div>
-        </div>
+        <ui:composition template="/Templates/mainTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="span12" style="margin-top: 100px; margin-left: 50px">
+                        <div class="hero-unit">
+                            <ul>
+                                <ui:repeat value="#{questionnaireBean.questionnaires}" var="qs">
+                                    <li>
+                                        <h:commandLink value="Se resultater til #{qs.name}" action="pretty:results">
+                                            <f:param name="name" value="#{qs.name}" />
+                                        </h:commandLink>
+                                    </li>
+                                </ui:repeat>
+                            </ul>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </body>
 </html>
