@@ -62,19 +62,19 @@
 
 
 
-                        <div class="hero-unit span7" style="background-color: #DCDDDF">
+                        <div class="hero-unit span6" style="background-color: #DCDDDF">
                         <table>
                             
                             <tr>
                                 <td>
-                                    <h2>Tittel/id:</h2><h:inputText style="width: 350px; height: 40px"/><br/>
+                                    <h2>Tittel/id:</h2><h:inputText value="#{questionnaireBean.name}" style="width: 350px; height: 40px"/><br/>
                                     <h:dataTable value="#{questionnaireBean.questions}" var="q" styleClass="order-table"
                                                  headerClass="order-table-header"
                                                  rowClasses="order-table-odd-row,order-table-even-row">
                                         <h:column>
                                             <!--ja/nei-->
                                             <h:panelGroup rendered="#{q.questionInt==2}">
-                                                <div class="alert alert-success span8">
+                                                <div class="alert alert-success span7">
                                                     <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
                                                     <b>#{q.questionText}</b>
                                                     <h:selectOneRadio value="#{q.answer}" disabled="true">
@@ -86,7 +86,7 @@
                                             </h:panelGroup>
                                             <!--radioknapper-->
                                             <h:panelGroup rendered="#{q.questionInt==1}">
-                                                <div class="alert alert-success span8"> 
+                                                <div class="alert alert-success span7"> 
                                                     <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
                                                     <b>#{q.questionText}</b>
                                                     <h:selectOneRadio value="#{q.answer}" disabled="true">
@@ -98,7 +98,7 @@
                                             </h:panelGroup>
                                             <!--tekst-->
                                             <h:panelGroup rendered="#{q.questionInt==3}">
-                                                <div class="alert alert-success span8">
+                                                <div class="alert alert-success span7">
                                                     <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
                                                     <b>#{q.questionText}</b>
                                                     <h:inputTextarea value="Her vil brukeren kunne svare" readonly="true"/></div>
@@ -106,7 +106,7 @@
                                             </h:panelGroup>
                                             <!--checkbox-->
                                             <h:panelGroup rendered="#{q.questionInt==0}">
-                                                <div class="alert alert-success span8">
+                                                <div class="alert alert-success span7">
                                                     <h:commandButton value="x" action="#{questionnaireBean.deleteQuestion(q)}"/>
                                                     <b>#{q.questionText}</b>
                                                     <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true">
@@ -124,10 +124,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td> <div class="alert alert-success span8" style="border: #000000; border-style: solid">  
+                                <td> <div class="alert alert-success span7" style="border: #000000; border-style: solid">  
                                          Varighet
                                 <h:selectOneMenu/><br/>
-                                        <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire}"/>
+                                        <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}"/>
                                         <br/>
                                
                                     </div>
