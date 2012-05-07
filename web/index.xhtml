@@ -67,7 +67,7 @@
                             
                             <tr>
                                 <td>
-                                    <h2>Tittel/id:</h2><h:inputText style="width: 350px; height: 40px"/><br/>
+                                    <h2>Tittel/id:</h2><h:inputText value="#{questionnaireBean.name}" style="width: 350px; height: 40px"/><br/>
                                     <h:dataTable value="#{questionnaireBean.questions}" var="q" styleClass="order-table"
                                                  headerClass="order-table-header"
                                                  rowClasses="order-table-odd-row,order-table-even-row">
@@ -127,7 +127,7 @@
                                 <td> <div class="alert alert-success span7" style="border: #000000; border-style: solid">  
                                          Varighet
                                 <h:selectOneMenu/><br/>
-                                        <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire}"/>
+                                        <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}"/>
                                         <br/>
                                
                                     </div>
@@ -139,6 +139,8 @@
                             </div>
 
                     </h:form>
+                    
+                    
                 </div>
             </ui:define>
         </ui:composition>

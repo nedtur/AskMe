@@ -7,10 +7,6 @@ package com.hist.askme.models;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author christian
- */
 public class TextQuestion extends Question {
 
     public TextQuestion(String questiontext) {

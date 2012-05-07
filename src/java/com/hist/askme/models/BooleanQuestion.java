@@ -6,10 +6,6 @@ package com.hist.askme.models;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author christian
- */
 public class BooleanQuestion extends Question {
 
     public BooleanQuestion(String questiontext) {

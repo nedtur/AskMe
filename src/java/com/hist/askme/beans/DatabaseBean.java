@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author amit
+ * @author Ina
  */
 @ManagedBean
 @SessionScoped

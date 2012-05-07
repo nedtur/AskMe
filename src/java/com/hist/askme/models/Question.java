@@ -45,6 +45,10 @@ public class Question {
     public List<Answer> getOptions() {
         return options;
     }
+    
+    public int getAmountOfOptions(){
+        return options.size();
+    }
 
     public void setQuestionText(String newQ) {
         questionText = newQ;
