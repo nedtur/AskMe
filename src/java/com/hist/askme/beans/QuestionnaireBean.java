@@ -126,6 +126,8 @@ public class QuestionnaireBean implements Serializable {
         return hasAnswered;
         
     }
+    
+    public boolean IPAlreadyUsed() {
 
         for (int i = 0; i<questionnaire.getIPList().size(); i++){
             if (questionnaire.getIPList().get(i).equals(getUserIP())){
