@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextQuestion extends Question {
-
+    private List<String> textAnswers = new ArrayList<String>();
+    
     public TextQuestion(String questiontext) {
         super(questiontext, null);
     }
@@ -23,5 +24,15 @@ public class TextQuestion extends Question {
     @Override
     public int getQuestionInt(){
         return Question.TEXT_QUESTION;
+    }
+    
+    @Override
+    public void addTextAnswer(String answer) {
+        textAnswers.add(answer);
+    }
+    
+    @Override
+    public List<String> getTextAnswers() {
+        return textAnswers;
     }
 }

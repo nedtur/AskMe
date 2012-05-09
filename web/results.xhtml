@@ -16,24 +16,38 @@
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
                 <div class="span12 hero-unit" style="margin-top: 100px; margin-left: 50px; background-color: #DCDDDF">
-                        <table>
-                            <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
-                                         styleClass="order-table"
-                                         headerClass="order-table-header"
-                                         rowClasses="order-table-odd-row,order-table-even-row">
-                               
-                                <h:column>
-                                    <div class="alert alert-success span12">
-                                    
-                                    
-                                    <iframe src="#{charts.setPiechart(q)}" scrolling="no" height="200" width="500" style="border-style: none"/>
-                                           
-                                    </div> 
-                                </h:column>
-                                     
+                    <table>
+                        <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
+                                     styleClass="order-table"
+                                     headerClass="order-table-header"
+                                     rowClasses="order-table-odd-row,order-table-even-row">
 
-                            </h:dataTable>
-                        </table>
+                            <h:column>
+                                <h:panelGroup rendered="#{q.questionInt!=3}">
+                                    <div class="alert alert-success span12">
+
+                                        <h2>#{q.questionText}</h2>
+                                        <iframe src="#{charts.setPiece(q)}" scrolling="no" height="200" width="500" style="border-style: none"/>
+
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{q.questionInt==3}">
+                                    <div class="alert alert-success span12">
+                                        <h:dataTable value="#{q.textAnswers}" var="a"
+                                                     styleClass="order-table"
+                                                     headerClass="order-table-header"
+                                                     rowClasses="order-table-odd-row,order-table-even-row">
+                                            <h:column>
+                                                #{a}
+                                            </h:column>
+                                        </h:dataTable>
+                                    </div>
+                                </h:panelGroup>
+                            </h:column>
+
+
+                        </h:dataTable>
+                    </table>
                 </div>
             </ui:define>
         </ui:composition>
@@ -51,9 +65,9 @@
                                                  rowClasses="order-table-odd-row,order-table-even-row">
                                         
                                         <h:column>
-                                            #{a.text} : #{a.result}
-                                        </h:column>
-                                    </h:dataTable>
-                                </h:column>
+#{a.text} : #{a.result}
+</h:column>
+</h:dataTable>
+</h:column>
 
 -->

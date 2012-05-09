@@ -80,4 +80,9 @@ public class Question {
     public int getQuestionInt() {
         return 4;
     }
+
+    public void addTextAnswer(String answer) {}
+    public List<String> getTextAnswers() {
+        return null;
+    }
 }

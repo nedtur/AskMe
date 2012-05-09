@@ -12,7 +12,7 @@ public class BooleanQuestion extends Question {
         super(questiontext, null);
         ArrayList<Answer> yesno = new ArrayList<Answer>();
         yesno.add(new Answer("Ja"));
-        yesno.add(new Answer("Nei"));        
+        yesno.add(new Answer("Nei"));
         super.setOptions(yesno);
     }
  
