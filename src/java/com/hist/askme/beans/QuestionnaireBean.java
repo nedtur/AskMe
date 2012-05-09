@@ -30,7 +30,8 @@ public class QuestionnaireBean implements Serializable {
     ArrayList<Question> questions = new ArrayList<Question>();
     QuestionnaireService questionnaireService = new QuestionnaireService();
     ArrayList<Questionnaire> questionnaires = questionnaireService.getQuestionnaires();
-    ArrayList<String> IP = new ArrayList<String>();
+    boolean hasAnswered = false;
+    
 
     public QuestionnaireService getQuestionnaireService() {
         return questionnaireService;
@@ -97,7 +98,7 @@ public class QuestionnaireBean implements Serializable {
 
     public String answerQuestionnaire() {
         if(IPAlreadyUsed()){
-            return "pretty:home";
+            return "pretty:questionnaire";
         }else {
         for (Question q : questionnaire.getQuestions()) {
             q.getOptionByString(q.getAnswer()).setResult();
@@ -112,15 +113,22 @@ public class QuestionnaireBean implements Serializable {
     }
     
     public void setUserIP(){
-        IP.add(getUserIP());
+        questionnaire.setUserIP(getUserIP());
+        
+    }
+    
+    public boolean getHasAnswered(){
+        return hasAnswered;
+        
     }
     
     
     /*sjekker om en IP er blitt brukt til å besvare en undersøkelse fra før true - alt brukt, false - er unik*/
     public boolean IPAlreadyUsed(){
 
-        for (int i = 0; i<IP.size(); i++){
-            if (IP.get(i).equals(getUserIP())){
+        for (int i = 0; i<questionnaire.getIPList().size(); i++){
+            if (questionnaire.getIPList().get(i).equals(getUserIP())){
+                hasAnswered=true;
             return true;
             } 
         }
