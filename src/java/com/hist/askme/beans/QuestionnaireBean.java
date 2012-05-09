@@ -106,7 +106,7 @@ public class QuestionnaireBean implements Serializable {
         }
         return "pretty:result";
     }
-        }
+        
 
     public String getUserIP() {
         HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
