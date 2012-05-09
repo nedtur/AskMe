@@ -15,38 +15,25 @@
     <body>
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
-                <div class="span12" style="margin-top: 100px; margin-left: 50px">
-                    <div class="hero-unit">
+                <div class="span12 hero-unit" style="margin-top: 100px; margin-left: 50px; background-color: #DCDDDF">
                         <table>
                             <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
                                          styleClass="order-table"
                                          headerClass="order-table-header"
                                          rowClasses="order-table-odd-row,order-table-even-row">
+                               
                                 <h:column>
-                                    <h2>#{q.questionText}</h2>
+                                    <div class="alert alert-success span12">
                                     
+                                    <h2>#{q.questionText}</h2>
+                                    <iframe src="#{charts.setPiece(q)}" scrolling="no" height="200" width="500" style="border-style: none"/>
+                                           
+                                    </div> 
                                 </h:column>
-                                <h:column>
-                                    <h:dataTable value="#{q.options}" var="a"
-                                                 styleClass="order-table"
-                                                 headerClass="order-table-header"
-                                                 rowClasses="order-table-odd-row,order-table-even-row">
-                                        
-                                        <h:column>
-                                            #{a.text} : #{a.result}
-                                            #{charts.setPiece(a.text, a.result)}
-                        
-<iframe src="#{charts.createChart(q.amountOfOptions, q.questionText)}" scrolling="no" height="200" width="500"/>
-                                             
+                                     
 
-                                        </h:column>
-                                    </h:dataTable>
-                                </h:column>
                             </h:dataTable>
                         </table>
-
-                        
-                    </div>
                 </div>
             </ui:define>
         </ui:composition>
@@ -55,4 +42,18 @@
 
 <!--#{charts.setPiece(a.text, a.result)}
                         
-<iframe src="#{charts.createChart(q.amountOfOptions, q.questionText)}" scrolling="no" height="200" width="500"/>-->
+<iframe src="#{charts.createChart(q.amountOfOptions, q.questionText)}" scrolling="no" height="200" width="500"/>
+
+                                <h:column>
+                                    <h:dataTable value="#{q.options}" var="a"
+                                                 styleClass="order-table"
+                                                 headerClass="order-table-header"
+                                                 rowClasses="order-table-odd-row,order-table-even-row">
+                                        
+                                        <h:column>
+                                            #{a.text} : #{a.result}
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:column>
+
+-->
