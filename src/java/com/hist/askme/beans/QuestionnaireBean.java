@@ -96,42 +96,43 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public String answerQuestionnaire() {
-        for(Question q : questionnaire.getQuestions()) {
-            if(q.getQuestionInt() == 3) {
-               q.addTextAnswer(q.getAnswer());
-            } else {
-                q.getOptionByString(q.getAnswer()).setResult();
+        if (IPAlreadyUsed()) {
+            return "pretty:home";
+        } else {
+            for (Question q : questionnaire.getQuestions()) {
+                if (q.getQuestionInt() == 3) {
+                    q.addTextAnswer(q.getAnswer());
+                } else {
+                    q.getOptionByString(q.getAnswer()).setResult();
+                }
             }
+            return "pretty:result";
         }
-        return "pretty:result";
     }
-        }
 
     public String getUserIP() {
         HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         return httpServletRequest.getRemoteAddr();
     }
-    
-    public void setUserIP(){
+
+    public void setUserIP() {
         IP.add(getUserIP());
     }
-    
-    
-    /*sjekker om en IP er blitt brukt til å besvare en undersøkelse fra før true - alt brukt, false - er unik*/
-    public boolean IPAlreadyUsed(){
 
-        for (int i = 0; i<IP.size(); i++){
-            if (IP.get(i).equals(getUserIP())){
-            return true;
-            } 
+    /*sjekker om en IP er blitt brukt til å besvare en undersøkelse fra før true - alt brukt, false - er unik*/
+    public boolean IPAlreadyUsed() {
+
+        for (int i = 0; i < IP.size(); i++) {
+            if (IP.get(i).equals(getUserIP())) {
+                return true;
+            }
         }
         setUserIP();
         return false;
-        
-    }
-    
-    //-----------------------------------------------------------------------------
 
+    }
+
+    //-----------------------------------------------------------------------------
     public void init() {
         if (name.trim() == null) {
             String message = "Bad request. Please use a link from within the system.";
