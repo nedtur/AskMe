@@ -97,6 +97,9 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public String answerQuestionnaire() {
+        if(IPAlreadyUsed()) {
+            return "pretty:questionnaire";
+        }
         for(Question q : questionnaire.getQuestions()) {
             if(q.getQuestionInt() == 3) {
                q.addTextAnswer(q.getAnswer());
