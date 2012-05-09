@@ -16,52 +16,51 @@
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
                 <div class="span12" style="margin-top: 100px; margin-left: 50px">
-                    <div class="hero-unit">
+                    <div class="hero-unit" style="height: 500px; background-color: #DCDDDF">
                         <h:form>
                             <div class="container">
-                                <div class="span2">
-                                    <table>
-                                        <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
-                                                     styleClass="order-table"
-                                                     headerClass="order-table-header"
-                                                     rowClasses="order-table-odd-row,order-table-even-row">
-                                            <h:column>
-                                                <h2>#{q.questionText}</h2>
-                                            </h:column>
-                                            <!--
-                                                CHECKBOX_QUESTION = 0;
-                                                RADIO_QUESTION = 1;
-                                                BOOLEAN_QUESTION = 2;                                         
-                                                TEXT_QUESTION = 3;
-                                            -->
-                                            <h:column>
-                                                <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
-                                                    <f:selectItems value="#{q.options}"
-                                                                   var="a"
-                                                                   itemValue="#{a.text}"
-                                                                   itemLabel="#{a.text}"/>
-                                                </h:selectOneRadio>
+                                <table>
+                                    <h2>#{questionnaireBean.questionnaire.name}</h2>
+                                    <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
+                                                 styleClass="order-table"
+                                                 headerClass="order-table-header"
+                                                 rowClasses="order-table-odd-row,order-table-even-row">
+                                                <h:column>
+                                                    <h3>#{q.questionText}</h3>
+                                                </h:column>
+                                                <!--
+                                                    CHECKBOX_QUESTION = 0;
+                                                    RADIO_QUESTION = 1;
+                                                    BOOLEAN_QUESTION = 2;                                         
+                                                    TEXT_QUESTION = 3;
+                                                -->
+                                                <h:column>
+                                                    <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
+                                                        <f:selectItems value="#{q.options}"
+                                                                       var="a"
+                                                                       itemValue="#{a.text}"
+                                                                       itemLabel="#{a.text}"/>
+                                                    </h:selectOneRadio>
 
-                                                <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}">
-                                                    <f:selectItems value="#{q.options}"
-                                                                   var="a"
-                                                                   itemValue="#{a}"
-                                                                   itemLabel="#{a.text}"/>
-                                                </h:selectManyCheckbox>
+                                                    <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}">
+                                                        <f:selectItems value="#{q.options}"
+                                                                       var="a"
+                                                                       itemValue="#{a}"
+                                                                       itemLabel="#{a.text}"/>
+                                                    </h:selectManyCheckbox>
 
 
-                                                <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}">
-                                                    <f:selectItems value="#{q.options}"
-                                                                   var="a"
-                                                                   itemValue="#{a}"
-                                                                   itemLabel="#{a.text}"/>
-                                                </h:selectOneRadio>
-                                                <h:inputTextarea value="#{q.answer.text}" rendered="#{q.questionInt==3}"/>
-                                            </h:column>
-                                        </h:dataTable>
-                                        <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
-                                    </table>
-                                </div>
+                                                    <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}">
+                                                        <f:selectItems value="#{q.options}"
+                                                                       var="a"
+                                                                       itemValue="#{a}"
+                                                                       itemLabel="#{a.text}"/>
+                                                    </h:selectOneRadio>
+                                                    <h:inputTextarea value="#{q.answer.text}" rendered="#{q.questionInt==3}"/>
+                                                </h:column>
+                                    </h:dataTable>
+                                    <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/> 
+                                </table>
                             </div>
                         </h:form>
                     </div>
