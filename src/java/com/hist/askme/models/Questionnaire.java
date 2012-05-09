@@ -15,6 +15,15 @@ public class Questionnaire {
     private Calendar start;
     private int pubTime;
     private Calendar end;
+    ArrayList<String> IP = new ArrayList<String>();
+    
+    public void setUserIP(String UserIP){
+        IP.add(UserIP);
+    }
+    
+    public ArrayList<String> getIPList(){
+        return IP;
+    }
     
     public Questionnaire() {}
     
