@@ -29,6 +29,7 @@ import static com.googlecode.charts4j.Color.*;
 import com.googlecode.charts4j.GCharts;
 import com.googlecode.charts4j.PieChart;
 import com.googlecode.charts4j.Slice;
+import com.hist.askme.models.Question;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
@@ -39,18 +40,51 @@ import java.util.ArrayList;
 public class Charts implements Serializable {
 
     ArrayList<Slice> list;
+    String[] colors = {"FF1155", "33DD55", "3355FF"};
+    int colorCount = 0;
+    
+    
     
     public Charts(){
     list = new ArrayList<Slice>();
 
     }
-
     
-        public void setPiece(String answer, int numberOfAnswered) {
-        list.add(Slice.newSlice(numberOfAnswered, Color.newColor("CACACA"), answer, answer));
+    public void updatePiece(){
     }
     
-    public String createChart(int optionNumber, String question) {
+    public String setPiece(Question q){
+        for (int i = 0; i<q.getOptions().size(); i++){
+            list.add(Slice.newSlice(q.getOptions().get(i).getResult(), Color.newColor(colors[colorCount]), q.getOptions().get(i).getText(), q.getOptions().get(i).getText()));
+            colorCount++;
+            if(colorCount == 3){
+                colorCount = 0;
+            }
+        }
+        
+        PieChart chart = GCharts.newPieChart(list);
+        chart.setTitle(q.getQuestionText(), BLACK, 16);
+        chart.setSize(500, 200);
+        chart.setThreeD(true);
+        
+        String url = chart.toURLString();
+        list.clear();
+        colorCount=0;
+        return url;
+        
+       
+    }
+
+    /*
+        public void setPiece(String answer, int numberOfAnswered) {
+        list.add(Slice.newSlice(numberOfAnswered, Color.newColor(colors[colorCount]), answer, answer));
+        colorCount++;
+    }
+     * 
+     */
+    
+    /*
+    public String createChart(String question) {
         
         PieChart chart = GCharts.newPieChart(list);
         chart.setTitle(question, BLACK, 16);
@@ -59,6 +93,8 @@ public class Charts implements Serializable {
         String url = chart.toURLString();
         return url;
     }
+     * 
+     */
     
     /*
     public String getPieChart() {
@@ -75,5 +111,9 @@ public class Charts implements Serializable {
         return url;
     }
     
+     * #FF1155 //rosa
+     * #33DD55 //grønn
+     * #3355FF //blå
+     * 
     */
 }
