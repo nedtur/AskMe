@@ -126,12 +126,18 @@
                                 </tr>
                                 <tr>
                                     <td> <div class="alert alert-success span7" style="border: #000000; border-style: solid">  
-                                            Varighet
-                                            <h:selectOneMenu/><br/>
                                             <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}"/>
+                                            
+                                           
                                             <br/>
 
                                         </div>
+                                         <h:panelGroup rendered="#{questionnaireBean.isPublished}">
+                                                <div class="alert alert-success" style="background-color: #DFF0D8">
+                                            <h:outputText value="Spørreundersøkelsen ble lagt til: "  />
+                                            <h:commandLink action="result.xhtml" value="#{questionnaireBean.link}"/>
+                                            </div>
+                                            </h:panelGroup>
 
                                     </td>
                                 </tr>
