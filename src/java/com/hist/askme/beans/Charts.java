@@ -40,7 +40,8 @@ import java.util.ArrayList;
 public class Charts implements Serializable {
 
     ArrayList<Slice> list;
-    String[] colors = {"FF1155", "33DD55", "3355FF"};
+    String[] colors = {"DF0000", "FF8000", "FFFF00", "00FF00", "0000FF", "0000AF", "50007F", "FF1155"};
+    
     int colorCount = 0;
     
     
@@ -53,11 +54,11 @@ public class Charts implements Serializable {
     public void updatePiece(){
     }
     
-    public String setPiece(Question q){
+    public String setPiechart(Question q){
         for (int i = 0; i<q.getOptions().size(); i++){
             list.add(Slice.newSlice(q.getOptions().get(i).getResult(), Color.newColor(colors[colorCount]), q.getOptions().get(i).getText(), q.getOptions().get(i).getText()));
             colorCount++;
-            if(colorCount == 3){
+            if(colorCount == 7){
                 colorCount = 0;
             }
         }
@@ -74,46 +75,4 @@ public class Charts implements Serializable {
         
        
     }
-
-    /*
-        public void setPiece(String answer, int numberOfAnswered) {
-        list.add(Slice.newSlice(numberOfAnswered, Color.newColor(colors[colorCount]), answer, answer));
-        colorCount++;
-    }
-     * 
-     */
-    
-    /*
-    public String createChart(String question) {
-        
-        PieChart chart = GCharts.newPieChart(list);
-        chart.setTitle(question, BLACK, 16);
-        chart.setSize(500, 200);
-        chart.setThreeD(true);
-        String url = chart.toURLString();
-        return url;
-    }
-     * 
-     */
-    
-    /*
-    public String getPieChart() {
-        Slice s1 = Slice.newSlice(30, Color.newColor("CACACA"), "Safari", "Apple");
-        Slice s2 = Slice.newSlice(30, Color.newColor("DF7417"), "Firefox", "Mozilla");
-        Slice s3 = Slice.newSlice(30, Color.newColor("951800"), "Chrome", "Google");
-        Slice s4 = Slice.newSlice(10, Color.newColor("01A1DB"), "Internet Explorer", "Microsoft");
-
-        PieChart chart = GCharts.newPieChart(s1, s2, s3, s4);
-        chart.setTitle("A Better Web", BLACK, 16);
-        chart.setSize(500, 200);
-        chart.setThreeD(true);
-        String url = chart.toURLString();
-        return url;
-    }
-    
-     * #FF1155 //rosa
-     * #33DD55 //grønn
-     * #3355FF //blå
-     * 
-    */
 }
