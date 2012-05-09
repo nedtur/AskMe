@@ -97,14 +97,18 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public String answerQuestionnaire() {
-        for(Question q : questionnaire.getQuestions()) {
-            if(q.getQuestionInt() == 3) {
-               q.addTextAnswer(q.getAnswer());
-            } else {
-                q.getOptionByString(q.getAnswer()).setResult();
+        if (IPAlreadyUsed()) {
+            return "pretty:home";
+        } else {
+            for (Question q : questionnaire.getQuestions()) {
+                if (q.getQuestionInt() == 3) {
+                    q.addTextAnswer(q.getAnswer());
+                } else {
+                    q.getOptionByString(q.getAnswer()).setResult();
+                }
             }
+            return "pretty:result";
         }
-        return "pretty:result";
     }
         
 
@@ -123,9 +127,7 @@ public class QuestionnaireBean implements Serializable {
         
     }
     
-    
-    /*sjekker om en IP er blitt brukt til å besvare en undersøkelse fra før true - alt brukt, false - er unik*/
-    public boolean IPAlreadyUsed(){
+    public boolean IPAlreadyUsed() {
 
         for (int i = 0; i<questionnaire.getIPList().size(); i++){
             if (questionnaire.getIPList().get(i).equals(getUserIP())){
@@ -135,11 +137,10 @@ public class QuestionnaireBean implements Serializable {
         }
         setUserIP();
         return false;
-        
-    }
-    
-    //-----------------------------------------------------------------------------
 
+    }
+
+    //-----------------------------------------------------------------------------
     public void init() {
         if (name.trim() == null) {
             String message = "Bad request. Please use a link from within the system.";
