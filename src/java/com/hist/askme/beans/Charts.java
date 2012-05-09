@@ -50,9 +50,7 @@ public class Charts implements Serializable {
     list = new ArrayList<Slice>();
 
     }
-    
-    public void updatePiece(){
-    }
+   
     
     public String setPiechart(Question q){
         for (int i = 0; i<q.getOptions().size(); i++){

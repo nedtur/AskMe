@@ -31,8 +31,13 @@ public class QuestionnaireBean implements Serializable {
     QuestionnaireService questionnaireService = new QuestionnaireService();
     ArrayList<Questionnaire> questionnaires = questionnaireService.getQuestionnaires();
     boolean hasAnswered = false;
+    boolean isPublished = false;
+    String link = "askme.hist.no";
     
 
+    public boolean getIsPublished(){
+        return isPublished;
+    }
     public QuestionnaireService getQuestionnaireService() {
         return questionnaireService;
     }
@@ -47,6 +52,7 @@ public class QuestionnaireBean implements Serializable {
 
     public void addQuestionnaire(Questionnaire q) {
         questionnaireService.addQuestionnaire(q);
+        isPublished=true;
     }
 
     public void deleteQuestionnaire(Questionnaire q) {
@@ -61,6 +67,10 @@ public class QuestionnaireBean implements Serializable {
 
     public String getName() {
         return name;
+    }
+    
+    public String getLink(){
+        return link+"/"+name;
     }
 
     public void setName(String newName) {
@@ -98,7 +108,7 @@ public class QuestionnaireBean implements Serializable {
 
     public String answerQuestionnaire() {
         if (IPAlreadyUsed()) {
-            return "pretty:home";
+            return "pretty:questionnaire";
         } else {
             for (Question q : questionnaire.getQuestions()) {
                 if (q.getQuestionInt() == 3) {

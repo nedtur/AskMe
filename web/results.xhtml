@@ -27,6 +27,7 @@
                                     <div class="alert alert-success span12">
 
                                         <h2>#{q.questionText}</h2>
+                                        Antall som har svart: #{q.amountOfAnswered()}
                                         <iframe src="#{charts.setPiechart(q)}" scrolling="no" height="200" width="500" style="border-style: none"/>
 
                                     </div>
@@ -53,21 +54,3 @@
         </ui:composition>
     </body>
 </html>
-
-<!--#{charts.setPiece(a.text, a.result)}
-                        
-<iframe src="#{charts.createChart(q.amountOfOptions, q.questionText)}" scrolling="no" height="200" width="500"/>
-
-                                <h:column>
-                                    <h:dataTable value="#{q.options}" var="a"
-                                                 styleClass="order-table"
-                                                 headerClass="order-table-header"
-                                                 rowClasses="order-table-odd-row,order-table-even-row">
-                                        
-                                        <h:column>
-#{a.text} : #{a.result}
-</h:column>
-</h:dataTable>
-</h:column>
-
--->

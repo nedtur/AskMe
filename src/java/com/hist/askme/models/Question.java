@@ -21,6 +21,7 @@ public class Question {
     private String questionText;
     private List<Answer> options = new ArrayList<Answer>();
     private String answer;
+    
 
     public Question() {
     }
@@ -44,6 +45,15 @@ public class Question {
 
     public List<Answer> getOptions() {
         return options;
+    }
+    
+    public int amountOfAnswered(){
+        int amountOfAnswered = 0;
+        for(int i=0; i<options.size(); i++){
+            amountOfAnswered+=options.get(i).getResult();
+        }
+        return amountOfAnswered;
+        
     }
     
     public int getAmountOfOptions(){

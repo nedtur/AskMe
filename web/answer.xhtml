@@ -40,7 +40,7 @@
                                                                itemLabel="#{a.text}"/>
                                             </h:selectOneRadio>
 
-                                            <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}">
+                                            <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}" onchange="submit()">
                                                 <f:selectItems value="#{q.options}"
                                                                var="a"
                                                                itemValue="#{a}"
@@ -48,29 +48,34 @@
                                             </h:selectManyCheckbox>
 
 
-                                            <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
-                                                <f:selectItems value="#{q.options}"
-                                                               var="a"
-                                                               itemValue="#{a.text}"
-                                                               itemLabel="#{a.text}"/>
-                                            </h:selectOneRadio>
-                                            <h:inputTextarea value="#{q.answer}" rendered="#{q.questionInt==3}" onchange="submit()"/>
-                                        </div>
+                                                <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
+                                                    <f:selectItems value="#{q.options}"
+                                                                   var="a"
+                                                                   itemValue="#{a.text}"
+                                                                   itemLabel="#{a.text}"/>
+                                                </h:selectOneRadio>
+                                                <h:inputTextarea value="#{q.answer.text}" rendered="#{q.questionInt==3}" onchange="submit()"/>
+                                                </div>        
                                     </h:column>
+                                    
+                               
+                                        </h:dataTable>
+                                
+                                     <h:panelGroup rendered="#{questionnaireBean.hasAnswered}">
+                                            <div class="alert-error alert" style="width: 927px">
+                                                <h:outputText  value="Du har allerede besvart disse spørsmålene"/>
+                                            </div>
+                                        </h:panelGroup>
+                                        
+                                            
 
-                                </h:dataTable>
-                                <h:panelGroup rendered="#{questionnaireBean.hasAnswered}">
-                                    <div class="alert-error alert">
-                                        <h:outputText  value="Du har allerede besvart disse spørsmålene"/>
-                                    </div>
-                                </h:panelGroup>
-
-
-                                <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire()}"/>
-                            </table>
-                        </div>
-                    </h:form>
-                </div>
+                                        <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
+                                    </table>
+                                </div>
+                           
+                        </h:form>
+                     
+                    </div>
             </ui:define>
         </ui:composition>
     </body>
