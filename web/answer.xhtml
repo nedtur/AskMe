@@ -33,14 +33,14 @@
                                     <h:column>
                                         <div class="alert alert-success span12">
                                             <b>#{q.questionText}</b>
-                                            <h:selectOneRadio  required="true" value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
+                                            <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
                                                 <f:selectItems value="#{q.options}"
                                                                var="a"
                                                                itemValue="#{a.text}"
                                                                itemLabel="#{a.text}"/>
                                             </h:selectOneRadio>
 
-                                            <h:selectManyCheckbox required="true" value="#{q.answers}" rendered="#{q.questionInt==0}" onchange="submit()">
+                                            <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}" onchange="submit()">
                                                 <f:selectItems value="#{q.options}"
                                                                var="a"
                                                                itemValue="#{a}"
@@ -48,13 +48,13 @@
                                             </h:selectManyCheckbox>
 
 
-                                                <h:selectOneRadio required="true" value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
+                                                <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
                                                     <f:selectItems value="#{q.options}"
                                                                    var="a"
                                                                    itemValue="#{a.text}"
                                                                    itemLabel="#{a.text}"/>
                                                 </h:selectOneRadio>
-                                                <h:inputTextarea required="true" value="#{q.answer.text}" rendered="#{q.questionInt==3}" onchange="submit()"/>
+                                                <h:inputTextarea value="#{q.answer.text}" rendered="#{q.questionInt==3}" onchange="submit()"/>
                                                 </div>        
                                     </h:column>
                                     
