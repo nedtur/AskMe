@@ -1,39 +1,37 @@
-/*
+                                                                                                /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.hist.askme.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+import javax.persistence.*;
 
-public class Questionnaire {
-    private ArrayList<Question> questions = new ArrayList<Question>();
+
+@Entity
+public class Questionnaire implements Serializable {
+    @Id
     private String name;
-    private boolean published;
-    private Calendar start;
-    private int pubTime;
-    private Calendar end;
+    @OneToMany(mappedBy="questionnaire", cascade=CascadeType.PERSIST)
+    private ArrayList<Question> questions = new ArrayList<Question>();
+    @Transient
     ArrayList<String> IP = new ArrayList<String>();
     
+      
     public void setUserIP(String UserIP){
         IP.add(UserIP);
     }
-    
     public ArrayList<String> getIPList(){
         return IP;
     }
     
     public Questionnaire() {}
     
-    public Questionnaire(String name, ArrayList<Question> questions, int pubTime) {
+    public Questionnaire(String name, ArrayList<Question> questions) {
         this.name = name;
         this.questions = questions;
-        start = Calendar.getInstance();
-        this.pubTime = pubTime;
-        end = null;
-        published = false;
     }
     
     public String getName() {
@@ -43,14 +41,6 @@ public class Questionnaire {
         name = nName;
     }
     
-    public void publish() {
-        end.setTimeInMillis(start.getTimeInMillis()+(long) pubTime);
-        published = true;
-    }
-    
-    public boolean getPublished() {
-        return published;
-    }
     public void setQuestions(ArrayList<Question> qs) {
         questions = qs;
     }
@@ -70,6 +60,7 @@ public class Questionnaire {
         return questions.get(id);
     }    
     public void addQuestion(Question question){
+        question.setQuestionnaire(this);
         questions.add(question);
     }
     public void deleteQuestion(Question question) {
@@ -84,4 +75,6 @@ public class Questionnaire {
     public List<Answer> getAnswers(Question q) {
         return q.getOptions();
     }
+
 }
+

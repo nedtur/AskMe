@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hist.askme.beans;
 
 import com.hist.askme.models.Question;
@@ -16,10 +12,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- * @author Håvard
- */
 @ManagedBean
 @SessionScoped
 public class QuestionnaireBean implements Serializable {
@@ -60,7 +52,7 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public Questionnaire newQuestionnaire() {
-        questionnaire = new Questionnaire(name, questions, pubTime);
+        questionnaire = new Questionnaire(name, questions);
         questions = new ArrayList<Question>();
         return questionnaire;
     }
@@ -99,11 +91,6 @@ public class QuestionnaireBean implements Serializable {
 
     public void deleteQuestion(Question q) {
         questions.remove(q);
-    }
-
-    public boolean publishQuestionnaire() {
-        questionnaire.publish();
-        return true;
     }
 
     public String answerQuestionnaire() {
