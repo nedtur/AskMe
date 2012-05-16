@@ -135,7 +135,7 @@
                                          <h:panelGroup rendered="#{questionnaireBean.isPublished}">
                                                 <div class="alert alert-success" style="background-color: #DFF0D8">
                                             <h:outputText value="Spørreundersøkelsen ble lagt til: "  />
-                                            <h:commandLink action="result.xhtml" value="#{questionnaireBean.link}"/>
+                                            <h:commandLink action="pretty:questionnaire" value="#{questionnaireBean.link}"/>
                                             </div>
                                             </h:panelGroup>
 
