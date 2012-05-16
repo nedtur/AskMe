@@ -4,37 +4,38 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>AskMe</title>
-        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-responsive.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-responsive.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/boostrap.css"/>
-        <link rel="stylesheet" type ="text/css" href="resources/css/mycss.css"/>
-        <link rel="stylesheet" type ="text/css" href="resources/css/toggle-radio-buttons.css"/>
-    </h:head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>AskMe</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css" target="head"/>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.min.css" target="head"/>
+    <h:outputStylesheet library="css" name="application.css" target="head"/>
+</h:head>
 
-    <body data-spy="scroll" data-target=".subnav" data-offset="50" style="background-color: #0074CC">
+<body>
 
-    <h:outputStylesheet library="css" name="mycss.css"  />
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="">AskMe</a>
 
-    <div class="navbar navbar-fixed-top" style="background-color: #0074CC">
-        <div class="navbar-inner" >
-            <div class="container">
+            <div class="nav-collapse">
                 <ul class="nav">
-
-                    <li>
-                        <a href=""> <h3 style="color: #D0D1D3">AskMe</h3></a>
-                    </li>
+                    <li class="active"><a href="#">Ny spørreundersøkelse</a></li>
+                    <li><a href="">Resultat</a></li>
+                    <form class="navbar-search pull-right" action="">
+                        <input class="search-query span2" type="text" placeholder="søk"/>
+                    </form>
                 </ul>
-
             </div>
+            <!--/.nav-collapse -->
         </div>
     </div>
-    <div id ="content">
-        <ui:insert name="content"/>
-    </div>
+</div>
+<div id="content" class="container">
+    <ui:insert name="content"/>
+</div>
 </body>
 </html>
 
