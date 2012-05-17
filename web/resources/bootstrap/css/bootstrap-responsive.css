@@ -29,6 +29,13 @@
     display: block;
     line-height: 18px;
   }
+  
+
+.hero-unit {
+width:480px;
+}
+
+  
   input[class*="span"],
   select[class*="span"],
   textarea[class*="span"],
