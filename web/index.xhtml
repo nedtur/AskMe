@@ -111,32 +111,16 @@
                             <div class="alert alert-success" style="background-color: #DFF0D8">
                                 <h:commandLink action="pretty:result" value="#{questionnaireBean.link}" styleClass="btn btn-info"/>
                                 <strong>  Suksess!</strong> Spørreundersøkelsen ble lagt til.
-                                #{questionnaireBean.endSession()}
                             </div>
                         </h:panelGroup>
+                        <h:panelGroup  rendered="#{questionnaireBean.idOK()}">
+                            <div class="alert alert-error">Du må skrive inn en unik ID</div>
+                        </h:panelGroup>
                     </h:form>
-
-                    <h:commandButton value="Publiser spørreundersøkelse"
-                                     action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}"
-                                     styleClass="btn btn-success"/>
-                </h:panelGroup>
-                <h:panelGroup rendered="#{questionnaireBean.isPublished}">
-                    <div class="alert alert-success" style="background-color: #DFF0D8">
-                        <h:commandLink action="result.xhtml" value="#{questionnaireBean.link}" styleClass="btn btn-info"/>
-                        <strong>  Suksess!</strong> Spørreundersøkelsen ble lagt til.
-                    </div>
-                    
-                </h:panelGroup>
-                <h:panelGroup  rendered="#{questionnaireBean.idOK()}">
-                    <div class="alert alert-error">Du må skrive inn en unik ID</div>
-                </h:panelGroup>
-                
-            </h:form>
-
-        </div>
-    </ui:define>
-</ui:composition>
-</body>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>
 <!--
 CHECKBOX_QUESTION = 0;
