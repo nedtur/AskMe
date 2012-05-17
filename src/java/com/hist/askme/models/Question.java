@@ -33,7 +33,9 @@ public class Question implements Serializable {
     public Question(String questionText, List<Answer> options) {
         this.questionText = questionText;
         this.options = options;
-        answer = options.get(0).getText();
+        if(options != null) {
+            answer = options.get(0).getText();
+        }
     }
 
     public void fixOptions() {
