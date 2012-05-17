@@ -57,8 +57,9 @@
             </h:form>
             <h:form styleClass="span8">
 
-                <h1>Navn på spørreundersøkelsen:</h1>
+                <h2>Navn på skjemaet:</h2>
                 <h:inputText value="#{questionnaireBean.name}" styleClass="span6"/>
+                <h1>Forhåndsvisning:</h1>
                 <h:dataTable value="#{questionnaireBean.questions}" var="q" styleClass="table table-striped"
                              headerClass="order-table-header"
                              rowClasses="order-table-odd-row,order-table-even-row">
@@ -66,7 +67,7 @@
                         <h3>#{q.questionText}</h3>
                         <!--ja/nei-->
                         <h:panelGroup rendered="#{q.questionInt==2}">
-                            <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline">
+                            <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline" layout="pageDirection">
                                 <f:selectItems value="#{q.options}"
                                                var="a"
                                                itemValue="#{a}"
@@ -75,7 +76,7 @@
                         </h:panelGroup>
                         <!--radioknapper-->
                         <h:panelGroup rendered="#{q.questionInt==1}">
-                            <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline">
+                            <h:selectOneRadio value="#{q.answer}" disabled="true"  styleClass="inline" layout="pageDirection">
                                 <f:selectItems value="#{q.options}"
                                                var="a"
                                                itemValue="#{a}"
@@ -88,7 +89,7 @@
                         </h:panelGroup>
                         <!--checkbox-->
                         <h:panelGroup rendered="#{q.questionInt==0}">
-                            <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true" styleClass="inline">
+                            <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true" styleClass="inline" layout="pageDirection">
                                 <f:selectItems value="#{q.options}"
                                                var="a"
                                                itemValue="#{a}"

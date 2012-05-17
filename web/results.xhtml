@@ -15,25 +15,21 @@
     <body>
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
-                <div class="span12 hero-unit" style="margin-top: 100px; margin-left: 50px; background-color: #DCDDDF">
+               <h1>#{questionnaireBean.questionnaire.name}</h1>
+                <h2>Antall som har svart: </h2>
                     <table>
                         <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
-                                     styleClass="order-table"
+                                     styleClass="table table-striped"
                                      headerClass="order-table-header"
                                      rowClasses="order-table-odd-row,order-table-even-row">
 
                             <h:column>
                                 <h:panelGroup rendered="#{q.questionInt!=3}">
-                                    <div class="alert alert-success span12">
-
                                         <h2>#{q.questionText}</h2>
                                         Antall som har svart: #{q.amountOfAnswered()}
                                         <iframe src="#{charts.setPiechart(q)}" scrolling="no" height="200" width="500" style="border-style: none"/>
-
-                                    </div>
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{q.questionInt==3}">
-                                    <div class="alert alert-success span12">
                                         <h:dataTable value="#{q.textAnswers}" var="a"
                                                      styleClass="order-table"
                                                      headerClass="order-table-header"
@@ -42,14 +38,12 @@
                                                 #{a}
                                             </h:column>
                                         </h:dataTable>
-                                    </div>
                                 </h:panelGroup>
                             </h:column>
 
 
                         </h:dataTable>
                     </table>
-                </div>
             </ui:define>
         </ui:composition>
     </body>
