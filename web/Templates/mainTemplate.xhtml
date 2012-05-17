@@ -11,29 +11,31 @@ and open the template in the editor.
     <h:outputStylesheet library="css" name="bootstrap.min.css" target="head"/>
     <h:outputStylesheet library="css" name="bootstrap-responsive.min.css" target="head"/>
     <h:outputStylesheet library="css" name="application.css" target="head"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </h:head>
 
 <body>
 
 <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="">AskMe</a>
+        <div class="navbar-inner">
+            <div class="container">
+                <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
 
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li class="active"><a href="#">Ny spørreundersøkelse</a></li>
-                    <li><a href="">Resultat</a></li>
-                    <form class="navbar-search pull-right" action="">
-                        <input class="search-query span2" type="text" placeholder="søk"/>
-                    </form>
-                </ul>
+                <a href="index.xhtml" class="brand">AskMe</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                                <li><a href="">Ny spørreundersøkelse</a></li>
+                            
+                                <li><a href="">Resultater</a></li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
             </div>
-            <!--/.nav-collapse -->
-        </div>
+        </div><!-- /navbar-inner -->
     </div>
-</div>
 <div id="content" class="container">
     <ui:insert name="content"/>
 </div>
