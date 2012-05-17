@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -55,7 +57,7 @@ public class QuestionBean implements Serializable {
     }
 
     public Question newQuestion() {
-        switch (Integer.parseInt(selected))  {
+        switch (Integer.parseInt(selected)) {
             case Question.BOOLEAN_QUESTION:
                 question = new BooleanQuestion(questiontext);
                 break;
@@ -100,6 +102,11 @@ public class QuestionBean implements Serializable {
     }
 
     public boolean getMultipleChoiceQuestion() {
-        return (selected.equals("1")||selected.equals("0"));
+        return (selected.equals("1") || selected.equals("0"));
+    }
+
+    public void endSession() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+
     }
 }

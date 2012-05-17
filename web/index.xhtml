@@ -18,7 +18,7 @@
                 <label>Spørsmål</label>
                 <h:inputTextarea id="questionBox" styleClass="span3" value="#{questionBean.questiontext}"
                                  required="true"
-                                 requiredMessage="Du må skrive inn et spørsmål" placeholder="Type something…"/>
+                                 requiredMessage="Du må skrive inn et spørsmål"/>
                 <span class="help-block">Velg spørsmålstype:</span>
                 <h:selectOneMenu value="#{questionBean.selected}" styleClass="span3">
                     <f:selectItem itemValue="0" itemLabel="Flervalg"/>
@@ -111,6 +111,7 @@
                     <div class="alert alert-success" style="background-color: #DFF0D8">
                         <h:commandLink action="result.xhtml" value="#{questionnaireBean.link}" styleClass="btn btn-info"/>
                         <strong>  Suksess!</strong> Spørreundersøkelsen ble lagt til.
+                        #{questionnaireBean.endSession()}
                     </div>
                 </h:panelGroup>
             </h:form>
