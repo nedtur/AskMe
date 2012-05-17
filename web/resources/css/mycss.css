@@ -1,0 +1,70 @@
+/* 
+    Document   : mycss
+    Created on : Mar 19, 2012, 12:14:57 PM
+    Author     : Ina
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.root { 
+    display: block;
+}
+
+.topbar {
+    width: 950px;
+    background-color: cadetblue;
+}
+
+.hero-unit h1{
+    margin-bottom:0;
+    font-size:60px;
+    line-height:1;
+    letter-spacing:-1px;
+}
+
+.roundedBoxes {
+border-radius: 6px;
+background-color: #d9d9d9;
+padding: 60px;
+margin: 40px;
+margin-bottom: 60px;
+}
+
+.mybox{
+    padding:60px;
+    margin-bottom: 30px;
+    background-color:#7aba7b;
+        -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    border-radius:6px;
+    
+}
+
+.vr {
+
+height: 40px;
+
+width: 1px;
+margin: 0 5px;
+
+overflow: hidden;
+
+background-color: #222;
+
+border-right: 1px solid #444;
+
+}
+
+@media (max-width: 480px) {
+    
+
+    
+}
+
+
+
