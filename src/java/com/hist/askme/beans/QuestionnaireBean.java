@@ -33,12 +33,26 @@ public class QuestionnaireBean implements Serializable {
     ArrayList<Questionnaire> questionnaires = questionnaireService.getQuestionnaires();
     boolean hasAnswered = false;
     boolean isPublished = false;
+    boolean isUnvalid = false;
     String link = "askme.hist.no";
     
 
     public boolean getIsPublished(){
         return isPublished;
     }
+    
+    public boolean idOK(){
+        if (name.trim().equals("")){
+            isUnvalid=true;
+        }
+        for(Questionnaire q : questionnaires){
+            if (q.getName().equals(name)){
+                isUnvalid=true;
+            }
+        }
+        return isUnvalid;
+    }
+    
     public QuestionnaireService getQuestionnaireService() {
         return questionnaireService;
     }
@@ -52,8 +66,11 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public void addQuestionnaire(Questionnaire q) {
+        if (!isUnvalid){
         questionnaireService.addQuestionnaire(q);
         isPublished=true;
+        endSession();
+        }
     }
 
     public void deleteQuestionnaire(Questionnaire q) {
