@@ -33,10 +33,10 @@
                                     <h:column>
                                         <div class="alert alert-success span12">
                                             <b>#{q.questionText}</b>
-                                            <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
+                                            <h:selectOneRadio  value="#{questionnaireBean.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
                                                 <f:selectItems value="#{q.options}"
                                                                var="a"
-                                                               itemValue="#{a.text}"
+                                                               itemValue="#{a.id}"
                                                                itemLabel="#{a.text}"/>
                                             </h:selectOneRadio>
 
@@ -54,7 +54,7 @@
                                                                    itemValue="#{a.text}"
                                                                    itemLabel="#{a.text}"/>
                                                 </h:selectOneRadio>
-                                                <h:inputTextarea value="#{q.answer.text}" rendered="#{q.questionInt==3}" onchange="submit()"/>
+                                                <h:inputTextarea value="#{q.answer}" rendered="#{q.questionInt==3}" onchange="submit()"/>
                                                 </div>        
                                     </h:column>
                                     
@@ -70,6 +70,8 @@
                                             
 
                                         <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
+                                        
+                                        
                                     </table>
                                 </div>
                            

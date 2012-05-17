@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hist.askme.beans;
 
 import com.hist.askme.models.Question;
@@ -17,10 +13,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- * @author Håvard
- */
 @ManagedBean
 @SessionScoped
 public class QuestionnaireBean implements Serializable {
@@ -30,11 +22,20 @@ public class QuestionnaireBean implements Serializable {
     Questionnaire questionnaire = new Questionnaire();
     ArrayList<Question> questions = new ArrayList<Question>();
     QuestionnaireService questionnaireService = new QuestionnaireService();
-    ArrayList<Questionnaire> questionnaires = questionnaireService.getQuestionnaires();
+    ArrayList<Questionnaire> questionnaires;
     boolean hasAnswered = false;
     boolean isPublished = false;
     boolean isUnvalid = false;
     String link = "askme.hist.no";
+    Long answer;
+
+    public Long getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Long answer) {
+        this.answer = answer;
+    }
     
 
     public boolean getIsPublished(){
@@ -62,6 +63,7 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public ArrayList<Questionnaire> getQuestionnaires() {
+        questionnaires = questionnaireService.getQuestionnaires();
         return questionnaires;
     }
 
@@ -73,12 +75,9 @@ public class QuestionnaireBean implements Serializable {
         }
     }
 
-    public void deleteQuestionnaire(Questionnaire q) {
-        questionnaireService.deleteQuestionnaire(q);
-    }
-
     public Questionnaire newQuestionnaire() {
-        questionnaire = new Questionnaire(name, questions, pubTime);
+        questionnaire = new Questionnaire(name, questions);
+        questionnaire.fixQuestions();
         questions = new ArrayList<Question>();
         return questionnaire;
     }
@@ -119,11 +118,6 @@ public class QuestionnaireBean implements Serializable {
         questions.remove(q);
     }
 
-    public boolean publishQuestionnaire() {
-        questionnaire.publish();
-        return true;
-    }
-
     public String answerQuestionnaire() {
         if (IPAlreadyUsed()) {
             return "pretty:questionnaire";
@@ -132,7 +126,7 @@ public class QuestionnaireBean implements Serializable {
                 if (q.getQuestionInt() == 3) {
                     q.addTextAnswer(q.getAnswer());
                 } else {
-                    q.getOptionByString(q.getAnswer()).setResult();
+                    questionnaireService.updateQuestionnaire(answer);
                 }
             }
             return "pretty:result";

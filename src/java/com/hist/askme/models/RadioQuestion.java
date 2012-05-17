@@ -1,16 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hist.askme.models;
 
 import java.util.List;
+import javax.persistence.*;
 
-/**
- *
- * @author Ina
- */
+@Entity
+@DiscriminatorValue("1")
 public class RadioQuestion extends Question {
+    public RadioQuestion() {}
     public RadioQuestion(String questiontext, List<Answer> answers) {
         super(questiontext, answers);
     }
