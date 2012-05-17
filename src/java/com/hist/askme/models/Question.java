@@ -6,6 +6,10 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "QUESTION")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("4")
+@DiscriminatorColumn(name = "proj_type")
 public class Question implements Serializable {
 
     public final static int CHECKBOX_QUESTION = 0;
@@ -13,6 +17,8 @@ public class Question implements Serializable {
     public final static int BOOLEAN_QUESTION = 2;
     public final static int TEXT_QUESTION = 3;
     @Id
+    @GeneratedValue
+    private Long id;
     private String questionText;
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
     private List<Answer> options = new ArrayList<Answer>();
@@ -21,10 +27,19 @@ public class Question implements Serializable {
     @ManyToOne
     private Questionnaire questionnaire;
 
-    public Question() {}
+    public Question() {
+    }
+
     public Question(String questionText, List<Answer> options) {
         this.questionText = questionText;
         this.options = options;
+        answer = options.get(0).getText();
+    }
+
+    public void fixOptions() {
+        for (Answer a : options) {
+            a.setQuestion(this);
+        }
     }
 
     public Answer getOptionByString(String ans) {
@@ -34,6 +49,14 @@ public class Question implements Serializable {
             }
         }
         return null;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getQuestionText() {
@@ -105,4 +128,5 @@ public class Question implements Serializable {
     public List<String> getTextAnswers() {
         return null;
     }
+
 }

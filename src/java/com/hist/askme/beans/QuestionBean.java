@@ -69,6 +69,7 @@ public class QuestionBean implements Serializable {
                 question = new TextQuestion(questiontext);
                 break;
         }
+        question.fixOptions();
         answers = new ArrayList<Answer>();
         return question;
     }

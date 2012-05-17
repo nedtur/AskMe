@@ -21,10 +21,19 @@ public class QuestionnaireBean implements Serializable {
     Questionnaire questionnaire = new Questionnaire();
     ArrayList<Question> questions = new ArrayList<Question>();
     QuestionnaireService questionnaireService = new QuestionnaireService();
-    ArrayList<Questionnaire> questionnaires = questionnaireService.getQuestionnaires();
+    ArrayList<Questionnaire> questionnaires;
     boolean hasAnswered = false;
     boolean isPublished = false;
     String link = "askme.hist.no";
+    Long answer;
+
+    public Long getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Long answer) {
+        this.answer = answer;
+    }
     
 
     public boolean getIsPublished(){
@@ -39,6 +48,7 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public ArrayList<Questionnaire> getQuestionnaires() {
+        questionnaires = questionnaireService.getQuestionnaires();
         return questionnaires;
     }
 
@@ -47,12 +57,9 @@ public class QuestionnaireBean implements Serializable {
         isPublished=true;
     }
 
-    public void deleteQuestionnaire(Questionnaire q) {
-        questionnaireService.deleteQuestionnaire(q);
-    }
-
     public Questionnaire newQuestionnaire() {
         questionnaire = new Questionnaire(name, questions);
+        questionnaire.fixQuestions();
         questions = new ArrayList<Question>();
         return questionnaire;
     }
@@ -101,7 +108,7 @@ public class QuestionnaireBean implements Serializable {
                 if (q.getQuestionInt() == 3) {
                     q.addTextAnswer(q.getAnswer());
                 } else {
-                    q.getOptionByString(q.getAnswer()).setResult();
+                    questionnaireService.updateQuestionnaire(answer);
                 }
             }
             return "pretty:result";

@@ -15,11 +15,10 @@ public class Questionnaire implements Serializable {
     @Id
     private String name;
     @OneToMany(mappedBy="questionnaire", cascade=CascadeType.PERSIST)
-    private ArrayList<Question> questions = new ArrayList<Question>();
+    private List<Question> questions = new ArrayList<Question>();
     @Transient
     ArrayList<String> IP = new ArrayList<String>();
-    
-      
+          
     public void setUserIP(String UserIP){
         IP.add(UserIP);
     }
@@ -34,6 +33,13 @@ public class Questionnaire implements Serializable {
         this.questions = questions;
     }
     
+    public void fixQuestions() {
+        for(Question q : questions) {
+            q.setQuestionnaire(this);
+        }
+    }
+   
+    
     public String getName() {
         return name;
     }
@@ -45,7 +51,7 @@ public class Questionnaire implements Serializable {
         questions = qs;
     }
     
-    public ArrayList<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
     public Question getQuestionByString(String question) {
@@ -74,6 +80,32 @@ public class Questionnaire implements Serializable {
     }
     public List<Answer> getAnswers(Question q) {
         return q.getOptions();
+    }
+    
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (name != null ? name.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Questionnaire)) {
+            return false;
+        }
+        Questionnaire other = (Questionnaire) object;
+        if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "models.Questionnaire[ id=" + name + " ]";
     }
 
 }
