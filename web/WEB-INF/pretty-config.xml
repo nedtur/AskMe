@@ -29,7 +29,7 @@
           <view-id value="/faces/result.xhtml" />
       </url-mapping>
       
-      <url-mapping id="results"> 
+      <url-mapping id="results">
           <pattern value="/#{questionnaireBean.name}-r" />
           <view-id value="/faces/results.xhtml" />
       </url-mapping>

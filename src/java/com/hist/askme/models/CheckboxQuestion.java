@@ -1,19 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.hist.askme.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
-/**
- *
- * @author Ina
- */
 public class CheckboxQuestion extends Question {
     private ArrayList<Answer> answers = new ArrayList<Answer>();
-
+    
+    public CheckboxQuestion() {}
     public CheckboxQuestion(String questiontext, List<Answer> answers) {
         super(questiontext, answers);
     }

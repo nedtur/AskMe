@@ -1,18 +1,35 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hist.askme.models;
 
-/**
- *
- * @author Ina
- */
-public class Answer {
+import java.io.Serializable;
+import javax.persistence.*;
 
+@Entity
+public class Answer implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private Long id;
     private String text;
-    private int result = 0;
-    
+    private int resultInt;
+    @ManyToOne
+    private Question question;
+
+    public Answer() {
+    }
+
+    public Answer(String text) {
+        this.text = text;
+        resultInt = 0;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getText() {
         return text;
     }
@@ -21,15 +38,20 @@ public class Answer {
         this.text = text;
     }
 
-    public Answer(String text) {
-        this.text = text;
-    }
-
     public int getResult() {
-        return result;
+        return resultInt;
     }
 
     public void setResult() {
-        result++;
+        resultInt++;
     }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
 }

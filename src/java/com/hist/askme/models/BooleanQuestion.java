@@ -5,9 +5,13 @@
 package com.hist.askme.models;
 
 import java.util.ArrayList;
+import javax.persistence.*;
 
+@Entity
+@DiscriminatorValue("2")
 public class BooleanQuestion extends Question {
-
+    
+    public BooleanQuestion() {}
     public BooleanQuestion(String questiontext) {
         super(questiontext, null);
         ArrayList<Answer> yesno = new ArrayList<Answer>();
