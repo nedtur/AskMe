@@ -46,14 +46,14 @@ public class QuestionnaireBean implements Serializable {
         if (name.trim().equals("")){
             isUnvalid=true;
         }
-        for(Questionnaire q : questionnaires){
+        for(Questionnaire q : questionnaireService.getQuestionnaires()){
             if (q.getName().equals(name)){
                 isUnvalid=true;
             }
         }
         return isUnvalid;
     }
-    
+
     public QuestionnaireService getQuestionnaireService() {
         return questionnaireService;
     }
