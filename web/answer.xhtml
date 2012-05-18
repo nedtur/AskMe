@@ -12,89 +12,72 @@
     <h:head>
         <title>IGNORED</title>
     </h:head>
-    <body>
+   <body>
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
-                <h:form>
-                    <div class="container">
-                        <table>
-                            <h2>#{questionnaireBean.questionnaire.name}</h2>
-                            <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
-                                         styleClass="table table-striped"
-                                         headerClass="order-table-header"
-                                         rowClasses="order-table-odd-row,order-table-even-row">
-                                <!--
-                                    CHECKBOX_QUESTION = 0;
-                                    RADIO_QUESTION = 1;
-                                    BOOLEAN_QUESTION = 2;                                         
-                                    TEXT_QUESTION = 3;
-                                -->
-                                <h:column>
-                                    <b>#{q.questionText}</b>
-                                    <!--radioknapper-->
-                                    <h:selectOneRadio  value="#{questionnaireBean.answer}" rendered="#{q.questionInt==1}" onchange="submit()" layout="pageDirection">                                                    
-                                        <f:selectItems value="#{q.options}"
-                                                       var="a"
-                                                       itemValue="#{a.id}"
-                                                       itemLabel="#{a.text}"/>
-                                    </h:selectOneRadio>
-
-                                    <!--sjekkbokser-->
-                                    <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}" onchange="submit()">
-                                        <f:selectItems value="#{q.options}"
-                                                       var="a"
-                                                       itemValue="#{a}"
-                                                       itemLabel="#{a.text}"/>
-                                    </h:selectManyCheckbox>
-
-                                    <!--Ja/Nei-->
-                                    <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
-                                        <f:selectItems value="#{q.options}"
-                                                       var="a"
-                                                       itemValue="#{a.text}"
-                                                       itemLabel="#{a.text}"/>
-                                    </h:selectOneRadio>
-                                    <h:inputTextarea value="#{q.answer}" rendered="#{q.questionInt==3}" onchange="submit()"/>      
-                                </h:column>
-
-                                                <h:selectOneRadio value="#{questionnaireBean.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
+                <div class="span12 hero-unit" style="margin-top: 100px; margin-left: 50px; background-color: #DCDDDF">
+                    <h:form>
+                        <div class="container">
+                            <table>
+                                <h3>#{questionnaireBean.questionnaire.name}</h3>
+                                <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
+                                            styleClass="order-table"
+                                            headerClass="order-table-header"
+                                            rowClasses="order-table-odd-row,order-table-even-row">
+                                    <!--
+                                       CHECKBOX_QUESTION = 0;
+                                       RADIO_QUESTION = 1;
+                                       BOOLEAN_QUESTION = 2;                                        
+                                       TEXT_QUESTION = 3;
+                                   -->
+                                    <h:column>
+                                        <div class="alert alert-success span12">
+                                            <b>#{q.questionText}</b>
+                                            <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
+                                                <f:selectItems value="#{q.options}"
+                                                              var="a"
+                                                              itemValue="#{a.id}"
+                                                              itemLabel="#{a.text}"/>
+                                            </h:selectOneRadio>
+ 
+                                            <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}" onchange="submit()">
+                                                <f:selectItems value="#{q.options}"
+                                                              var="a"
+                                                              itemValue="#{a}"
+                                                              itemLabel="#{a.text}"/>
+                                            </h:selectManyCheckbox>
+ 
+ 
+                                                <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
                                                     <f:selectItems value="#{q.options}"
-                                                                   var="a"
-                                                                   itemValue="#{a.id}"
-                                                                   itemLabel="#{a.text}"/>
+                                                                  var="a"
+                                                                  itemValue="#{a.id}"
+                                                                  itemLabel="#{a.text}"/>
                                                 </h:selectOneRadio>
                                                 <h:inputTextarea value="#{q.answer}" rendered="#{q.questionInt==3}" onchange="submit()"/>
                                                 </div>        
                                     </h:column>
-                                    
+                                   
                                
                                         </h:dataTable>
-                                
+                               
                                      <h:panelGroup rendered="#{questionnaireBean.hasAnswered}">
                                             <div class="alert-error alert" style="width: 927px">
                                                 <h:outputText  value="Du har allerede besvart disse spørsmålene"/>
                                             </div>
                                         </h:panelGroup>
-                                        
-                                            
-
-                            </h:dataTable>
-
-                            <h:panelGroup rendered="#{questionnaireBean.hasAnswered}">
-                                <div class="alert-error alert" style="width: 927px">
-                                    <h:outputText  value="Du har allerede besvart disse spørsmålene"/>
+                                       
+                                           
+ 
+                                        <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
+                                       
+                                       
+                                    </table>
                                 </div>
-                            </h:panelGroup>
-
-
-
-                            <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
-
-
-                        </table>
+                           
+                        </h:form>
+                     
                     </div>
-
-                </h:form>
             </ui:define>
         </ui:composition>
     </body>

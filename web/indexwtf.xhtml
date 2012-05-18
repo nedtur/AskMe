@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>TODO supply a title</title>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <h2>Navn på skjemaet:</h2>
+                <h:inputText value="#{questionnaireBean.name}" styleClass="span6"/>
+                <h1>Forhåndsvisning:</h1>
+                <h:dataTable value="#{questionnaireBean.questions}" var="q" styleClass="table table-striped"
+                             headerClass="order-table-header"
+                             rowClasses="order-table-odd-row,order-table-even-row">
+                    <h:column>
+                        <h3>#{q.questionText}</h3>
+
+                        ja/nei
+                        <h:panelGroup rendered="#{q.questionInt==2}">
+                            <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline" layout="pageDirection">
+                                <f:selectItems value="#{q.options}"
+                                               var="a"
+                                               itemValue="#{a}"
+                                               itemLabel="#{a.text}"/>
+                            </h:selectOneRadio>
+                        </h:panelGroup>
+                        radioknapper--><!--
+                        <h:panelGroup rendered="#{q.questionInt==1}">
+                            <h:selectOneRadio value="#{q.answer}" disabled="true"  styleClass="inline" layout="pageDirection">
+                                <f:selectItems value="#{q.options}"
+                                               var="a"
+                                               itemValue="#{a}"
+                                               itemLabel="#{a.text}"/>
+                            </h:selectOneRadio>
+                        </h:panelGroup>
+                        <!--tekst--><!--
+                        <h:panelGroup rendered="#{q.questionInt==3}">
+                            <h:inputTextarea value="Her vil brukeren kunne svare" readonly="true"/>
+                        </h:panelGroup>
+                        <!--checkbox--><!--
+                        <h:panelGroup rendered="#{q.questionInt==0}">
+                            <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true" styleClass="inline" layout="pageDirection">
+                                <f:selectItems value="#{q.options}"
+                                               var="a"
+                                               itemValue="#{a}"
+                                               itemLabel="#{a.text}"/>
+                            </h:selectManyCheckbox>-->
+    </body>
+</html>
