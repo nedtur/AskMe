@@ -24,16 +24,26 @@ public class QuestionnaireBean implements Serializable {
     QuestionnaireService questionnaireService = new QuestionnaireService();
     ArrayList<Questionnaire> questionnaires;
     boolean hasAnswered = false;
-    boolean isPublished = false;
-    boolean isUnvalid = false;
+    boolean published = false;
+    boolean valid = true;
 
-    public boolean isIsUnvalid() {
-        return isUnvalid;
+    public boolean isValid() {
+        return valid;
     }
 
-    public void setIsUnvalid(boolean isUnvalid) {
-        this.isUnvalid = isUnvalid;
+    public void checkID() {
+        if (name.trim().equals("")) {
+            valid = false;
+        } else {
+            valid = true;
+        }
+        for (Questionnaire q : questionnaireService.getQuestionnaires()) {
+            if (q.getName().equals(name)) {
+                valid = false;
+            }
+        }
     }
+    
     String link = "askme.hist.no";
     Long answer;
 
@@ -44,22 +54,9 @@ public class QuestionnaireBean implements Serializable {
     public void setAnswer(Long answer) {
         this.answer = answer;
     }
-    
 
-    public boolean getIsPublished(){
-        return isPublished;
-    }
-    
-    public boolean idOK(){
-        if (name.trim().equals("")){
-            isUnvalid=true;
-        }
-        for(Questionnaire q : questionnaireService.getQuestionnaires()){
-            if (q.getName().equals(name)){
-                isUnvalid=true;
-            }
-        }
-        return isUnvalid;
+    public boolean getPublished() {
+        return published;
     }
 
     public QuestionnaireService getQuestionnaireService() {
@@ -76,26 +73,27 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public void addQuestionnaire(Questionnaire q) {
-        if (!isUnvalid){
-        questionnaireService.addQuestionnaire(q);
-        isPublished=true;
-        endSession();
-        }
+        checkID();
+        if (valid) {
+            questionnaireService.addQuestionnaire(q);
+            published = true;
+            questions = new ArrayList<Question>();
+        } else 
+            published = false;
     }
 
     public Questionnaire newQuestionnaire() {
         questionnaire = new Questionnaire(name, questions);
         questionnaire.fixQuestions();
-        questions = new ArrayList<Question>();
         return questionnaire;
     }
 
     public String getName() {
         return name;
     }
-    
-    public String getLink(){
-        return link+"/"+name;
+
+    public String getLink() {
+        return link + "/" + name;
     }
 
     public void setName(String newName) {
@@ -140,35 +138,34 @@ public class QuestionnaireBean implements Serializable {
             return "pretty:result";
         }
     }
-        
 
     public String getUserIP() {
         HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         return httpServletRequest.getRemoteAddr();
     }
-    
-    public void setUserIP(){
+
+    public void setUserIP() {
         questionnaire.setUserIP(getUserIP());
-        
+
     }
-    
-    public boolean getHasAnswered(){
-        return hasAnswered;  
-        
+
+    public boolean getHasAnswered() {
+        return hasAnswered;
+
     }
-    
+
     public void endSession() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
     }
-    
+
     public boolean IPAlreadyUsed() {
 
-        for (int i = 0; i<questionnaire.getIPList().size(); i++){
-            if (questionnaire.getIPList().get(i).equals(getUserIP())){
-                hasAnswered=true;
-            return true;
-            } 
+        for (int i = 0; i < questionnaire.getIPList().size(); i++) {
+            if (questionnaire.getIPList().get(i).equals(getUserIP())) {
+                hasAnswered = true;
+                return true;
+            }
         }
         setUserIP();
         return false;
@@ -183,7 +180,7 @@ public class QuestionnaireBean implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
             return;
         }
-        if(questionnaires == null) {
+        if (questionnaires == null) {
             questionnaires = questionnaireService.getQuestionnaires();
         }
         questionnaire = questionnaireService.find(name, questionnaires);

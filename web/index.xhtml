@@ -32,7 +32,7 @@
                                 <div class="controls">
                                     <div class="input-append">
                                         <!--Vises når flersvar er valgt-->
-                                        <h:inputText id="optionInput" size="10" value="#{questionBean.ans}" required="true"
+                                        <h:inputTextarea id="optionInput" value="#{questionBean.ans}" required="true"
                                                      requiredMessage="Du må skrive inn et svaralternativ" styleClass="span2"/>
                                         <h:commandButton value="Legg til" action="#{questionBean.addAnswer()}"
                                                          styleClass="btn btn-success"/>
@@ -57,8 +57,9 @@
                     </h:form>
                     <h:form styleClass="span8">
 
-                        <h1>Navn på spørreundersøkelsen:</h1>
+                        <h2>Navn på skjemaet:</h2>
                         <h:inputText value="#{questionnaireBean.name}" styleClass="span6"/>
+                        <h1>Forhåndsvisning:</h1>
                         <h:dataTable value="#{questionnaireBean.questions}" var="q" styleClass="table table-striped"
                                      headerClass="order-table-header"
                                      rowClasses="order-table-odd-row,order-table-even-row">
@@ -66,7 +67,7 @@
                                 <h3>#{q.questionText}</h3>
                                 <!--ja/nei-->
                                 <h:panelGroup rendered="#{q.questionInt==2}">
-                                    <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline">
+                                    <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline" layout="pageDirection">
                                         <f:selectItems value="#{q.options}"
                                                        var="a"
                                                        itemValue="#{a}"
@@ -75,7 +76,7 @@
                                 </h:panelGroup>
                                 <!--radioknapper-->
                                 <h:panelGroup rendered="#{q.questionInt==1}">
-                                    <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline">
+                                    <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline" layout="pageDirection">
                                         <f:selectItems value="#{q.options}"
                                                        var="a"
                                                        itemValue="#{a}"
@@ -88,7 +89,7 @@
                                 </h:panelGroup>
                                 <!--checkbox-->
                                 <h:panelGroup rendered="#{q.questionInt==0}">
-                                    <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true" styleClass="inline">
+                                    <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true" styleClass="inline" layout="pageDirection">
                                         <f:selectItems value="#{q.options}"
                                                        var="a"
                                                        itemValue="#{a}"
@@ -101,21 +102,23 @@
                                                  styleClass="btn btn-danger"/>
                             </h:column>
                         </h:dataTable>
-                        <h:panelGroup rendered="#{!questionnaireBean.isPublished}">
+                        
+                        
 
-                            <h:commandButton value="Publiser spørreundersøkelse"
-                                             action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}"
-                                             styleClass="btn btn-success"/>
-                        </h:panelGroup>
-                        <h:panelGroup rendered="#{questionnaireBean.isPublished}">
+                        
+                        <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}" styleClass="btn btn-info"/>
+                        
+                        <h:panelGroup rendered="#{questionnaireBean.published}">
                             <div class="alert alert-success" style="background-color: #DFF0D8">
                                 <h:commandLink action="pretty:result" value="#{questionnaireBean.link}" styleClass="btn btn-info"/>
                                 <strong>  Suksess!</strong> Spørreundersøkelsen ble lagt til.
+                                #{questionnaireBean.endSession()}
                             </div>
                         </h:panelGroup>
-                        <h:panelGroup  rendered="#{questionnaireBean.idOK()}">
+                        <h:panelGroup rendered="#{!questionnaireBean.valid}">
                             <div class="alert alert-error">Du må skrive inn en unik ID</div>
                         </h:panelGroup>
+                        
                     </h:form>
                 </div>
             </ui:define>
@@ -130,3 +133,5 @@ TEXT_QUESTION = 3;
 
 
 -->
+
+
