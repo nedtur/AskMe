@@ -17,6 +17,7 @@
             <ui:define name="content">
                 <div class="span12 hero-unit" style="margin-top: 100px; margin-left: 50px; background-color: #DCDDDF">
                     <table>
+                        <h3>#{questionnaireBean.questionnaire.name}</h3>
                         <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
                                      styleClass="order-table"
                                      headerClass="order-table-header"
@@ -34,6 +35,7 @@
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{q.questionInt==3}">
                                     <div class="alert alert-success span12">
+                                        <h2>#{q.questionText}</h2>
                                         <h:dataTable value="#{q.textAnswers}" var="a"
                                                      styleClass="order-table"
                                                      headerClass="order-table-header"
