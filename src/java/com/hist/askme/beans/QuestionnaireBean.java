@@ -43,7 +43,6 @@ public class QuestionnaireBean implements Serializable {
             }
         }
     }
-    
     String link = "askme.hist.no";
     Long answer;
 
@@ -78,8 +77,9 @@ public class QuestionnaireBean implements Serializable {
             questionnaireService.addQuestionnaire(q);
             published = true;
             questions = new ArrayList<Question>();
-        } else 
+        } else {
             published = false;
+        }
     }
 
     public Questionnaire newQuestionnaire() {
@@ -130,7 +130,7 @@ public class QuestionnaireBean implements Serializable {
         } else {
             for (Question q : questionnaire.getQuestions()) {
                 if (q.getQuestionInt() == 3) {
-                    q.addTextAnswer(new TextEntity("mjau"));
+                    questionnaireService.updateTextQuestionnaire(q);
                 } else {
                     questionnaireService.updateQuestionnaire(q.getAnswer());
                 }

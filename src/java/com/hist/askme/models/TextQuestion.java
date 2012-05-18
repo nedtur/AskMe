@@ -13,6 +13,12 @@ public class TextQuestion extends Question {
     public TextQuestion(String questiontext) {
         super(questiontext, null);
     }
+    @Override
+    public void fixOptions() {
+        for(TextEntity t : textAnswers) {
+            t.setTextQuestion(this);
+        }
+    }
     
     @Override
     public List<Answer> getOptions() {
