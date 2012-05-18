@@ -21,7 +21,7 @@ public class QuestionnaireBean implements Serializable {
     Questionnaire questionnaire = new Questionnaire();
     ArrayList<Question> questions = new ArrayList<Question>();
     QuestionnaireService questionnaireService = new QuestionnaireService();
-    ArrayList<Questionnaire> questionnaires = questionnaireService.getQuestionnaires();
+    ArrayList<Questionnaire> questionnaires;
     boolean hasAnswered = false;
     boolean isPublished = false;
     boolean isUnvalid = false;
@@ -181,6 +181,9 @@ public class QuestionnaireBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
             return;
+        }
+        if(questionnaires == null) {
+            questionnaires = questionnaireService.getQuestionnaires();
         }
         questionnaire = questionnaireService.find(name, questionnaires);
 
