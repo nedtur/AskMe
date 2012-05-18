@@ -31,7 +31,6 @@
                                         <iframe src="#{charts.setPiechart(q)}" scrolling="no" height="200" width="500" style="border-style: none"/>
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{q.questionInt==3}">
-                                    <div class="alert alert-success span12">
                                         <h2>#{q.questionText}</h2>
                                         <h:dataTable value="#{q.textAnswers}" var="a"
                                                      styleClass="order-table"

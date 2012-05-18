@@ -15,13 +15,12 @@
     <body>
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
-                <div class="span12 hero-unit" style="margin-top: 100px; margin-left: 50px; background-color: #DCDDDF">
                     <h:form>
                         <div class="container">
                             <table>
                                 <h3>#{questionnaireBean.questionnaire.name}</h3>
                                 <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
-                                             styleClass="order-table"
+                                             styleClass="table table-striped"
                                              headerClass="order-table-header"
                                              rowClasses="order-table-odd-row,order-table-even-row">
                                     <!--
@@ -31,7 +30,6 @@
                                         TEXT_QUESTION = 3;
                                     -->
                                     <h:column>
-                                        <div class="alert alert-success span12">
                                             <b>#{q.questionText}</b>
                                             <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
                                                 <f:selectItems value="#{q.options}"
@@ -54,8 +52,7 @@
                                                                    itemValue="#{a.id}"
                                                                    itemLabel="#{a.text}"/>
                                                 </h:selectOneRadio>
-                                                <h:inputTextarea value="#{q.answer}" rendered="#{q.questionInt==3}" onchange="submit()"/>
-                                                </div>        
+                                                <h:inputTextarea value="#{q.answer}" rendered="#{q.questionInt==3}" onchange="submit()"/>       
                                     </h:column>
                                     
                                
@@ -76,8 +73,6 @@
                                 </div>
                            
                         </h:form>
-                     
-                    </div>
             </ui:define>
         </ui:composition>
     </body>
