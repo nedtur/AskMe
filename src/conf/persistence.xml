@@ -10,5 +10,5 @@
       <property name="javax.persistence.jdbc.user" value="admin"/>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>
-  </persistence-unit>
+  </persistence-unit> 
 </persistence>
