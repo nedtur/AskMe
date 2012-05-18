@@ -3,7 +3,6 @@ package com.hist.askme.beans;
 import com.hist.askme.models.Question;
 import com.hist.askme.models.Questionnaire;
 import com.hist.askme.models.QuestionnaireService;
-import com.hist.askme.models.TextEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -131,10 +130,13 @@ public class QuestionnaireBean implements Serializable {
             for (Question q : questionnaire.getQuestions()) {
                 if (q.getQuestionInt() == 3) {
                     questionnaireService.updateTextQuestionnaire(q);
+                } else if (q.getQuestionInt() == 0) {
+                    questionnaireService.updateCheckboxQuestionnaire(q.getAnswers());
                 } else {
                     questionnaireService.updateQuestionnaire(q.getAnswer());
                 }
             }
+            endSession();
             return "pretty:result";
         }
     }
@@ -145,7 +147,7 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public void setUserIP() {
-        questionnaire.setUserIP(getUserIP());
+        questionnaireService.setUserIP(getUserIP(), questionnaire);
 
     }
 
@@ -160,9 +162,8 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public boolean IPAlreadyUsed() {
-
         for (int i = 0; i < questionnaire.getIPList().size(); i++) {
-            if (questionnaire.getIPList().get(i).equals(getUserIP())) {
+            if (questionnaire.getIPList().get(i).getIp().equals(getUserIP())) {
                 hasAnswered = true;
                 return true;
             }

@@ -31,7 +31,7 @@ public class QuestionnaireService {
         EntityManager em = factory.createEntityManager();
         EntityTransaction userTransaction = em.getTransaction();
 
-        userTransaction.begin();
+        if(!userTransaction.isActive())userTransaction.begin();
         em.persist(questionnaire);
         userTransaction.commit();
         em.close();
@@ -46,8 +46,27 @@ public class QuestionnaireService {
         Query q = em.createQuery("SELECT a FROM Answer a WHERE a.id = '" + id + "'");
         List<Answer> ans = q.getResultList();
         ans.get(0).setResult();
-        userTransaction.begin();
+        if(!userTransaction.isActive())userTransaction.begin();
         em.merge(ans.get(0));
+
+        userTransaction.commit();
+        em.close();
+        factory.close();
+    }
+    
+    public void updateCheckboxQuestionnaire(List<String> ids) {
+        factory = Persistence.createEntityManagerFactory(pum);
+        EntityManager em = factory.createEntityManager();
+        EntityTransaction userTransaction = em.getTransaction();
+        
+        for(String i : ids) {
+            Long id = Long.parseLong(i);
+            Query q = em.createQuery("SELECT a FROM Answer a WHERE a.id = '" + id + "'");
+            List<Answer> ans = q.getResultList();
+            ans.get(0).setResult();
+            if(!userTransaction.isActive())userTransaction.begin();
+            em.merge(ans.get(0));
+        }
 
         userTransaction.commit();
         em.close();
@@ -61,7 +80,7 @@ public class QuestionnaireService {
 
         question.addTextAnswer(new TextEntity(question.getTextAnswer()));
         question.fixOptions();
-        userTransaction.begin();
+        if(!userTransaction.isActive())userTransaction.begin();
         em.merge(question);
 
         userTransaction.commit();
@@ -86,5 +105,19 @@ public class QuestionnaireService {
         }
 
         return null;
+    }
+
+    public void setUserIP(String userIP, Questionnaire questionnaire) {
+        factory = Persistence.createEntityManagerFactory(pum);
+        EntityManager em = factory.createEntityManager();
+        EntityTransaction userTransaction = em.getTransaction();
+
+        questionnaire.setUserIP(userIP);
+        if(!userTransaction.isActive())userTransaction.begin();
+        em.merge(questionnaire);
+
+        userTransaction.commit();
+        em.close();
+        factory.close();
     }
 }

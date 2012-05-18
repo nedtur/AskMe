@@ -41,7 +41,7 @@
                                     <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}" onchange="submit()" layout="pageDirection">
                                         <f:selectItems value="#{q.options}"
                                                        var="a"
-                                                       itemValue="#{a}"
+                                                       itemValue="#{a.id}"
                                                        itemLabel="#{a.text}"/>
                                     </h:selectManyCheckbox>
 
