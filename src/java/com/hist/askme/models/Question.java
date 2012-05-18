@@ -24,6 +24,16 @@ public class Question implements Serializable {
     private List<Answer> options = new ArrayList<Answer>();
     @Transient
     Long answer;
+    @Transient
+    String textAnswer;
+
+    public String getTextAnswer() {
+        return textAnswer;
+    }
+
+    public void setTextAnswer(String textAnswer) {
+        this.textAnswer = textAnswer;
+    }
     @ManyToOne
     private Questionnaire questionnaire;
 
@@ -121,10 +131,10 @@ public class Question implements Serializable {
         return 4;
     }
 
-    public void addTextAnswer(String answer) {
+    public void addTextAnswer(TextEntity answer) {
     }
 
-    public List<String> getTextAnswers() {
+    public List<TextEntity> getTextAnswers() {
         return null;
     }
 

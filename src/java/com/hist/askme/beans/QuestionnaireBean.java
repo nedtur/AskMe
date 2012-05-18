@@ -3,6 +3,7 @@ package com.hist.askme.beans;
 import com.hist.askme.models.Question;
 import com.hist.askme.models.Questionnaire;
 import com.hist.askme.models.QuestionnaireService;
+import com.hist.askme.models.TextEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,8 +19,8 @@ public class QuestionnaireBean implements Serializable {
 
     String name = "ID" + new Random().nextInt(9999);
     int pubTime = 0;
-    Questionnaire questionnaire = new Questionnaire();
     ArrayList<Question> questions = new ArrayList<Question>();
+    Questionnaire questionnaire = new Questionnaire("", questions);
     QuestionnaireService questionnaireService = new QuestionnaireService();
     ArrayList<Questionnaire> questionnaires;
     boolean hasAnswered = false;
@@ -131,7 +132,7 @@ public class QuestionnaireBean implements Serializable {
         } else {
             for (Question q : questionnaire.getQuestions()) {
                 if (q.getQuestionInt() == 3) {
-                    q.addTextAnswer("mjau");
+                    q.addTextAnswer(new TextEntity("mjau"));
                 } else {
                     questionnaireService.updateQuestionnaire(q.getAnswer());
                 }

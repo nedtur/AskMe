@@ -53,18 +53,20 @@ public class QuestionBean implements Serializable {
         switch (Integer.parseInt(selected)) {
             case Question.BOOLEAN_QUESTION:
                 question = new BooleanQuestion(questiontext);
+                question.fixOptions();
                 break;
             case Question.CHECKBOX_QUESTION:
                 question = new CheckboxQuestion(questiontext, answers);
+                question.fixOptions();
                 break;
             case Question.RADIO_QUESTION:
                 question = new RadioQuestion(questiontext, answers);
+                question.fixOptions();
                 break;
             case Question.TEXT_QUESTION:
                 question = new TextQuestion(questiontext);
                 break;
         }
-        question.fixOptions();
         answers = new ArrayList<Answer>();
         return question;
     }
