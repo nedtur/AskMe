@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 public class TextQuestion extends Question {
     private List<String> textAnswers = new ArrayList<String>();
-    
+     
     public TextQuestion() {}
     public TextQuestion(String questiontext) {
         super(questiontext, null);

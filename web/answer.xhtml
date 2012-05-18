@@ -48,10 +48,10 @@
                                             </h:selectManyCheckbox>
 
 
-                                                <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
+                                                <h:selectOneRadio value="#{questionnaireBean.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
                                                     <f:selectItems value="#{q.options}"
                                                                    var="a"
-                                                                   itemValue="#{a.text}"
+                                                                   itemValue="#{a.id}"
                                                                    itemLabel="#{a.text}"/>
                                                 </h:selectOneRadio>
                                                 <h:inputTextarea value="#{q.answer}" rendered="#{q.questionInt==3}" onchange="submit()"/>

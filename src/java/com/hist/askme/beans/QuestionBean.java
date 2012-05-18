@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hist.askme.beans;
 
 import com.hist.askme.models.*;
@@ -13,10 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- * @author Håvard
- */
+
 @ManagedBean
 @SessionScoped
 public class QuestionBean implements Serializable {
@@ -107,6 +100,5 @@ public class QuestionBean implements Serializable {
 
     public void endSession() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-
     }
 }
