@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-
+@Entity
 public class TextQuestion extends Question {
     private List<String> textAnswers = new ArrayList<String>();
      
