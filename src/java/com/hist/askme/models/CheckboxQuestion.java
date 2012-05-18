@@ -26,12 +26,12 @@ public class CheckboxQuestion extends Question {
     }
     
     @Override
-    public String getAnswer(){
+    public Long getAnswer(){
         throw new UnsupportedOperationException();
     }
     
     @Override
-    public void setAnswer(String answer){
+    public void setAnswer(Long answer){
         throw new UnsupportedOperationException();
     }
     @Override

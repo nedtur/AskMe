@@ -52,7 +52,8 @@ public class QuestionnaireService {
         factory.close();
     }
 
-    public Questionnaire find(String name) {
+    public Questionnaire find(String name, ArrayList<Questionnaire> questionnaires) {
+        /*
         factory = Persistence.createEntityManagerFactory(pum);
         EntityManager em = factory.createEntityManager();
         
@@ -60,7 +61,13 @@ public class QuestionnaireService {
         Questionnaire ques = (Questionnaire)q.getSingleResult();
         em.close();
         factory.close();
-        if(ques==null) return null;
-        return ques;
+        if(ques==null) return null;*/
+        for(Questionnaire q : questionnaires) {
+            if(q.getName().equals(name)) {
+                return q;
+            }
+        }
+        
+        return null;
     }
 }

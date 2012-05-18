@@ -21,10 +21,18 @@ public class QuestionnaireBean implements Serializable {
     Questionnaire questionnaire = new Questionnaire();
     ArrayList<Question> questions = new ArrayList<Question>();
     QuestionnaireService questionnaireService = new QuestionnaireService();
-    ArrayList<Questionnaire> questionnaires;
+    ArrayList<Questionnaire> questionnaires = questionnaireService.getQuestionnaires();
     boolean hasAnswered = false;
     boolean isPublished = false;
     boolean isUnvalid = false;
+
+    public boolean isIsUnvalid() {
+        return isUnvalid;
+    }
+
+    public void setIsUnvalid(boolean isUnvalid) {
+        this.isUnvalid = isUnvalid;
+    }
     String link = "askme.hist.no";
     Long answer;
 
@@ -123,9 +131,9 @@ public class QuestionnaireBean implements Serializable {
         } else {
             for (Question q : questionnaire.getQuestions()) {
                 if (q.getQuestionInt() == 3) {
-                    q.addTextAnswer(q.getAnswer());
+                    q.addTextAnswer("mjau");
                 } else {
-                    questionnaireService.updateQuestionnaire(answer);
+                    questionnaireService.updateQuestionnaire(q.getAnswer());
                 }
             }
             return "pretty:result";
@@ -174,7 +182,7 @@ public class QuestionnaireBean implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
             return;
         }
-        questionnaire = questionnaireService.find(name);
+        questionnaire = questionnaireService.find(name, questionnaires);
 
         if (questionnaire == null) {
             String message = "Bad request. Unknown questionnaire.";

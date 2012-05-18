@@ -23,7 +23,7 @@ public class Question implements Serializable {
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
     private List<Answer> options = new ArrayList<Answer>();
     @Transient
-    private String answer;
+    Long answer;
     @ManyToOne
     private Questionnaire questionnaire;
 
@@ -33,9 +33,6 @@ public class Question implements Serializable {
     public Question(String questionText, List<Answer> options) {
         this.questionText = questionText;
         this.options = options;
-        if(options != null) {
-            answer = options.get(0).getText();
-        }
     }
 
     public void fixOptions() {
@@ -108,11 +105,11 @@ public class Question implements Serializable {
         options.remove(answer);
     }
 
-    public String getAnswer() {
+    public Long getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(Long answer) {
         this.answer = answer;
     }
 
