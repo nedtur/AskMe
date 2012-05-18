@@ -32,7 +32,7 @@
                                 <div class="controls">
                                     <div class="input-append">
                                         <!--Vises når flersvar er valgt-->
-                                        <h:inputText id="optionInput" size="10" value="#{questionBean.ans}" required="true"
+                                        <h:inputTextarea id="optionInput" value="#{questionBean.ans}" required="true"
                                                      requiredMessage="Du må skrive inn et svaralternativ" styleClass="span2"/>
                                         <h:commandButton value="Legg til" action="#{questionBean.addAnswer()}"
                                                          styleClass="btn btn-success"/>
@@ -67,7 +67,7 @@
                                 <h3>#{q.questionText}</h3>
                                 <!--ja/nei-->
                                 <h:panelGroup rendered="#{q.questionInt==2}">
-                                    <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline">
+                                    <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline" layout="pageDirection">
                                         <f:selectItems value="#{q.options}"
                                                        var="a"
                                                        itemValue="#{a}"
@@ -76,7 +76,7 @@
                                 </h:panelGroup>
                                 <!--radioknapper-->
                                 <h:panelGroup rendered="#{q.questionInt==1}">
-                                    <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline">
+                                    <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline" layout="pageDirection">
                                         <f:selectItems value="#{q.options}"
                                                        var="a"
                                                        itemValue="#{a}"
@@ -89,7 +89,7 @@
                                 </h:panelGroup>
                                 <!--checkbox-->
                                 <h:panelGroup rendered="#{q.questionInt==0}">
-                                    <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true" styleClass="inline">
+                                    <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true" styleClass="inline" layout="pageDirection">
                                         <f:selectItems value="#{q.options}"
                                                        var="a"
                                                        itemValue="#{a}"

@@ -15,10 +15,8 @@
     <body>
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
-               <h1>#{questionnaireBean.questionnaire.name}</h1>
-                <h2>Antall som har svart: </h2>
+               <h2>#{questionnaireBean.questionnaire.name}</h2>
                     <table>
-                        <h3>#{questionnaireBean.questionnaire.name}</h3>
                         <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
                                      styleClass="table table-striped"
                                      headerClass="order-table-header"

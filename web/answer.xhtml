@@ -31,14 +31,14 @@
                                     -->
                                     <h:column>
                                             <b>#{q.questionText}</b>
-                                            <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
+                                            <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()" layout="pageDirection">                                                    
                                                 <f:selectItems value="#{q.options}"
                                                                var="a"
                                                                itemValue="#{a.id}"
                                                                itemLabel="#{a.text}"/>
                                             </h:selectOneRadio>
 
-                                            <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}" onchange="submit()">
+                                            <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}" onchange="submit()" layout="pageDirection">
                                                 <f:selectItems value="#{q.options}"
                                                                var="a"
                                                                itemValue="#{a}"
@@ -46,7 +46,7 @@
                                             </h:selectManyCheckbox>
 
 
-                                                <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
+                                                <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()" layout="pageDirection">
                                                     <f:selectItems value="#{q.options}"
                                                                    var="a"
                                                                    itemValue="#{a.id}"
