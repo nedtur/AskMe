@@ -6,7 +6,6 @@ import com.hist.askme.models.QuestionnaireService;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -145,7 +144,7 @@ public class QuestionnaireBean implements Serializable {
     }
     
     public boolean getHasAnswered(){
-        return hasAnswered;
+        return hasAnswered;  
         
     }
     

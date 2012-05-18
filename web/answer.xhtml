@@ -57,6 +57,26 @@
                                     <h:inputTextarea value="#{q.answer}" rendered="#{q.questionInt==3}" onchange="submit()"/>      
                                 </h:column>
 
+                                                <h:selectOneRadio value="#{questionnaireBean.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
+                                                    <f:selectItems value="#{q.options}"
+                                                                   var="a"
+                                                                   itemValue="#{a.id}"
+                                                                   itemLabel="#{a.text}"/>
+                                                </h:selectOneRadio>
+                                                <h:inputTextarea value="#{q.answer}" rendered="#{q.questionInt==3}" onchange="submit()"/>
+                                                </div>        
+                                    </h:column>
+                                    
+                               
+                                        </h:dataTable>
+                                
+                                     <h:panelGroup rendered="#{questionnaireBean.hasAnswered}">
+                                            <div class="alert-error alert" style="width: 927px">
+                                                <h:outputText  value="Du har allerede besvart disse spørsmålene"/>
+                                            </div>
+                                        </h:panelGroup>
+                                        
+                                            
 
                             </h:dataTable>
 
