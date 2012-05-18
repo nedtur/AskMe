@@ -33,7 +33,7 @@
                                     <h:column>
                                         <div class="alert alert-success span12">
                                             <b>#{q.questionText}</b>
-                                            <h:selectOneRadio  value="#{questionnaireBean.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
+                                            <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()">                                                    
                                                 <f:selectItems value="#{q.options}"
                                                                var="a"
                                                                itemValue="#{a.id}"
@@ -48,7 +48,7 @@
                                             </h:selectManyCheckbox>
 
 
-                                                <h:selectOneRadio value="#{questionnaireBean.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
+                                                <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()">
                                                     <f:selectItems value="#{q.options}"
                                                                    var="a"
                                                                    itemValue="#{a.id}"
