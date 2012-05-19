@@ -128,10 +128,12 @@ public class QuestionnaireBean implements Serializable {
             return "pretty:questionnaire";
         } else {
             for (Question q : questionnaire.getQuestions()) {
-                if (q.getQuestionInt() == 3) {
+                if (q.getQuestionInt() == Question.TEXT_QUESTION) {
                     questionnaireService.updateTextQuestionnaire(q);
-                } else if (q.getQuestionInt() == 0) {
-                    questionnaireService.updateCheckboxQuestionnaire(q.getAnswers());
+                } else if (q.getQuestionInt() == Question.CHECKBOX_QUESTION) {
+                    if(q.getAnswers() != null) {
+                        questionnaireService.updateCheckboxQuestionnaire(q.getAnswers());
+                    }
                 } else {
                     questionnaireService.updateQuestionnaire(q.getAnswer());
                 }

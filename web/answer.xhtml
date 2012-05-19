@@ -24,37 +24,44 @@
                                          headerClass="order-table-header"
                                          rowClasses="order-table-odd-row,order-table-even-row">
                                 <!--
-                                    CHECKBOX_QUESTION = 0;
-                                    RADIO_QUESTION = 1;
+                                    RADIO_QUESTION = 0;
+                                    CHECKBOX_QUESTION = 1;
                                     BOOLEAN_QUESTION = 2;                                         
                                     TEXT_QUESTION = 3;
                                 -->
                                 <h:column>
-                                    <b>#{q.questionText}</b>
-                                    <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==1}" onchange="submit()" layout="pageDirection">                                                    
-                                        <f:selectItems value="#{q.options}"
-                                                       var="a"
-                                                       itemValue="#{a.id}"
-                                                       itemLabel="#{a.text}"/>
-                                    </h:selectOneRadio>
+                                    <h:panelGroup id="questionPanel">
+                                        <b>#{q.questionText}</b>
+                                        <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==0}" layout="pageDirection">                                                    
+                                            <f:selectItems value="#{q.options}"
+                                                           var="a"
+                                                           itemValue="#{a.id}"
+                                                           itemLabel="#{a.text}"/>
+                                            <f:ajax event="click" render="@this"/>
+                                        </h:selectOneRadio>
 
-                                    <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==0}" onchange="submit()" layout="pageDirection">
-                                        <f:selectItems value="#{q.options}"
-                                                       var="a"
-                                                       itemValue="#{a.id}"
-                                                       itemLabel="#{a.text}"/>
-                                    </h:selectManyCheckbox>
+                                        <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==1}" layout="pageDirection">
+                                            <f:selectItems value="#{q.options}"
+                                                           var="a"
+                                                           itemValue="#{a.id}"
+                                                           itemLabel="#{a.text}"/>
+                                            <f:ajax event="change" render="@this"/>
+                                        </h:selectManyCheckbox>
 
-                                    <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" onchange="submit()" layout="pageDirection">
-                                        <f:selectItems value="#{q.options}"
-                                                       var="a"
-                                                       itemValue="#{a.id}"
-                                                       itemLabel="#{a.text}"/>
-                                    </h:selectOneRadio>
-                                    <h:inputTextarea value="#{q.textAnswer}" rendered="#{q.questionInt==3}" onchange="submit()"/>       
+                                        <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" layout="pageDirection">
+                                            <f:selectItems value="#{q.options}"
+                                                           var="a"
+                                                           itemValue="#{a.id}"
+                                                           itemLabel="#{a.text}"/>
+                                            <f:ajax event="click" render="@this"/>
+                                        </h:selectOneRadio>
+                                        <h:inputTextarea value="#{q.textAnswer}" rendered="#{q.questionInt==3}">
+                                            <f:ajax event="blur" render="@this"/>
+                                        </h:inputTextarea>
+                                    </h:panelGroup>
                                 </h:column>
                             </h:dataTable>
-                            
+
                             <h:panelGroup rendered="#{questionnaireBean.hasAnswered}">
                                 <div class="alert-error alert" style="width: 927px">
                                     <h:outputText  value="Du har allerede besvart disse spørsmålene"/>

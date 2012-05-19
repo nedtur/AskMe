@@ -12,8 +12,8 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "proj_type")
 public class Question implements Serializable {
 
-    public final static int CHECKBOX_QUESTION = 0;
-    public final static int RADIO_QUESTION = 1;
+    public final static int RADIO_QUESTION = 0;
+    public final static int CHECKBOX_QUESTION = 1;
     public final static int BOOLEAN_QUESTION = 2;
     public final static int TEXT_QUESTION = 3;
     @Id
