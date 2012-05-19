@@ -18,8 +18,8 @@ public class QuestionnaireBean implements Serializable {
 
     String name = "ID" + new Random().nextInt(9999);
     int pubTime = 0;
-    Questionnaire questionnaire = new Questionnaire();
     ArrayList<Question> questions = new ArrayList<Question>();
+    Questionnaire questionnaire = new Questionnaire("", questions);
     QuestionnaireService questionnaireService = new QuestionnaireService();
     ArrayList<Questionnaire> questionnaires;
     boolean hasAnswered = false;
@@ -42,7 +42,6 @@ public class QuestionnaireBean implements Serializable {
             }
         }
     }
-    
     String link = "askme.hist.no";
     Long answer;
 
@@ -77,8 +76,9 @@ public class QuestionnaireBean implements Serializable {
             questionnaireService.addQuestionnaire(q);
             published = true;
             questions = new ArrayList<Question>();
-        } else 
+        } else {
             published = false;
+        }
     }
 
     public Questionnaire newQuestionnaire() {
@@ -129,11 +129,14 @@ public class QuestionnaireBean implements Serializable {
         } else {
             for (Question q : questionnaire.getQuestions()) {
                 if (q.getQuestionInt() == 3) {
-                    q.addTextAnswer("mjau");
+                    questionnaireService.updateTextQuestionnaire(q);
+                } else if (q.getQuestionInt() == 0) {
+                    questionnaireService.updateCheckboxQuestionnaire(q.getAnswers());
                 } else {
                     questionnaireService.updateQuestionnaire(q.getAnswer());
                 }
             }
+            endSession();
             return "pretty:result";
         }
     }
@@ -144,7 +147,7 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public void setUserIP() {
-        questionnaire.setUserIP(getUserIP());
+        questionnaireService.setUserIP(getUserIP(), questionnaire);
 
     }
 
@@ -159,9 +162,8 @@ public class QuestionnaireBean implements Serializable {
     }
 
     public boolean IPAlreadyUsed() {
-
         for (int i = 0; i < questionnaire.getIPList().size(); i++) {
-            if (questionnaire.getIPList().get(i).equals(getUserIP())) {
+            if (questionnaire.getIPList().get(i).getIp().equals(getUserIP())) {
                 hasAnswered = true;
                 return true;
             }

@@ -1,7 +1,3 @@
-                                                                                                /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hist.askme.models;
 
 import java.io.Serializable;
@@ -16,13 +12,13 @@ public class Questionnaire implements Serializable {
     private String name;
     @OneToMany(mappedBy="questionnaire", cascade=CascadeType.PERSIST)
     private List<Question> questions = new ArrayList<Question>();
-    @Transient
-    ArrayList<String> IP = new ArrayList<String>();
+    @OneToMany(mappedBy="questionnaire", cascade=CascadeType.PERSIST)
+    private List<IpEntity> IP = new ArrayList<IpEntity>();
           
     public void setUserIP(String UserIP){
-        IP.add(UserIP);
+        IP.add(new IpEntity(UserIP, this));
     }
-    public ArrayList<String> getIPList(){
+    public List<IpEntity> getIPList(){
         return IP;
     }
     

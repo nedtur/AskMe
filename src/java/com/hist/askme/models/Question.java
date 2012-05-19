@@ -24,6 +24,10 @@ public class Question implements Serializable {
     private List<Answer> options = new ArrayList<Answer>();
     @Transient
     Long answer;
+    @Transient
+    String textAnswer;
+    @Transient
+    List<String> answers = new ArrayList<String>();
     @ManyToOne
     private Questionnaire questionnaire;
 
@@ -84,7 +88,6 @@ public class Question implements Serializable {
             amountOfAnswered += options.get(i).getResult();
         }
         return amountOfAnswered;
-
     }
 
     public int getAmountOfOptions() {
@@ -112,6 +115,22 @@ public class Question implements Serializable {
     public void setAnswer(Long answer) {
         this.answer = answer;
     }
+    
+    public String getTextAnswer() {
+        return textAnswer;
+    }
+
+    public void setTextAnswer(String textAnswer) {
+        this.textAnswer = textAnswer;
+    }
+    
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+    }
 
     public String getQuestionType() {
         return "Type:" + this.getClass();
@@ -121,10 +140,10 @@ public class Question implements Serializable {
         return 4;
     }
 
-    public void addTextAnswer(String answer) {
+    public void addTextAnswer(TextEntity answer) {
     }
 
-    public List<String> getTextAnswers() {
+    public List<TextEntity> getTextAnswers() {
         return null;
     }
 

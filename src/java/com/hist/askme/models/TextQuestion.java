@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-
+@Entity
 public class TextQuestion extends Question {
-    private List<String> textAnswers = new ArrayList<String>();
-     
+    @OneToMany(mappedBy="textQuestion", cascade=CascadeType.PERSIST)
+    private List<TextEntity> textAnswers = new ArrayList<TextEntity>();
+    
     public TextQuestion() {}
     public TextQuestion(String questiontext) {
         super(questiontext, null);
+    }
+    @Override
+    public void fixOptions() {
+        for(TextEntity t : textAnswers) {
+            t.setTextQuestion(this);
+        }
     }
     
     @Override
@@ -26,12 +33,12 @@ public class TextQuestion extends Question {
     }
     
     @Override
-    public void addTextAnswer(String answer) {
+    public void addTextAnswer(TextEntity answer) {
         textAnswers.add(answer);
     }
     
     @Override
-    public List<String> getTextAnswers() {
+    public List<TextEntity> getTextAnswers() {
         return textAnswers;
     }
 }
