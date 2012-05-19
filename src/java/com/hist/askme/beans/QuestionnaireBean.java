@@ -19,7 +19,7 @@ public class QuestionnaireBean implements Serializable {
     String name = "ID" + new Random().nextInt(9999);
     int pubTime = 0;
     ArrayList<Question> questions = new ArrayList<Question>();
-    Questionnaire questionnaire = new Questionnaire("", questions);
+    Questionnaire questionnaire;
     QuestionnaireService questionnaireService = new QuestionnaireService();
     ArrayList<Questionnaire> questionnaires;
     boolean hasAnswered = false;
@@ -183,6 +183,9 @@ public class QuestionnaireBean implements Serializable {
         }
         if (questionnaires == null) {
             questionnaires = questionnaireService.getQuestionnaires();
+        }
+        if (questionnaire == null) {
+            questionnaire = new Questionnaire("123", questions);
         }
         questionnaire = questionnaireService.find(name, questionnaires);
 
