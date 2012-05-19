@@ -67,9 +67,14 @@
                                     <h:outputText  value="Du har allerede besvart disse spørsmålene"/>
                                 </div>
                             </h:panelGroup>
-
-                            <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
-
+                            <h:panelGroup rendered="#{questionnaireBean.answerSuccess}">
+                                <div class="alert-success alert" style="width: 927px">
+                                    Takk for din besvarelse! <br/>
+                                    Se resultater på #{questionnaireBean.link}-r
+                                </div>
+                                #{questionnaireBean.endSession()}
+                            </h:panelGroup>
+                            <h:commandButton value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
                         </table>
                     </div>
 
