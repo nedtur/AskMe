@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -6,6 +6,7 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
+    xmlns:p="">
     <h:head>
         <title>IGNORED</title>
     </h:head>
@@ -16,13 +17,13 @@
                 <div class="row">
                     <h:form styleClass="well span3">
                         <label>Spørsmål</label>
-                        <h:inputTextarea id="questionBox" styleClass="span3" value="#{questionBean.questiontext}"
+                        <h:inputTextarea id="questionBox" styleClass="span3" 
                                          required="true"
-                                         requiredMessage="Du må skrive inn et spørsmål"/>
+                                         requiredMessage="Du må skrive inn et spørsmål" value="#{questionBean.questiontext}"/>
                         <span class="help-block">Velg spørsmålstype:</span>
                         <h:selectOneMenu value="#{questionBean.selected}" styleClass="span3">
-                            <f:selectItem itemValue="0" itemLabel="Valg"/>
-                            <f:selectItem itemValue="1" itemLabel="Flervalg"/>
+                            <f:selectItem itemValue="0" itemLabel="Flervalg"/>
+                            <f:selectItem itemValue="1" itemLabel="Fleralternativ"/>
                             <f:selectItem itemValue="2" itemLabel="Ja/Nei"/>
                             <f:selectItem itemValue="3" itemLabel="Tekst"/>
                             <f:ajax event="change" render="qtype"/>
@@ -33,9 +34,11 @@
                                     <div class="input-append">
                                         <!--Vises når flersvar er valgt-->
                                         <h:inputTextarea id="optionInput" value="#{questionBean.ans}" required="true"
-                                                     requiredMessage="Du må skrive inn et svaralternativ" styleClass="span2"/>
+                                                         requiredMessage="Du må skrive inn et svaralternativ" styleClass="span3"/>
                                         <h:commandButton value="Legg til" action="#{questionBean.addAnswer()}"
-                                                         styleClass="btn btn-success"/>
+                                                         styleClass="btn btn-success">
+                                            <f:ajax execute="optionInput" render="ans"/>
+                                        </h:commandButton>
                                     </div>
                                 </div>
 
@@ -46,7 +49,8 @@
                                     </h:column>
                                     <h:column>
                                         <h:commandButton value="fjern" action="#{questionBean.deleteAnswer(a)}"
-                                                         styleClass="span1 btn btn-danger" immediate="true"/>
+                                                         styleClass="span1 btn btn-danger" immediate="true">
+                                        </h:commandButton>
                                     </h:column>
                                 </h:dataTable>
                             </h:panelGroup>
@@ -75,7 +79,7 @@
                                     </h:selectOneRadio>
                                 </h:panelGroup>
                                 <!--radioknapper-->
-                                <h:panelGroup rendered="#{q.questionInt==0}">
+                                <h:panelGroup rendered="#{q.questionInt==1}">
                                     <h:selectOneRadio value="#{q.answer}" disabled="true" styleClass="inline" layout="pageDirection">
                                         <f:selectItems value="#{q.options}"
                                                        var="a"
@@ -88,8 +92,8 @@
                                     <h:inputTextarea value="Her vil brukeren kunne svare" readonly="true"/>
                                 </h:panelGroup>
                                 <!--checkbox-->
-                                <h:panelGroup rendered="#{q.questionInt==1}">
-                                    <h:selectManyCheckbox rendered="#{q.questionInt==1}" disabled="true" styleClass="inline" layout="pageDirection">
+                                <h:panelGroup rendered="#{q.questionInt==0}">
+                                    <h:selectManyCheckbox rendered="#{q.questionInt==0}" disabled="true" styleClass="inline" layout="pageDirection">
                                         <f:selectItems value="#{q.options}"
                                                        var="a"
                                                        itemValue="#{a}"
@@ -102,12 +106,12 @@
                                                  styleClass="btn btn-danger"/>
                             </h:column>
                         </h:dataTable>
-                        
-                        
 
-                        
+
+
+
                         <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}" styleClass="btn btn-info"/>
-                        
+
                         <h:panelGroup rendered="#{questionnaireBean.published}">
                             <div class="alert alert-success" style="background-color: #DFF0D8">
                                 <h:commandLink action="pretty:result" value="#{questionnaireBean.link}" styleClass="btn btn-info"/>
@@ -118,7 +122,7 @@
                         <h:panelGroup rendered="#{!questionnaireBean.valid}">
                             <div class="alert alert-error">Du må skrive inn en unik ID</div>
                         </h:panelGroup>
-                        
+
                     </h:form>
                 </div>
             </ui:define>
@@ -126,10 +130,12 @@
     </body>
 </html>
 <!--
-RADIO_QUESTION = 0;
-CHECKBOX_QUESTION = 1;
+CHECKBOX_QUESTION = 0;
+RADIO_QUESTION = 1;
 BOOLEAN_QUESTION = 2;
 TEXT_QUESTION = 3;
+
+
 -->
 
 
