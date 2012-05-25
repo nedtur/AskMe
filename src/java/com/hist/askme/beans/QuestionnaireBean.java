@@ -26,6 +26,15 @@ public class QuestionnaireBean implements Serializable {
     boolean published = false;
     boolean valid = true;
     boolean answerSuccess = false;
+    boolean noQuestionnaire = false;
+
+    public boolean isNoQuestionnaire() {
+        return noQuestionnaire;
+    }
+
+    public void setNoQuestionnaire(boolean noQuestionnaire) {
+        this.noQuestionnaire = noQuestionnaire;
+    }
 
     public boolean isValid() {
         return valid;
@@ -173,7 +182,6 @@ public class QuestionnaireBean implements Serializable {
 
     public void endSession() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-
     }
 
     public boolean IPAlreadyUsed() {
@@ -204,9 +212,7 @@ public class QuestionnaireBean implements Serializable {
         questionnaire = questionnaireService.find(name, questionnaires);
 
         if (questionnaire == null) {
-            String message = "Bad request. Unknown questionnaire.";
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+            noQuestionnaire = true;
             return;
         }
     }

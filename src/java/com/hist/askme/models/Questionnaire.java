@@ -103,6 +103,9 @@ public class Questionnaire implements Serializable {
     public String toString() {
         return "models.Questionnaire[ id=" + name + " ]";
     }
-
+    
+    public int amountOfAnswered() {
+        return IP.size();
+    }
 }
 

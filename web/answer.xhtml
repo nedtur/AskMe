@@ -6,8 +6,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <f:metadata>
-        <f:viewParam name="name" value="#{questionnaireBean.questionnaire.name}"/>
-        <f:event type="preRenderView" listener="#{questionnaireBean.init}"/>
+        <f:viewParam name="name" value="#{answerBean.questionnaire.name}"/>
+        <f:event type="preRenderView" listener="#{answerBean.init}"/>
     </f:metadata>
     <h:head>
         <title>IGNORED</title>
@@ -18,8 +18,8 @@
                 <h:form>
                     <div class="container">
                         <table>
-                            <h3>#{questionnaireBean.questionnaire.name}</h3>
-                            <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
+                            <h3>#{answerBean.questionnaire.name}</h3>
+                            <h:dataTable value="#{answerBean.questionnaire.questions}" var="q"
                                          styleClass="table table-striped"
                                          headerClass="order-table-header"
                                          rowClasses="order-table-odd-row,order-table-even-row">
@@ -32,7 +32,7 @@
                                 <h:column>
                                     <h:panelGroup id="questionPanel">
                                         <b>#{q.questionText}</b>
-                                        <h:selectOneRadio  value="#{q.answer}" rendered="#{q.questionInt==0}" layout="pageDirection">                                                    
+                                        <h:selectOneRadio id="radio"  value="#{q.answer}" rendered="#{q.questionInt==0}" layout="pageDirection">                                                    
                                             <f:selectItems value="#{q.options}"
                                                            var="a"
                                                            itemValue="#{a.id}"
@@ -40,7 +40,7 @@
                                             <f:ajax event="click" render="@this"/>
                                         </h:selectOneRadio>
 
-                                        <h:selectManyCheckbox value="#{q.answers}" rendered="#{q.questionInt==1}" layout="pageDirection">
+                                        <h:selectManyCheckbox id="check" value="#{q.answers}" rendered="#{q.questionInt==1}" layout="pageDirection">
                                             <f:selectItems value="#{q.options}"
                                                            var="a"
                                                            itemValue="#{a.id}"
@@ -48,33 +48,44 @@
                                             <f:ajax event="change" render="@this"/>
                                         </h:selectManyCheckbox>
 
-                                        <h:selectOneRadio value="#{q.answer}" rendered="#{q.questionInt==2}" layout="pageDirection">
+                                        <h:selectOneRadio id="bool" value="#{q.answer}" rendered="#{q.questionInt==2}" layout="pageDirection">
                                             <f:selectItems value="#{q.options}"
                                                            var="a"
                                                            itemValue="#{a.id}"
                                                            itemLabel="#{a.text}"/>
                                             <f:ajax event="click" render="@this"/>
                                         </h:selectOneRadio>
-                                        <h:inputTextarea value="#{q.textAnswer}" rendered="#{q.questionInt==3}">
-                                            <f:ajax event="blur" render="@this"/>
+                                        <h:inputTextarea id="text" value="#{q.textAnswer}" rendered="#{q.questionInt==3}">
+                                            
                                         </h:inputTextarea>
                                     </h:panelGroup>
                                 </h:column>
                             </h:dataTable>
-
-                            <h:panelGroup rendered="#{questionnaireBean.hasAnswered}">
-                                <div class="alert-error alert" style="width: 927px">
-                                    <h:outputText  value="Du har allerede besvart disse spørsmålene"/>
-                                </div>
+                            <h:commandButton value="Send svar" action="#{answerBean.answerQuestionnaire}">
+                               
+                            </h:commandButton>
+                            <h:panelGroup id="group">
+                                <h:panelGroup rendered="#{answerBean.hasAnswered}">
+                                    <div class="alert-error alert">
+                                        <h:outputText  value="Du har allerede besvart disse spørsmålene"/>
+                                    </div>
+                                    #{answerBean.endSession()}
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{answerBean.answerSuccess}">
+                                    <div class="alert-success alert">
+                                        Takk for din besvarelse! Se resultater på : <br/> 
+                                        <h2 style="color : black">#{answerBean.link}-r</h2>
+                                    </div>
+                                    #{answerBean.endSession()}
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{answerBean.noQuestionnaire}">
+                                    <div class="alert-error alert">
+                                        Dette spørreskjemaet finnes ikke.
+                                    </div>
+                                   #{answerBean.endSession()}
+                                </h:panelGroup>
                             </h:panelGroup>
-                            <h:panelGroup rendered="#{questionnaireBean.answerSuccess}">
-                                <div class="alert-success alert" style="width: 927px">
-                                    Takk for din besvarelse! <br/>
-                                    Se resultater på #{questionnaireBean.link}-r
-                                </div>
-                                #{questionnaireBean.endSession()}
-                            </h:panelGroup>
-                            <h:commandButton value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
+                            
                         </table>
                     </div>
 

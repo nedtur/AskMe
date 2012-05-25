@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 public class QuestionBean implements Serializable {
 
     Question question = new Question();
-    String questiontext = "Spørsmål...";
-    String ans = "Svar...";
+    String questiontext = "";
+    String ans = "";
     List<Answer> answers = new ArrayList<Answer>();
     String selected = "0";
     String yesOrNo = "whoknows";

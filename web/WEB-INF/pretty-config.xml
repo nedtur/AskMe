@@ -35,7 +35,7 @@
       </url-mapping>
       
       <url-mapping id="questionnaire"> 
-          <pattern value="/#{questionnaireBean.name}" /> 
+          <pattern value="/#{answerBean.name}" /> 
           <view-id value="/faces/answer.xhtml" />
       </url-mapping>
       <!--

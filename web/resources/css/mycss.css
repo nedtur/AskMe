@@ -11,6 +11,7 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
+
 .root { 
     display: block;
 }
@@ -55,12 +56,3 @@ background-color: #222;
 border-right: 1px solid #444;
 
 }
-
-@media (max-width: 480px) {
-    
-
-    
-}
-
-
-

@@ -15,7 +15,7 @@
             <ui:define name="content">
                 <div class="row">
                     <h:form styleClass="well span3">
-                        <label>Spørsmål</label>
+                        <label>Spørsmål:</label>
                         <h:inputTextarea id="questionBox" styleClass="span3"
                                          required="true"
                                          requiredMessage="Du må skrive inn et spørsmål" value="#{questionBean.questiontext}"/>
@@ -32,6 +32,7 @@
                                 <div class="controls">
                                     <div class="input-append">
                                         <!--Vises når flersvar er valgt-->
+                                        <label>Svar:</label>
                                         <h:inputTextarea id="optionInput" value="#{questionBean.ans}" required="true"
                                                          requiredMessage="Du må skrive inn et svaralternativ" styleClass="span3"/>
                                         <h:commandButton value="Legg til" action="#{questionBean.addAnswer()}"
@@ -109,7 +110,7 @@
                         <h:commandButton value="Publiser" action="#{questionnaireBean.addQuestionnaire(questionnaireBean.newQuestionnaire())}" styleClass="btn btn-info"/>
                         <br/> &nbsp; <br/>
                         <h:panelGroup rendered="#{questionnaireBean.published}">
-                            <div class="alert alert-success" style="background-color: #DFF0D8">
+                            <div class="alert alert-success">
                                 <strong>  Suksess!</strong> Spørreundersøkelsen ble lagt til og finnes på : <br/>
                                 <h2 style="color: black">#{questionnaireBean.link}</h2>
                                 #{questionnaireBean.endSession()}

@@ -15,33 +15,39 @@
     <body>
         <ui:composition template="/Templates/mainTemplate.xhtml">
             <ui:define name="content">
-               <h2>#{questionnaireBean.questionnaire.name}</h2>
-                    <table>
-                        <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
-                                     styleClass="table table-striped"
-                                     headerClass="order-table-header"
-                                     rowClasses="order-table-odd-row,order-table-even-row">
+                <h2>#{questionnaireBean.questionnaire.name}</h2>
+                Antall som har svart: #{questionnaireBean.questionnaire.amountOfAnswered()}
+                <table>
+                    <h:dataTable value="#{questionnaireBean.questionnaire.questions}" var="q"
+                                 styleClass="table table-striped"
+                                 headerClass="order-table-header"
+                                 rowClasses="order-table-odd-row,order-table-even-row">
 
-                            <h:column>
-                                <h:panelGroup rendered="#{q.questionInt!=3}">
-                                        <h2>#{q.questionText}</h2>
-                                        Antall som har svart: #{q.amountOfAnswered()}
-                                        <iframe src="#{charts.setPiechart(q)}" scrolling="no" height="200" width="500" style="border-style: none"/>
-                                </h:panelGroup>
-                                <h:panelGroup rendered="#{q.questionInt==3}">
-                                        <h2>#{q.questionText}</h2>
-                                        <h:dataTable value="#{q.textAnswers}" var="a"
-                                                     styleClass="order-table"
-                                                     headerClass="order-table-header"
-                                                     rowClasses="order-table-odd-row,order-table-even-row">
-                                            <h:column>
-                                                #{a.text}
-                                            </h:column>
-                                        </h:dataTable>
-                                </h:panelGroup>
-                            </h:column>
-                        </h:dataTable>
-                    </table>
+                        <h:column>
+                            <h:panelGroup rendered="#{q.questionInt!=3}">
+                                <h2>#{q.questionText}</h2>
+                                <iframe src="#{charts.setPiechart(q)}" scrolling="no" height="200" width="500" style="border-style: none"/>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{q.questionInt==3}">
+                                <h2>#{q.questionText}</h2>
+                                <h:dataTable value="#{q.textAnswers}" var="a"
+                                             styleClass="order-table"
+                                             headerClass="order-table-header"
+                                             rowClasses="order-table-odd-row,order-table-even-row">
+                                    <h:column>
+                                        #{a.text}
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
+                        </h:column>
+                    </h:dataTable>
+                    <h:panelGroup rendered="#{questionnaireBean.noQuestionnaire}">
+                        <div class="alert-error alert">
+                            Dette spørreskjemaet finnes ikke.
+                        </div>
+                        #{questionnaireBean.endSession()}
+                    </h:panelGroup>
+                </table>
             </ui:define>
         </ui:composition>
     </body>
