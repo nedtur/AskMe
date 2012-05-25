@@ -25,6 +25,7 @@ public class QuestionnaireBean implements Serializable {
     boolean hasAnswered = false;
     boolean published = false;
     boolean valid = true;
+    boolean answerSuccess = false;
 
     public boolean isValid() {
         return valid;
@@ -106,6 +107,14 @@ public class QuestionnaireBean implements Serializable {
     public void setPubTime(int newTime) {
         pubTime = newTime;
     }
+    
+    public boolean isAnswerSuccess() {
+        return answerSuccess;
+    }
+
+    public void setAnswerSuccess(boolean answerSuccess) {
+        this.answerSuccess = answerSuccess;
+    }
 
     public Questionnaire getQuestionnaire() {
         return questionnaire;
@@ -135,11 +144,15 @@ public class QuestionnaireBean implements Serializable {
                         questionnaireService.updateCheckboxQuestionnaire(q.getAnswers());
                     }
                 } else {
+                    if(q.getAnswer() == null) {
+                        return "pretty:questionnaire";
+                    }
                     questionnaireService.updateQuestionnaire(q.getAnswer());
                 }
             }
-            endSession();
-            return "pretty:result";
+            setUserIP();
+            answerSuccess=true;
+            return "pretty:questionnaire";
         }
     }
 
@@ -170,7 +183,6 @@ public class QuestionnaireBean implements Serializable {
                 return true;
             }
         }
-        setUserIP();
         return false;
 
     }
@@ -197,5 +209,10 @@ public class QuestionnaireBean implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
             return;
         }
+    }
+    
+    public String navigate() {
+        published = false;
+        return "pretty:questionnaire";
     }
 }

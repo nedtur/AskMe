@@ -59,15 +59,15 @@ public class QuestionnaireService {
         EntityManager em = factory.createEntityManager();
         EntityTransaction userTransaction = em.getTransaction();
         
+        if(!userTransaction.isActive())userTransaction.begin();
         for(String i : ids) {
             Long id = Long.parseLong(i);
             Query q = em.createQuery("SELECT a FROM Answer a WHERE a.id = '" + id + "'");
             List<Answer> ans = q.getResultList();
             ans.get(0).setResult();
-            if(!userTransaction.isActive())userTransaction.begin();
+            
             em.merge(ans.get(0));
         }
-
         userTransaction.commit();
         em.close();
         factory.close();

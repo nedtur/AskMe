@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -67,9 +67,14 @@
                                     <h:outputText  value="Du har allerede besvart disse spørsmålene"/>
                                 </div>
                             </h:panelGroup>
-
-                            <h:commandButton immediate="true" value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
-
+                            <h:panelGroup rendered="#{questionnaireBean.answerSuccess}">
+                                <div class="alert-success alert" style="width: 927px">
+                                    Takk for din besvarelse! <br/>
+                                    Se resultater på #{questionnaireBean.link}-r
+                                </div>
+                                #{questionnaireBean.endSession()}
+                            </h:panelGroup>
+                            <h:commandButton value="Send svar" action="#{questionnaireBean.answerQuestionnaire}"/>
                         </table>
                     </div>
 
